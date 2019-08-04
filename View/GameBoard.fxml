@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameBoardController">
+   <children>
+      <ImageView fx:id="backdrop" fitHeight="960.0" fitWidth="1440.0" pickOnBounds="true" preserveRatio="true" />
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1440.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="66.5" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane fx:id="pane0" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img0" fitHeight="144.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge0" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img1" accessibleText="1" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge1" onMouseExited="#revertImage" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img2" fitHeight="144.0" fitWidth="96.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge2" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img3" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge3" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img4" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge4" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img5" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge5" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="13" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img6" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge6" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="15" GridPane.columnSpan="2" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img7" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge7" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img8" fitHeight="144.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge8" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img9" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge9" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="5" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img10" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge10" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane11" prefHeight="200.0" prefWidth="15.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="7" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img11" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge11" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="9" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img12" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge12" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img13" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge13" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane14" prefHeight="86.0" prefWidth="189.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img14" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge14" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane15" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="15" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img15" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge15" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane24" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img24" fitHeight="144.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge24" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane23" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img23" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge23" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane25" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="15" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img25" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge25" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane26" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img26" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge26" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane27" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img27" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge27" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane28" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="9" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img28" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge28" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane29" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="7" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img29" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge29" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane30" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="5" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img30" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge30" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane31" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2">
+               <children>
+                  <ImageView fx:id="img31" fitHeight="96.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" onMouseEntered="#enlarge31" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="480.0" GridPane.columnIndex="20" GridPane.columnSpan="10" GridPane.rowSpan="20">
+               <children>
+                  <Button fx:id="dice" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleDice" prefWidth="120.0" text="Roll Dice" />
+                  <Button fx:id="buy" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" prefWidth="120.0" text="Buy Property" />
+                  <Button fx:id="doNothing" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" prefWidth="120.0" text="Continue" />
+                  <Button fx:id="rent" layoutX="114.0" layoutY="896.0" mnemonicParsing="false" prefWidth="120.0" text="Pay Rent" />
+                  <Button fx:id="trade" layoutX="242.0" layoutY="896.0" mnemonicParsing="false" prefWidth="120.0" text="Initiate Trade" />
+                  <TextField fx:id="bankValue" alignment="CENTER" editable="false" layoutX="168.0" layoutY="805.0" prefHeight="35.0" prefWidth="190.0" />
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="805.0" prefHeight="35.0" prefWidth="50.0" text="Bank: " />
+                  <ImageView fx:id="dice1" fitHeight="120.0" fitWidth="120.0" layoutX="119.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="dice2" fitHeight="120.0" fitWidth="120.0" layoutX="239.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="currentSpace" fitHeight="300.0" fitWidth="200.0" layoutX="142.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="currentSpaceSquare" fitHeight="300.0" fitWidth="300.0" layoutX="92.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true" />
+               </children></AnchorPane>
+            <Pane fx:id="pane16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img16" fitHeight="144.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge16" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane17" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="15" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img17" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge17" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane18" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="13" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img18" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge18" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane19" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img19" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge19" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane20" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img20" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge20" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane21" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img21" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge21" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+            <Pane fx:id="pane22" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fx:id="img22" fitHeight="144.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlarge22" onMouseExited="#revertImage"/>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

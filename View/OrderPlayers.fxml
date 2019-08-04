@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderPlayersController">
+
+    <ImageView fx:id="backdrop" fitHeight="700.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
+    <children>
+        <Pane layoutX="301.0" layoutY="469.0" prefHeight="128.0" prefWidth="200.0">
+            <children>
+                <TextArea fx:id="bg" editable="false" prefHeight="128.0" prefWidth="200.0" />
+                <Label fx:id="playerSequence" alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="200.0" text="Label" textAlignment="CENTER" />
+            </children>
+        </Pane>
+      <ImageView fx:id="dice1" fitHeight="120.0" fitWidth="120.0" layoutX="250.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice2" fitHeight="120.0" fitWidth="120.0" layoutX="430.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dice" layoutX="364.0" layoutY="533.0" mnemonicParsing="false" mouseTransparent="false" onAction="#handleDice" text="Roll Dice" />
+      <Button fx:id="arrangeBoard" layoutX="436.0" layoutY="614.0" mnemonicParsing="false" onAction="#handleArrange" prefWidth="140.0" text="Arrange Board" />
+      <Button fx:id="randomizeBoard" layoutX="224.0" layoutY="614.0" mnemonicParsing="false" onAction="#handleRandom" prefWidth="140.0" text="Randomize Board" />
+      <TextField fx:id="currPlayerName" alignment="CENTER" editable="false" layoutX="171.0" layoutY="482.0" prefHeight="27.0" prefWidth="460.0" />
+    </children>
+</AnchorPane>
