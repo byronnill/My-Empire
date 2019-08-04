@@ -199,10 +199,10 @@ public class BoardStartUpDragController {
     rail1_ = new Image("/Images/Railroad Space/South Line/1.png");
     rail2 = new Image("/Images/Railroad Space/Metro Line/Full.png");
     rail2_ = new Image("/Images/Railroad Space/Metro Line/1.png");
-    util0 = new Image("/Images/Utility Space/Electric/Full.png");
-    util0_ = new Image("/Images/Utility Space/Electric/1.png");
-    util1 = new Image("/Images/Utility Space/Water/Full.png");
-    util1_ = new Image("/Images/Utility Space/Water/1.png");
+    util0 = new Image("/Images/Utility Space/Water/Full.png");
+    util0_ = new Image("/Images/Utility Space/Water/1.png");
+    util1 = new Image("/Images/Utility Space/Electric/Full.png");
+    util1_ = new Image("/Images/Utility Space/Electric/1.png");
     chance0 = new Image("/Images/Tax - Chance Space/Chance.png");
     chance1 = new Image("/Images/Tax - Chance Space/Chance.png");
     chance2 = new Image("/Images/Tax - Chance Space/Chance.png");

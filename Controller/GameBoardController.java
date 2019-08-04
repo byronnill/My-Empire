@@ -11,7 +11,8 @@ import java.util.*;
 public class GameBoardController {
 
   private Game masterObject;
-  private int diceValueHolder;
+  private Player masterCurrentPlayer;
+  private boolean hoverEnabled;
 
   @FXML
   private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31;
@@ -32,12 +33,14 @@ public class GameBoardController {
   public void setGame (Game game) {
 
     this.masterObject = game;
+    masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
+    masterCurrentPlayer = masterObject.getActivePlayer();
 
     for (int i = 0; i < 32; i++) {
 
       Space currSpace;
 
-      currSpace = masterObject.getGameBoard().getBoardSpaces().get(i);
+      currSpace = game.getGameBoard().getBoardSpaces().get(i);
 
       if (i == 0 || i == 8 || i == 16 || i == 24) {
 
@@ -57,8 +60,7 @@ public class GameBoardController {
         if (((TaxSpace) currSpace).isIncome()) {
           returnImageView(i).setImage(income);
           returnImageView(i).setAccessibleText("-2");
-        }
-        else {
+        } else {
           returnImageView(i).setImage(luxury);
           returnImageView(i).setAccessibleText("-3");
         }
@@ -79,10 +81,15 @@ public class GameBoardController {
 
     }
 
+
     backdrop.setImage(backdropImage);
     bankValue.setText(Double.toString(masterObject.getGameBank().getValue()));
     currentSpace.setVisible(false);
     currentSpaceSquare.setVisible(false);
+
+    dice1.setVisible(false);
+    dice2.setVisible(false);
+    dice.setDefaultButton(true);
 
     buy.setStyle("-fx-cursor: hand");
     doNothing.setStyle("-fx-cursor: hand");
@@ -115,7 +122,7 @@ public class GameBoardController {
     green2 = new Image("/Images/Property Space/Green/Connecticut/0.png");
     blue0 = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
     blue1 = new Image("/Images/Property Space/Blue/Dama De Noche/0.png");
-    blue2 = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
+    blue2 = new Image("/Images/Property Space/Blue/Acacia/0.png");
     orange0 = new Image("/Images/Property Space/Orange/Solar Street/0.png");
     orange1 = new Image("/Images/Property Space/Orange/Galaxy Street/0.png");
     yellow0 = new Image("/Images/Property Space/Yellow/9th Street/0.png");
@@ -123,8 +130,8 @@ public class GameBoardController {
     rail0 = new Image("/Images/Railroad Space/North Line/1.png");
     rail1 = new Image("/Images/Railroad Space/South Line/1.png");
     rail2 = new Image("/Images/Railroad Space/Metro Line/1.png");
-    util0 = new Image("/Images/Utility Space/Electric/1.png");
-    util1 = new Image("/Images/Utility Space/Water/1.png");
+    util0 = new Image("/Images/Utility Space/Water/1.png");
+    util1 = new Image("/Images/Utility Space/Electric/1.png");
     chance = new Image("/Images/Tax - Chance Space/Chance.png");
     income = new Image("/Images/Tax - Chance Space/Income Tax.png");
     luxury = new Image("/Images/Tax - Chance Space/Luxury Tax.png");
@@ -146,7 +153,7 @@ public class GameBoardController {
     green2_ = new Image("/Images/Property Space/Green/Connecticut/Full.png");
     blue0_ = new Image("/Images/Property Space/Blue/Bougainvilla/Full.png");
     blue1_ = new Image("/Images/Property Space/Blue/Dama De Noche/Full.png");
-    blue2_ = new Image("/Images/Property Space/Blue/Bougainvilla/Full.png");
+    blue2_ = new Image("/Images/Property Space/Blue/Acacia/Full.png");
     orange0_ = new Image("/Images/Property Space/Orange/Solar Street/Full.png");
     orange1_ = new Image("/Images/Property Space/Orange/Galaxy Street/Full.png");
     yellow0_ = new Image("/Images/Property Space/Yellow/9th Street/Full.png");
@@ -154,174 +161,310 @@ public class GameBoardController {
     rail0_ = new Image("/Images/Railroad Space/North Line/Full.png");
     rail1_ = new Image("/Images/Railroad Space/South Line/Full.png");
     rail2_ = new Image("/Images/Railroad Space/Metro Line/Full.png");
-    util0_ = new Image("/Images/Utility Space/Electric/Full.png");
-    util1_ = new Image("/Images/Utility Space/Water/Full.png");
+    util0_ = new Image("/Images/Utility Space/Water/Full.png");
+    util1_ = new Image("/Images/Utility Space/Electric/Full.png");
+
+    hoverEnabled = true;
 
   }
 
   public void enlarge0 () {
-    currentSpaceSquare.setImage(img0.getImage());
-    currentSpaceSquare.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpaceSquare.setImage(img0.getImage());
+      currentSpaceSquare.setVisible(true);
+    }
+
   }
 
   public void enlarge1 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img1.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img1.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge2 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img2.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img2.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge3 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img3.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img3.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge4 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img4.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img4.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge5 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img5.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img5.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge6 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img6.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img6.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge7 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img7.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img7.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge8 () {
-    currentSpaceSquare.setImage(img8.getImage());
-    currentSpaceSquare.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpaceSquare.setImage(img8.getImage());
+      currentSpaceSquare.setVisible(true);
+    }
+
   }
 
   public void enlarge9 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img9.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img9.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge10 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img10.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img10.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge11 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img11.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img11.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge12 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img12.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img12.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge13 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img13.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img13.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge14 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img14.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img14.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge15 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img15.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img15.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge16 () {
-    currentSpaceSquare.setImage(img16.getImage());
-    currentSpaceSquare.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpaceSquare.setImage(img16.getImage());
+      currentSpaceSquare.setVisible(true);
+    }
+
   }
 
   public void enlarge17 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img17.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img17.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge18 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img18.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img18.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge19 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img19.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img19.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge20 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img20.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img20.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge21 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img21.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img21.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge22 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img22.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img22.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge23 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img23.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img23.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge24 () {
-    currentSpaceSquare.setImage(img24.getImage());
-    currentSpaceSquare.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpaceSquare.setImage(img24.getImage());
+      currentSpaceSquare.setVisible(true);
+    }
+
   }
 
   public void enlarge25 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img25.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img25.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge26 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img26.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img26.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge27 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img27.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img27.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge28 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img28.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img28.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge29 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img29.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img29.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge30 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img30.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img30.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void enlarge31 () {
-    currentSpace.setImage(returnImageFull(Integer.parseInt(img31.getAccessibleText())));
-    currentSpace.setVisible(true);
+
+    if (hoverEnabled) {
+      currentSpace.setImage(returnImageFull(Integer.parseInt(img31.getAccessibleText())));
+      currentSpace.setVisible(true);
+    }
+
   }
 
   public void revertImage () {
-    currentSpace.setVisible(false);
-    currentSpaceSquare.setVisible(false);
+
+    if (hoverEnabled) {
+      currentSpace.setVisible(false);
+      currentSpaceSquare.setVisible(false);
+      currentSpaceSquare.setImage(null);
+      currentSpace.setImage(null);
+    }
+
   }
 
   public Image returnImage(int nID){
@@ -423,7 +566,23 @@ public class GameBoardController {
     }
   }
 
-  public void handleDice() {
+  public void setupChanceScreen (Card cardDrawn) {
+
+
+
+  }
+
+  public void setupOwnableScreen () {
+
+    OwnableSpace currSpace = (OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+
+
+
+  }
+
+  public void handleDice () {
+
+    hoverEnabled = false;
 
     int curr1 = masterObject.rollDice();
     dice1Holder = new Image("/Images/Main/Dice " + curr1 + ".png");
@@ -434,7 +593,103 @@ public class GameBoardController {
     dice1.setImage(dice1Holder);
     dice2.setImage(dice2Holder);
 
-    diceValueHolder = curr1 + curr2;
+    dice1.setVisible(true);
+    dice2.setVisible(true);
+
+    if (!masterCurrentPlayer.isFreedomPossible()) {
+      masterObject.setGameFinished(true);
+      endGameChangeScene();
+    } else {
+
+      //show freedom scene
+
+    }
+
+    int actionToDo = masterObject.turn(curr1 + curr2);
+
+    System.out.println(masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex()));
+    System.out.println(actionToDo);
+    System.out.println();
+
+    switch (actionToDo) {
+
+      case Game.LAND_ON_START_FREE  : //display no possible options
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_JAIL        : //display player has been sent to jail
+                                      masterCurrentPlayer.setInJail(true);
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_COMMUNITY   : if (masterCurrentPlayer.isPaymentPossible(50)) {
+
+                                        //display Player has paid 50
+                                        masterCurrentPlayer.payBank(50, masterObject.getGameBank());
+
+                                      } else {
+
+                                        //display bankruptcy
+                                        masterCurrentPlayer.setBankruptcy();
+                                        endGameChangeScene();
+
+                                      }
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_CHANCE      : setupChanceScreen(masterObject.getGameDeck().drawCard());
+                                      break;
+
+      case Game.LAND_ON_TAX         : double toPay = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).payTax(masterCurrentPlayer);
+
+                                      if (toPay != -1) {
+
+                                        //display Player has paid tax
+                                        masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
+
+                                      } else {
+
+                                        //display bankruptcy
+                                        masterCurrentPlayer.setBankruptcy();
+                                        endGameChangeScene();
+
+                                      }
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_OWNABLE     : setupOwnableScreen();
+                                      break;
+
+      default                       : endGameChangeScene();
+
+    }
+
+    masterObject.endTurn();
+    masterCurrentPlayer = masterObject.getActivePlayer();
+
+  }
+
+  public void handleBuy () {
+
+
+  }
+
+  public void handleRent () {
+
+  }
+
+  public void handleContinue () {
+
+    dice.setVisible(true);
+    doNothing.setVisible(false);
+
+  }
+
+  public void handleTrade () {
+
+  }
+
+  public void endGameChangeScene () {
 
   }
 

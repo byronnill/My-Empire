@@ -4,11 +4,20 @@ import java.util.*;
 
 public class Game {
 
+  public static final int GAME_IS_END = -1;
+//  public static final int NEXT_PLAYER_TURN = 1;
+  public static final int LAND_ON_OWNABLE = 2;
+  public static final int LAND_ON_TAX = 3;
+  public static final int LAND_ON_CHANCE = 4;
+  public static final int LAND_ON_START_FREE = 5;
+  public static final int LAND_ON_JAIL = 6;
+  public static final int LAND_ON_COMMUNITY = 7;
+
   private final int NUM_PLAYERS;
   private final Bank GAME_BANK;
 
   private ArrayList <Player> playerList;
-  private int nActivePlayer;
+  private Player activePlayer;
   private Board gameBoard;
   private Deck gameDeck;
   private boolean gameFinished;
@@ -25,7 +34,6 @@ public class Game {
     this.GAME_BANK = new Bank(nPlayers);
 
     this.gameFinished = false;
-    this.nActivePlayer = 0;
 
   }
 
@@ -76,27 +84,19 @@ public class Game {
   }
 
   public void endTurn () {
-    this.nActivePlayer = (this.nActivePlayer + 1) % this.NUM_PLAYERS;
+    this.activePlayer = this.playerList.get((this.activePlayer.getPlayerNum() + 1) % this.NUM_PLAYERS);
   }
 
-  public boolean turn () {
+  public int turn (int diceHolder) {
 
-    Player currPlayer = this.playerList.get(this.nActivePlayer);
+    Player currPlayer = this.activePlayer;
     Space currSpace;
-    int diceHolder, currSpaceIndex;
+    int currSpaceIndex;
 
-    //checking for jail status
+    //checking for jail status included in controller
 
-    if (!currPlayer.isFreedomPossible()) {
-
-      gameFinished = true;
-      return false;
-
-    }
-
-    diceHolder = rollDice();
     if (!currPlayer.movePlayer(this.gameBoard, diceHolder, true, this.GAME_BANK))
-      return false;
+      return GAME_IS_END;
 
     currSpaceIndex = currPlayer.getLocationIndex();
     currSpace = this.gameBoard.getBoardSpaces().get(currSpaceIndex);
@@ -104,45 +104,32 @@ public class Game {
     if (currSpaceIndex == 0 || currSpaceIndex == 8) {
 
       this.endTurn();
-      return true;
+      return LAND_ON_START_FREE;
 
     } else if (currSpaceIndex == 16) {
 
       currPlayer.setInJail(true);
 
       this.endTurn();
-      return true;
+      return LAND_ON_JAIL;
 
     } else if (currSpaceIndex == 24) {
 
-      boolean bPaymentPossibility = currPlayer.isPaymentPossible(50);
-
-      if (bPaymentPossibility) {
-
-        currPlayer.addOrDeductCash(-50);
-        this.GAME_BANK.addOrDeduct(50);
-
-      }
-
-      return bPaymentPossibility;
+      return LAND_ON_COMMUNITY;
 
     } else if (currSpace instanceof TaxSpace) {
 
-      return ((TaxSpace) currSpace).payTax(currPlayer, this.GAME_BANK);
+      return LAND_ON_TAX;
 
     } else if (currSpace instanceof ChanceSpace) {
 
-      Card cardDrawn = this.gameDeck.drawCard();
+      return LAND_ON_CHANCE;
 
-      return this.doChance(currPlayer, cardDrawn);
+    } else  {
 
-    } else if (currSpace instanceof OwnableSpace) {
-
-      return this.doAction(currPlayer, (OwnableSpace) currSpace, 1);
+      return LAND_ON_OWNABLE;
 
     }
-
-    return doesGameResume();
 
   }
 
@@ -169,7 +156,9 @@ public class Game {
     return true;
   }
 
-  public boolean doChance (Player currPlayer, Card cardDrawn) {
+  public boolean doChance (Player currPlayer) { //to adjust for controller
+
+    Card cardDrawn = this.gameDeck.drawCard();
 
     if (cardDrawn instanceof CardGroup1) {
 
@@ -301,8 +290,8 @@ public class Game {
     return playerList;
   }
 
-  public int getActivePlayer () {
-    return nActivePlayer;
+  public Player getActivePlayer () {
+    return activePlayer;
   }
 
   public Board getGameBoard () {
@@ -322,6 +311,10 @@ public class Game {
   }
 
   //setters
+
+  public void setActivePlayer (Player activePlayer) {
+    this.activePlayer = activePlayer;
+  }
 
   public void setGameBoard (Board gameBoard) {
     this.gameBoard = gameBoard;

@@ -197,10 +197,10 @@
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="480.0" GridPane.columnIndex="20" GridPane.columnSpan="10" GridPane.rowSpan="20">
                <children>
                   <Button fx:id="dice" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleDice" prefWidth="120.0" text="Roll Dice" />
-                  <Button fx:id="buy" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" prefWidth="120.0" text="Buy Property" />
-                  <Button fx:id="doNothing" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" prefWidth="120.0" text="Continue" />
-                  <Button fx:id="rent" layoutX="114.0" layoutY="896.0" mnemonicParsing="false" prefWidth="120.0" text="Pay Rent" />
-                  <Button fx:id="trade" layoutX="242.0" layoutY="896.0" mnemonicParsing="false" prefWidth="120.0" text="Initiate Trade" />
+                  <Button fx:id="buy" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleBuy" prefWidth="120.0" text="Buy Property" />
+                  <Button fx:id="doNothing" layoutX="178.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="120.0" text="Continue" />
+                  <Button fx:id="rent" layoutX="114.0" layoutY="896.0" mnemonicParsing="false" onAction="#handleRent" prefWidth="120.0" text="Pay Rent" />
+                  <Button fx:id="trade" layoutX="242.0" layoutY="896.0" mnemonicParsing="false" onAction="#handleTrade" prefWidth="120.0" text="Initiate Trade" />
                   <TextField fx:id="bankValue" alignment="CENTER" editable="false" layoutX="168.0" layoutY="805.0" prefHeight="35.0" prefWidth="190.0" />
                   <Label alignment="CENTER" layoutX="118.0" layoutY="805.0" prefHeight="35.0" prefWidth="50.0" text="Bank: " />
                   <ImageView fx:id="dice1" fitHeight="120.0" fitWidth="120.0" layoutX="119.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />

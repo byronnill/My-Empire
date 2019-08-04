@@ -97,7 +97,7 @@ public class BoardStartUpRandomController {
     green2_ = new Image("/Images/Property Space/Green/Connecticut/0.png");
     blue0_ = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
     blue1_ = new Image("/Images/Property Space/Blue/Dama De Noche/0.png");
-    blue2_ = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
+    blue2_ = new Image("/Images/Property Space/Blue/Acacia/0.png");
     orange0_ = new Image("/Images/Property Space/Orange/Solar Street/0.png");
     orange1_ = new Image("/Images/Property Space/Orange/Galaxy Street/0.png");
     yellow0_ = new Image("/Images/Property Space/Yellow/9th Street/0.png");
@@ -105,8 +105,8 @@ public class BoardStartUpRandomController {
     rail0_ = new Image("/Images/Railroad Space/North Line/1.png");
     rail1_ = new Image("/Images/Railroad Space/South Line/1.png");
     rail2_ = new Image("/Images/Railroad Space/Metro Line/1.png");
-    util0_ = new Image("/Images/Utility Space/Electric/1.png");
-    util1_ = new Image("/Images/Utility Space/Water/1.png");
+    util0_ = new Image("/Images/Utility Space/Water/1.png");
+    util1_ = new Image("/Images/Utility Space/Electric/1.png");
     chance = new Image("/Images/Tax - Chance Space/Chance.png");
     income = new Image("/Images/Tax - Chance Space/Income Tax.png");
     luxury = new Image("/Images/Tax - Chance Space/Luxury Tax.png");

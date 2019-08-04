@@ -21,7 +21,7 @@ public class Player {
 
     this.strName = "Player " + nPlayerNum; //default name, changeable in GUI
 
-    this.dCash = 1500;
+    this.dCash = 1300;
 
     this.nOwned = 0;
     this.nOwnedPerType = new int[9];
@@ -61,7 +61,7 @@ public class Player {
 
     for (int i = 0; i < numSteps; i++) {
 
-      this.nLocationIndex = this.nLocationIndex + 1 % 32;
+      this.nLocationIndex = (this.nLocationIndex + 1) % 32;
 
       if (board.getBoardSpaces().get(this.nLocationIndex) instanceof Property)
         ((Property) board.getBoardSpaces().get(this.nLocationIndex)).addFootTraffic();
@@ -389,6 +389,10 @@ public class Player {
 
   public void addOrDeductCash (double dToAdd) {
     this.dCash += dToAdd;
+  }
+
+  public void setBankruptcy () {
+    this.dCash = 0;
   }
 
   public void addSpaceOwned (OwnableSpace toAdd) {
