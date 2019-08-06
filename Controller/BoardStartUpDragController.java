@@ -410,6 +410,7 @@ public class BoardStartUpDragController {
       }
     }
     instructionImg.setImage(instruction1);
+    changeCursorSelection();
   }
 
   public void selectGray0() {

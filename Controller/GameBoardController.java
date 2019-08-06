@@ -10,6 +10,8 @@ import java.util.*;
 
 public class GameBoardController {
 
+  private static final int ROLL_DICE = -2;
+
   private Game masterObject;
   private Player masterCurrentPlayer;
   private boolean hoverEnabled;
@@ -21,10 +23,10 @@ public class GameBoardController {
   private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare;
 
   @FXML
-  private Button dice, buy, doNothing, rent, trade;
+  private Button dice, buy, doNothing, doNothingOnBuy, rent, trade, endGame;
 
   @FXML
-  private TextField bankValue;
+  private Label playerName, playerCash, inJail, bankValue, rentValue, instructionBox, spaceBox;
 
   private Image gray0, gray1, purple0, purple1, purple2, pink0, pink1, pink2, green0, green1, green2, blue0, blue1, blue2, orange0, orange1, yellow0, yellow1, rail0, rail1, rail2, util0, util1, chance, income, luxury, start, park, jail, service, backdropImage;
   private Image gray0_, gray1_, purple0_, purple1_, purple2_, pink0_, pink1_, pink2_, green0_, green1_, green2_, blue0_, blue1_, blue2_, orange0_, orange1_, yellow0_, yellow1_, rail0_, rail1_, rail2_, util0_, util1_;
@@ -35,6 +37,11 @@ public class GameBoardController {
     this.masterObject = game;
     masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
     masterCurrentPlayer = masterObject.getActivePlayer();
+
+
+    setDetails();
+    setRentValue("-");
+    setInstructionBox(ROLL_DICE);
 
     for (int i = 0; i < 32; i++) {
 
@@ -81,9 +88,7 @@ public class GameBoardController {
 
     }
 
-
     backdrop.setImage(backdropImage);
-    bankValue.setText(Double.toString(masterObject.getGameBank().getValue()));
     currentSpace.setVisible(false);
     currentSpaceSquare.setVisible(false);
 
@@ -93,20 +98,25 @@ public class GameBoardController {
 
     buy.setStyle("-fx-cursor: hand");
     doNothing.setStyle("-fx-cursor: hand");
+    doNothingOnBuy.setStyle("-fx-cursor: hand");
     rent.setStyle("-fx-cursor: hand");
     trade.setStyle("-fx-cursor: hand");
     dice.setStyle("-fx-cursor: hand");
 
+    endGame.setVisible(false);
     buy.setVisible(false);
     doNothing.setVisible(false);
+    doNothingOnBuy.setVisible(false);
     rent.setVisible(false);
     trade.setVisible(false);
+
+    setSpaceBox("");
 
   }
 
   public void initialize () {
 
-    backdropImage = new Image("/Images/Main/Game Screen.png");
+    backdropImage = new Image("/Images/Main/Game Screen with Details.png");
     dice1Holder = new Image("/Images/Main/Dice 6.png");
     dice2Holder = new Image("/Images/Main/Dice 6.png");
     gray0 = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
@@ -566,7 +576,142 @@ public class GameBoardController {
     }
   }
 
-  public void setupChanceScreen (Card cardDrawn) {
+  public void setDetails () {
+
+    playerName.setText(masterCurrentPlayer.getName());
+    playerCash.setText(Double.toString(masterCurrentPlayer.getCash()));
+    bankValue.setText(Double.toString(masterObject.getGameBank().getValue()));
+
+    if (masterCurrentPlayer.isInJail())
+      inJail.setText("Yes");
+    else
+      inJail.setText("No");
+
+  }
+
+  public void setRentValue (String toSet) {
+
+    rentValue.setText(toSet);
+
+  }
+
+  public void setInstructionBox (int nType) {
+
+    switch (nType) {
+
+      case ROLL_DICE              : instructionBox.setText(masterCurrentPlayer.getName() + ", ROLL the dice.");
+                                    break;
+
+      case Game.LAND_ON_START     : setSpaceBox("Start");
+                                    instructionBox.setText("You have been automatically given $200.");
+                                    break;
+
+      case Game.LAND_ON_FREE      : setSpaceBox("Free Parking");
+                                    instructionBox.setText("No further actions possible.");
+                                    break;
+
+      case Game.LAND_ON_JAIL      : setSpaceBox("Jail");
+                                    instructionBox.setText("You are now in jail.\nPay $50 or use a GET OUT OF JAIL FREE card on your next turn.");
+                                    break;
+
+      case Game.LAND_ON_COMMUNITY : setSpaceBox("Community Service");
+                                    instructionBox.setText("You have been automatically deducted $50.");
+                                    break;
+
+      case Game.LAND_ON_CHANCE    : setSpaceBox("Chance Card Space");
+                                    instructionBox.setText("Please see instructions on the card above.");
+                                    break;
+
+    }
+
+  }
+
+  public void setInstructionBox (String toSet) {
+
+    instructionBox.setText(toSet);
+
+  }
+
+  public void setSpaceBox (String toSet) {
+
+    spaceBox.setText(toSet);
+
+  }
+
+  public void gameIsEnd () {
+
+    setInstructionBox(instructionBox.getText() + "\nThe game is over.\nPlease press END GAME to proceed to the player rankings.");
+
+    masterObject.setGameFinished(true);
+
+    endGame.setVisible(true);
+
+    dice.setVisible(false);
+    buy.setVisible(false);
+    doNothing.setVisible(false);
+    doNothingOnBuy.setVisible(false);
+    rent.setVisible(false);
+    trade.setVisible(false);
+
+  }
+
+  public void playerTransition () {
+
+    if (!masterObject.doesGameResume()) {
+
+      gameIsEnd();
+
+    } else {
+
+      dice.setVisible(true);
+
+      buy.setVisible(false);
+      doNothing.setVisible(false);
+      doNothingOnBuy.setVisible(false);
+      rent.setVisible(false);
+      trade.setVisible(false);
+
+      setRentValue("-");
+      setSpaceBox("");
+
+      masterObject.endTurn();
+      masterCurrentPlayer = masterObject.getActivePlayer();
+
+      hoverEnabled = true;
+      setDetails();
+
+      dice1.setVisible(false);
+      dice2.setVisible(false);
+
+      if (masterCurrentPlayer.isInJail()) {
+
+        if (masterCurrentPlayer.isFreedomPossible() == 0) {
+
+          masterCurrentPlayer.setBankruptcy();
+          setInstructionBox("You do not have a GET OUT OF JAIL FREE card and enough money to post bail.");
+          gameIsEnd();
+
+        } else if (masterCurrentPlayer.isFreedomPossible() == 1) {
+
+          setInstructionBox("Your GET OUT OF JAIL FREE card has been used.\nPress ROLL DICE to start your turn.");
+
+        } else if (masterCurrentPlayer.isFreedomPossible() == 2) {
+
+          setInstructionBox("You have been automatically deducted $50 and are now free from jail.\nPress ROLL DICE to start your turn.");
+
+        }
+
+      } else {
+
+        setInstructionBox(ROLL_DICE);
+
+      }
+
+    }
+
+  }
+
+  public void setupChanceScreen () {
 
 
 
@@ -576,7 +721,56 @@ public class GameBoardController {
 
     OwnableSpace currSpace = (OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
+    setSpaceBox(currSpace.getName());
+    setRentValue(Double.toString(currSpace.getRent()));
 
+    if (currSpace.getOwner() == null) {
+
+      setInstructionBox("This space is unowned.");
+
+      if (currSpace.canBeBought(masterCurrentPlayer)) {
+
+        dice.setVisible(false);
+
+        buy.setVisible(true);
+        doNothingOnBuy.setVisible(true);
+
+      } else {
+
+        setInstructionBox(instructionBox.getText() + "\nHowever, you have insufficient funding to buy it.");
+
+        dice.setVisible(false);
+
+        buy.setVisible(true);
+        buy.setDisable(true);
+        doNothingOnBuy.setVisible(true);
+
+      }
+
+
+    } else if (currSpace.getOwner().equals(masterCurrentPlayer)) {
+
+      if (currSpace instanceof Property && ((Property) currSpace).canBeDeveloped(masterCurrentPlayer)) {
+
+        masterCurrentPlayer.developProperty((Property) currSpace, masterObject.getGameBank());
+        setInstructionBox("This property is yours and has been automatically developed.\nThe new rent is now $" + currSpace.getRent());
+
+      } else {
+
+        setInstructionBox("This property is yours.");
+
+      }
+
+    } else {
+
+      setInstructionBox("This property is owned by " + currSpace.getOwner().getName() + "\nand has a rent of $" + currSpace.getRent());
+
+      dice.setVisible(false);
+
+      rent.setVisible(true);
+      trade.setVisible(true);
+
+    }
 
   }
 
@@ -596,15 +790,6 @@ public class GameBoardController {
     dice1.setVisible(true);
     dice2.setVisible(true);
 
-    if (!masterCurrentPlayer.isFreedomPossible()) {
-      masterObject.setGameFinished(true);
-      endGameChangeScene();
-    } else {
-
-      //show freedom scene
-
-    }
-
     int actionToDo = masterObject.turn(curr1 + curr2);
 
     System.out.println(masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex()));
@@ -613,64 +798,77 @@ public class GameBoardController {
 
     switch (actionToDo) {
 
-      case Game.LAND_ON_START_FREE  : //display no possible options
+      case Game.LAND_ON_START       : setInstructionBox(Game.LAND_ON_START);
+                                      setDetails();
                                       doNothing.setVisible(true);
                                       break;
 
-      case Game.LAND_ON_JAIL        : //display player has been sent to jail
+      case Game.LAND_ON_FREE        : setInstructionBox(Game.LAND_ON_FREE);
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_JAIL        : setInstructionBox(Game.LAND_ON_JAIL);
                                       masterCurrentPlayer.setInJail(true);
+                                      setDetails();
                                       doNothing.setVisible(true);
                                       break;
 
       case Game.LAND_ON_COMMUNITY   : if (masterCurrentPlayer.isPaymentPossible(50)) {
 
-                                        //display Player has paid 50
+                                        setInstructionBox(Game.LAND_ON_COMMUNITY);
                                         masterCurrentPlayer.payBank(50, masterObject.getGameBank());
+                                        setDetails();
+                                        doNothing.setVisible(true);
 
                                       } else {
 
-                                        //display bankruptcy
                                         masterCurrentPlayer.setBankruptcy();
-                                        endGameChangeScene();
+                                        setInstructionBox("You have insufficient funding to pay for community service.");
+                                        gameIsEnd();
 
                                       }
-                                      doNothing.setVisible(true);
                                       break;
 
-      case Game.LAND_ON_CHANCE      : setupChanceScreen(masterObject.getGameDeck().drawCard());
+      case Game.LAND_ON_CHANCE      : setInstructionBox(Game.LAND_ON_CHANCE);
+                                      setupChanceScreen();
                                       break;
 
-      case Game.LAND_ON_TAX         : double toPay = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).payTax(masterCurrentPlayer);
+      case Game.LAND_ON_TAX         : String strType = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).isIncome() ? "Income" : "Luxury";
+                                      setSpaceBox(strType + " Tax");
+
+                                      double toPay = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).payTax(masterCurrentPlayer);
 
                                       if (toPay != -1) {
 
-                                        //display Player has paid tax
+                                        setInstructionBox("You have been automatically deducted $" + toPay);
                                         masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
+                                        setDetails();
+                                        doNothing.setVisible(true);
 
                                       } else {
 
-                                        //display bankruptcy
                                         masterCurrentPlayer.setBankruptcy();
-                                        endGameChangeScene();
+                                        setInstructionBox("You have insufficient funding to pay for taxes.");
+                                        gameIsEnd();
 
                                       }
-                                      doNothing.setVisible(true);
                                       break;
 
       case Game.LAND_ON_OWNABLE     : setupOwnableScreen();
                                       break;
 
-      default                       : endGameChangeScene();
-
     }
-
-    masterObject.endTurn();
-    masterCurrentPlayer = masterObject.getActivePlayer();
 
   }
 
   public void handleBuy () {
 
+    OwnableSpace currSpace = (OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+
+    masterCurrentPlayer.buyProperty(currSpace, masterObject.getGameBank());
+
+    setDetails();
+    setInstructionBox("You have bought this space.");
 
   }
 
@@ -680,8 +878,7 @@ public class GameBoardController {
 
   public void handleContinue () {
 
-    dice.setVisible(true);
-    doNothing.setVisible(false);
+    playerTransition();
 
   }
 
@@ -689,7 +886,7 @@ public class GameBoardController {
 
   }
 
-  public void endGameChangeScene () {
+  public void handleEndGame () {
 
   }
 

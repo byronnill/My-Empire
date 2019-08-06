@@ -27,7 +27,7 @@ public abstract class OwnableSpace extends Space {
 
   public boolean canBeBought (Player currPlayer) {
 
-    return this.owner == null && currPlayer.isPaymentPossible(this.PRICE);
+    return currPlayer.isPaymentPossible(this.PRICE);
 
   }
 

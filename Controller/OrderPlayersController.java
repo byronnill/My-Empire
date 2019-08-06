@@ -95,6 +95,8 @@ public class OrderPlayersController {
       bg.setVisible(true);
       playerSequence.setVisible(true);
       playerSequence.setText("Sequence of players\n\n" + masterObject.playerOrderString());
+
+      arrangeBoard.setDefaultButton(true);
     }
 
     else if (diceResults.size() == masterObject.getNumPlayers() && findDuplicate(diceResults)) {

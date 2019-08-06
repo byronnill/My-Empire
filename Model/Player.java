@@ -13,6 +13,7 @@ public class Player {
   private ArrayList <OwnableSpace> ownedSpaces;
   private boolean bInJail;
   private ArrayList <CardGroup1> jailChanceCards;
+  private boolean bBankrupt;
 
   public Player (int nPlayerNum) {
 
@@ -21,7 +22,7 @@ public class Player {
 
     this.strName = "Player " + nPlayerNum; //default name, changeable in GUI
 
-    this.dCash = 1300;
+    this.dCash = 1500;
 
     this.nOwned = 0;
     this.nOwnedPerType = new int[9];
@@ -35,23 +36,23 @@ public class Player {
 
   }
 
-  public boolean isFreedomPossible () {
+  public int isFreedomPossible () {
 
     if (!this.jailChanceCards.isEmpty()) {
 
       this.removeJailChance();
       this.bInJail = false;
-      return true;
+      return 1;
 
     } else if (this.dCash > 50) {
 
       this.dCash -= 50;
       this.bInJail = false;
-      return true;
+      return 2;
 
     } else {
 
-      return false;
+      return 0;
 
     }
 
@@ -148,47 +149,30 @@ public class Player {
 
   }
 
-  public boolean buyProperty (OwnableSpace currSpace, Bank bank) {
+  public void buyProperty (OwnableSpace currSpace, Bank bank) {
 
-    if (!currSpace.canBeBought(this))
-      return false;
+    currSpace.setOwner(this);
 
-    else {
-
-      currSpace.setOwner(this);
-
-      this.payBank(currSpace.getPrice(), bank);
-      this.addSpaceOwned(currSpace);
-
-      return true;
-
-    }
+    this.payBank(currSpace.getPrice(), bank);
+    this.addSpaceOwned(currSpace);
 
   }
 
-  public boolean developProperty (Property toDevelop, Bank bank) {
+  public void developProperty (Property toDevelop, Bank bank) {
 
-    if (!toDevelop.canBeDeveloped(this))
-      return false;
+    toDevelop.addToDevelopment();
+
+    if (toDevelop.getDevelopment() == 5) {
+      this.payBank(toDevelop.getHotelPrice(), bank);
+      toDevelop.addToWorth(toDevelop.getHotelPrice());
+    }
 
     else {
-
-      toDevelop.addToDevelopment();
-
-      if (toDevelop.getDevelopment() == 5) {
-        this.payBank(toDevelop.getHotelPrice(), bank);
-        toDevelop.addToWorth(toDevelop.getHotelPrice());
-      }
-
-      else {
-        this.payBank(toDevelop.getHousePrice(), bank);
-        toDevelop.addToWorth(toDevelop.getHousePrice());
-      }
-
-      this.adjustPropertyRents(toDevelop.getColorIndex());
-
-      return true;
+      this.payBank(toDevelop.getHousePrice(), bank);
+      toDevelop.addToWorth(toDevelop.getHousePrice());
     }
+
+    this.adjustPropertyRents(toDevelop.getColorIndex());
 
   }
 
@@ -375,6 +359,10 @@ public class Player {
     return this.jailChanceCards;
   }
 
+  public boolean getBankruptcy () {
+    return this.bBankrupt;
+  }
+
   public void setPlayerNum (int nPlayerNum) {
     this.nPlayerNum = nPlayerNum;
   }
@@ -389,10 +377,6 @@ public class Player {
 
   public void addOrDeductCash (double dToAdd) {
     this.dCash += dToAdd;
-  }
-
-  public void setBankruptcy () {
-    this.dCash = 0;
   }
 
   public void addSpaceOwned (OwnableSpace toAdd) {
@@ -453,6 +437,10 @@ public class Player {
 
   public void removeJailChance () {
     this.jailChanceCards.remove(0);
+  }
+
+  public void setBankruptcy () {
+    this.bBankrupt = true;
   }
 
   @Override

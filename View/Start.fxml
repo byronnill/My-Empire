@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
    <children>
       <ImageView fx:id="backdrop" fitHeight="700.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true"/>
       <RadioButton fx:id="players3" accessibleText="3" layoutX="391.0" layoutY="486.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" wrapText="true" />

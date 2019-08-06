@@ -9,9 +9,10 @@ public class Game {
   public static final int LAND_ON_OWNABLE = 2;
   public static final int LAND_ON_TAX = 3;
   public static final int LAND_ON_CHANCE = 4;
-  public static final int LAND_ON_START_FREE = 5;
-  public static final int LAND_ON_JAIL = 6;
-  public static final int LAND_ON_COMMUNITY = 7;
+  public static final int LAND_ON_START = 5;
+  public static final int LAND_ON_FREE = 6;
+  public static final int LAND_ON_JAIL = 7;
+  public static final int LAND_ON_COMMUNITY = 8;
 
   private final int NUM_PLAYERS;
   private final Bank GAME_BANK;
@@ -101,16 +102,18 @@ public class Game {
     currSpaceIndex = currPlayer.getLocationIndex();
     currSpace = this.gameBoard.getBoardSpaces().get(currSpaceIndex);
 
-    if (currSpaceIndex == 0 || currSpaceIndex == 8) {
+    if (currSpaceIndex == 0) {
 
-      this.endTurn();
-      return LAND_ON_START_FREE;
+      return LAND_ON_START;
+
+    } else if (currSpaceIndex == 8) {
+
+      return LAND_ON_FREE;
 
     } else if (currSpaceIndex == 16) {
 
       currPlayer.setInJail(true);
 
-      this.endTurn();
       return LAND_ON_JAIL;
 
     } else if (currSpaceIndex == 24) {
@@ -215,22 +218,6 @@ public class Game {
 
   }
 
-  public boolean doAction (Player currPlayer, OwnableSpace currSpace, int action) {
-
-    switch (action) {
-
-//      case 1: currPlayer.buyProperty(currSpace, this.GAME_BANK); break;
-//      case 2: currPlayer.developProperty((Property) currSpace, this.GAME_BANK);
-//      case 3: currPlayer.payRent(currSpace, currSpace.getOwner(), this, this.gameDeck);
-//      case 4: currPlayer.tradeProperty();
-
-    }
-
-
-    return true;
-
-  }
-
   public ArrayList <Player> rankPlayers () {
 
     ArrayList <Player> ranked = this.playerList;
@@ -238,7 +225,7 @@ public class Game {
 
     for (int i = 0; i < this.NUM_PLAYERS; i++) {
 
-     if (this.playerList.get(i).getCash() <= 0)
+     if (this.playerList.get(i).getCash() <= 0 || this.playerList.get(i).getBankruptcy())
         nWorth[i] = 0;
 
      else {
@@ -330,7 +317,7 @@ public class Game {
 
   public String playerOrderString () {
 
-    String toReturn = new String();
+    String toReturn = "";
 
     for (Player p : this.playerList) {
 
