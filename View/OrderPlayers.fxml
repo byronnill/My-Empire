@@ -24,5 +24,6 @@
       <Button fx:id="arrangeBoard" layoutX="436.0" layoutY="614.0" mnemonicParsing="false" onAction="#handleArrange" prefWidth="140.0" text="Arrange Board" />
       <Button fx:id="randomizeBoard" layoutX="224.0" layoutY="614.0" mnemonicParsing="false" onAction="#handleRandom" prefWidth="140.0" text="Randomize Board" />
       <TextField fx:id="currPlayerName" alignment="CENTER" editable="false" layoutX="171.0" layoutY="482.0" prefHeight="27.0" prefWidth="460.0" />
+        <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="726.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

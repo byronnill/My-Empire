@@ -6,6 +6,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.media.*;
 import javafx.stage.*;
 
 import java.io.*;
@@ -18,7 +19,7 @@ public class OrderPlayersController {
   private int currPlayer = 0;
 
   @FXML
-  private ImageView backdrop, dice1, dice2;
+  private ImageView backdrop, dice1, dice2, muteButton;
 
   @FXML
   private Button dice, arrangeBoard, randomizeBoard;
@@ -33,10 +34,15 @@ public class OrderPlayersController {
   private TextArea bg;
 
   private Image backdropHolder, dice1Holder, dice2Holder;
+  private MediaPlayer player;
 
-  public void setGame (Game game) {
+  public void initialize () {
 
-    this.masterObject = game;
+    backdropHolder = new Image("/Images/Main/Screens/Order Players Screen.png");
+    dice1Holder = new Image("/Images/Main/Dice/6.png");
+    dice2Holder = new Image("/Images/Main/Dice/6.png");
+
+    muteButton.setStyle("-fx-cursor: hand");
 
     backdrop.setImage(backdropHolder);
 
@@ -52,25 +58,48 @@ public class OrderPlayersController {
 
     dice.setStyle("-fx-cursor: hand");
 
+  }
+
+  public void setGame (Game game) {
+
+    this.masterObject = game;
     currPlayerName.setText(masterObject.getPlayerList().get(currPlayer).getName() + ", please roll the dice.");
 
   }
 
-  public void initialize () {
+  public void setPlayer (MediaPlayer player) {
+    this.player = player;
 
-    backdropHolder = new Image("/Images/Main/Order Players Screen.png");
-    dice1Holder = new Image("/Images/Main/Dice 6.png");
-    dice2Holder = new Image("/Images/Main/Dice 6.png");
+    if (player.getVolume() > 0)
+      muteButton.setImage(new Image("Images/Main/Misc/Sound on.png"));
+
+    else
+      muteButton.setImage(new Image("Images/Main/Misc/Sound off.png"));
+  }
+
+  public void handleMute () {
+
+    if (player.getVolume() > 0) {
+
+      player.setVolume(0);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound off.png"));
+
+    } else {
+
+      player.setVolume(9);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
+
+    }
 
   }
 
   public void handleDice () {
 
     int curr1 = rollDice();
-    dice1Holder = new Image("/Images/Main/Dice " + curr1 + ".png");
+    dice1Holder = new Image("/Images/Main/Dice/" + curr1 + ".png");
 
     int curr2 = rollDice();
-    dice2Holder = new Image("/Images/Main/Dice " + curr2 + ".png");
+    dice2Holder = new Image("/Images/Main/Dice/" + curr2 + ".png");
 
     dice1.setImage(dice1Holder);
     dice2.setImage(dice2Holder);
@@ -141,6 +170,7 @@ public class OrderPlayersController {
       Parent root = loader.load();
       BoardStartUpDragController boardController = loader.getController();
 
+      boardController.setPlayer(player);
       boardController.setGame(masterObject);
 
       Scene scene = new Scene(root);
@@ -167,6 +197,7 @@ public class OrderPlayersController {
       Parent root = loader.load();
       BoardStartUpRandomController boardController = loader.getController();
 
+      boardController.setPlayer(player);
       boardController.setGame(masterObject);
 
       Scene scene = new Scene(root);

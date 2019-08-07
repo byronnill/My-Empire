@@ -196,6 +196,7 @@
                <children>
                   <Button fx:id="startGame" layoutX="170.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="34.0" prefWidth="150.0" text="Begin!" />
                   <Button fx:id="randomizeAgain" layoutX="169.0" layoutY="396.0" mnemonicParsing="false" onAction="#handleRandomize" prefHeight="34.0" prefWidth="150.0" text="Randomize Again" />
+                  <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="406.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <Pane fx:id="pane16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">

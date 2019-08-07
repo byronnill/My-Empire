@@ -5,6 +5,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.media.MediaPlayer;
 
 import java.util.*;
 
@@ -14,13 +15,27 @@ public class GameBoardController {
 
   private Game masterObject;
   private Player masterCurrentPlayer;
+  private Space masterCurrentSpace;
   private boolean hoverEnabled;
+  private MediaPlayer player;
 
   @FXML
   private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31;
 
   @FXML
-  private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare;
+  private ImageView img0Avatar0, img0Avatar1, img0Avatar2, img0Avatar3, img1Avatar0, img1Avatar1, img1Avatar2, img1Avatar3, img2Avatar0, img2Avatar1, img2Avatar2, img2Avatar3, img3Avatar0, img3Avatar1, img3Avatar2, img3Avatar3, img4Avatar0, img4Avatar1, img4Avatar2, img4Avatar3, img5Avatar0, img5Avatar1, img5Avatar2, img5Avatar3, img6Avatar0, img6Avatar1, img6Avatar2, img6Avatar3, img7Avatar0, img7Avatar1, img7Avatar2, img7Avatar3;
+
+  @FXML
+  private ImageView img8Avatar0, img8Avatar1, img8Avatar2, img8Avatar3, img9Avatar0, img9Avatar1, img9Avatar2, img9Avatar3, img10Avatar0, img10Avatar1, img10Avatar2, img10Avatar3, img11Avatar0, img11Avatar1, img11Avatar2, img11Avatar3, img12Avatar0, img12Avatar1, img12Avatar2, img12Avatar3, img13Avatar0, img13Avatar1, img13Avatar2, img13Avatar3, img14Avatar0, img14Avatar1, img14Avatar2, img14Avatar3, img15Avatar0, img15Avatar1, img15Avatar2, img15Avatar3;
+
+  @FXML
+  private ImageView img16Avatar0, img16Avatar1, img16Avatar2, img16Avatar3, img17Avatar0, img17Avatar1, img17Avatar2, img17Avatar3, img18Avatar0, img18Avatar1, img18Avatar2, img18Avatar3, img19Avatar0, img19Avatar1, img19Avatar2, img19Avatar3, img20Avatar0, img20Avatar1, img20Avatar2, img20Avatar3, img21Avatar0, img21Avatar1, img21Avatar2, img21Avatar3, img22Avatar0, img22Avatar1, img22Avatar2, img22Avatar3, img23Avatar0, img23Avatar1, img23Avatar2, img23Avatar3;
+
+  @FXML
+  private ImageView img24Avatar0, img24Avatar1, img24Avatar2, img24Avatar3, img25Avatar0, img25Avatar1, img25Avatar2, img25Avatar3, img26Avatar0, img26Avatar1, img26Avatar2, img26Avatar3, img27Avatar0, img27Avatar1, img27Avatar2, img27Avatar3, img28Avatar0, img28Avatar1, img28Avatar2, img28Avatar3, img29Avatar0, img29Avatar1, img29Avatar2, img29Avatar3, img30Avatar0, img30Avatar1, img30Avatar2, img30Avatar3, img31Avatar0, img31Avatar1, img31Avatar2, img31Avatar3;
+
+  @FXML
+  private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton;
 
   @FXML
   private Button dice, buy, doNothing, doNothingOnBuy, rent, trade, endGame;
@@ -30,95 +45,14 @@ public class GameBoardController {
 
   private Image gray0, gray1, purple0, purple1, purple2, pink0, pink1, pink2, green0, green1, green2, blue0, blue1, blue2, orange0, orange1, yellow0, yellow1, rail0, rail1, rail2, util0, util1, chance, income, luxury, start, park, jail, service, backdropImage;
   private Image gray0_, gray1_, purple0_, purple1_, purple2_, pink0_, pink1_, pink2_, green0_, green1_, green2_, blue0_, blue1_, blue2_, orange0_, orange1_, yellow0_, yellow1_, rail0_, rail1_, rail2_, util0_, util1_;
+  private Image avatar0, avatar1, avatar2, avatar3;
   private Image dice1Holder, dice2Holder;
-
-  public void setGame (Game game) {
-
-    this.masterObject = game;
-    masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
-    masterCurrentPlayer = masterObject.getActivePlayer();
-
-
-    setDetails();
-    setRentValue("-");
-    setInstructionBox(ROLL_DICE);
-
-    for (int i = 0; i < 32; i++) {
-
-      Space currSpace;
-
-      currSpace = game.getGameBoard().getBoardSpaces().get(i);
-
-      if (i == 0 || i == 8 || i == 16 || i == 24) {
-
-        switch (i) {
-          case 0: img0.setImage(start);
-          case 8: img8.setImage(park);
-          case 16: img16.setImage(jail);
-          case 24: img24.setImage(service);
-
-        }
-
-      } else if (currSpace instanceof ChanceSpace) {
-        returnImageView(i).setImage(chance);
-        returnImageView(i).setAccessibleText("-1");
-      } else if (currSpace instanceof TaxSpace) {
-
-        if (((TaxSpace) currSpace).isIncome()) {
-          returnImageView(i).setImage(income);
-          returnImageView(i).setAccessibleText("-2");
-        } else {
-          returnImageView(i).setImage(luxury);
-          returnImageView(i).setAccessibleText("-3");
-        }
-
-      } else if (currSpace instanceof OwnableSpace) {
-
-        returnImageView(i).setImage(returnImage(((OwnableSpace) currSpace).getID()));
-        returnImageView(i).setAccessibleText(Integer.toString(((OwnableSpace) currSpace).getID()));
-
-      }
-
-      if (i > 0 && i < 8)
-        returnImageView(i).setRotate(180);
-      else if (i > 8 && i < 16)
-        returnImageView(i).setRotate(270);
-      else if (i > 24 && i < 32)
-        returnImageView(i).setRotate(90);
-
-    }
-
-    backdrop.setImage(backdropImage);
-    currentSpace.setVisible(false);
-    currentSpaceSquare.setVisible(false);
-
-    dice1.setVisible(false);
-    dice2.setVisible(false);
-    dice.setDefaultButton(true);
-
-    buy.setStyle("-fx-cursor: hand");
-    doNothing.setStyle("-fx-cursor: hand");
-    doNothingOnBuy.setStyle("-fx-cursor: hand");
-    rent.setStyle("-fx-cursor: hand");
-    trade.setStyle("-fx-cursor: hand");
-    dice.setStyle("-fx-cursor: hand");
-
-    endGame.setVisible(false);
-    buy.setVisible(false);
-    doNothing.setVisible(false);
-    doNothingOnBuy.setVisible(false);
-    rent.setVisible(false);
-    trade.setVisible(false);
-
-    setSpaceBox("");
-
-  }
 
   public void initialize () {
 
-    backdropImage = new Image("/Images/Main/Game Screen with Details.png");
-    dice1Holder = new Image("/Images/Main/Dice 6.png");
-    dice2Holder = new Image("/Images/Main/Dice 6.png");
+    backdropImage = new Image("/Images/Main/Screens/Game Screen.png");
+    dice1Holder = new Image("/Images/Main/Dice/6.png");
+    dice2Holder = new Image("/Images/Main/Dice/6.png");
     gray0 = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
     gray1 = new Image("/Images/Property Space/Gray/Kasoy Street/0.png");
     purple0 = new Image("/Images/Property Space/Purple/Rodeo Drive/0.png");
@@ -174,7 +108,138 @@ public class GameBoardController {
     util0_ = new Image("/Images/Utility Space/Water/Full.png");
     util1_ = new Image("/Images/Utility Space/Electric/Full.png");
 
+    avatar0 = new Image("/Images/Tokens/Player 0.png");
+    avatar1 = new Image("/Images/Tokens/Player 1.png");
+    avatar2 = new Image("/Images/Tokens/Player 2.png");
+    avatar3 = new Image("/Images/Tokens/Player 3.png");
+
+//    for (int i = 0; i < 32; i++){
+//      returnAvatar(i, 0).setImage(avatar0);
+//      returnAvatar(i, 0).setVisible(false);
+//      returnAvatar(i, 1).setImage(avatar1);
+//      returnAvatar(i, 1).setVisible(false);
+//      returnAvatar(i, 2).setImage(avatar2);
+//      returnAvatar(i, 2).setVisible(false);
+//      returnAvatar(i, 3).setImage(avatar3);
+//      returnAvatar(i, 3).setVisible(false);
+//    }
+//
+//    for (int i = 0; i < masterObject.getNumPlayers(); i++)
+//      returnAvatar(0, i).setVisible(true);
+
     hoverEnabled = true;
+
+    //avatar disable TODO
+
+    setRentValue("-");
+
+    backdrop.setImage(backdropImage);
+    currentSpace.setVisible(false);
+    currentSpaceSquare.setVisible(false);
+
+    dice1.setVisible(false);
+    dice2.setVisible(false);
+    dice.setDefaultButton(true);
+
+    buy.setStyle("-fx-cursor: hand");
+    doNothing.setStyle("-fx-cursor: hand");
+    doNothingOnBuy.setStyle("-fx-cursor: hand");
+    rent.setStyle("-fx-cursor: hand");
+    trade.setStyle("-fx-cursor: hand");
+    dice.setStyle("-fx-cursor: hand");
+    muteButton.setStyle("-fx-cursor: hand");
+
+    endGame.setVisible(false);
+    buy.setVisible(false);
+    doNothing.setVisible(false);
+    doNothingOnBuy.setVisible(false);
+    rent.setVisible(false);
+    trade.setVisible(false);
+
+    setSpaceBox("");
+  }
+
+  public void setGame (Game game) {
+
+    this.masterObject = game;
+    masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
+    masterCurrentPlayer = masterObject.getActivePlayer();
+
+    for (int i = 0; i < 32; i++) {
+
+      Space currSpace;
+
+      currSpace = game.getGameBoard().getBoardSpaces().get(i);
+
+      if (i == 0 || i == 8 || i == 16 || i == 24) {
+
+        switch (i) {
+          case 0: img0.setImage(start);
+          case 8: img8.setImage(park);
+          case 16: img16.setImage(jail);
+          case 24: img24.setImage(service);
+
+        }
+
+      } else if (currSpace instanceof ChanceSpace) {
+        returnImageView(i).setImage(chance);
+        returnImageView(i).setAccessibleText("-1");
+      } else if (currSpace instanceof TaxSpace) {
+
+        if (((TaxSpace) currSpace).isIncome()) {
+          returnImageView(i).setImage(income);
+          returnImageView(i).setAccessibleText("-2");
+        } else {
+          returnImageView(i).setImage(luxury);
+          returnImageView(i).setAccessibleText("-3");
+        }
+
+      } else if (currSpace instanceof OwnableSpace) {
+
+        returnImageView(i).setImage(returnImage(((OwnableSpace) currSpace).getID()));
+        returnImageView(i).setAccessibleText(Integer.toString(((OwnableSpace) currSpace).getID()));
+
+      }
+
+      if (i > 0 && i < 8)
+        returnImageView(i).setRotate(180);
+      else if (i > 8 && i < 16)
+        returnImageView(i).setRotate(270);
+      else if (i > 24 && i < 32)
+        returnImageView(i).setRotate(90);
+
+    }
+
+    setDetails();
+    setInstructionBox(ROLL_DICE);
+
+    masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(0);
+
+  }
+
+  public void setPlayer(MediaPlayer player){
+    this.player = player;
+
+    if (player.getVolume() > 0)
+      muteButton.setImage(new Image("Images/Main/Misc/Sound on.png"));
+
+    else
+      muteButton.setImage(new Image("Images/Main/Misc/Sound off.png"));
+  }
+
+  public void handleMute () {
+
+    if (player.getVolume() > 0) {
+
+      player.setVolume(0);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound off.png"));
+
+    } else {
+
+      player.setVolume(9);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
+
+    }
 
   }
 
@@ -619,7 +684,7 @@ public class GameBoardController {
                                     break;
 
       case Game.LAND_ON_CHANCE    : setSpaceBox("Chance Card Space");
-                                    instructionBox.setText("Please see instructions on the card above.");
+                                    instructionBox.setText("Please see instructions on the card drawn from the deck.");
                                     break;
 
     }
@@ -719,7 +784,7 @@ public class GameBoardController {
 
   public void setupOwnableScreen () {
 
-    OwnableSpace currSpace = (OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+    OwnableSpace currSpace = (OwnableSpace) masterCurrentSpace;//masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
     setSpaceBox(currSpace.getName());
     setRentValue(Double.toString(currSpace.getRent()));
@@ -779,10 +844,10 @@ public class GameBoardController {
     hoverEnabled = false;
 
     int curr1 = masterObject.rollDice();
-    dice1Holder = new Image("/Images/Main/Dice " + curr1 + ".png");
+    dice1Holder = new Image("/Images/Main/Dice/" + curr1 + ".png");
 
     int curr2 = masterObject.rollDice();
-    dice2Holder = new Image("/Images/Main/Dice " + curr2 + ".png");
+    dice2Holder = new Image("/Images/Main/Dice/" + curr2 + ".png");
 
     dice1.setImage(dice1Holder);
     dice2.setImage(dice2Holder);
@@ -791,6 +856,9 @@ public class GameBoardController {
     dice2.setVisible(true);
 
     int actionToDo = masterObject.turn(curr1 + curr2);
+
+    //moveAvatar(this.masterCurrentPlayer.getLocationIndex());
+    masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
     System.out.println(masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex()));
     System.out.println(actionToDo);
@@ -870,6 +938,11 @@ public class GameBoardController {
     setDetails();
     setInstructionBox("You have bought this space.");
 
+    buy.setVisible(false);
+    doNothingOnBuy.setVisible(false);
+
+    doNothing.setVisible(true);
+
   }
 
   public void handleRent () {
@@ -890,4 +963,238 @@ public class GameBoardController {
 
   }
 
+  public void moveAvatar(int newIndex){
+    returnAvatar(this.masterCurrentPlayer.getLocationIndex(), this.masterCurrentPlayer.getPlayerNum()).setVisible(false);
+    returnAvatar(newIndex, this.masterCurrentPlayer.getPlayerNum()).setVisible(true);
+  }
+
+  public ImageView returnAvatar(int nIndex, int playerNum){
+    switch(nIndex){
+      case 0: switch(playerNum){
+        case 0: return img0Avatar0;
+        case 1: return img0Avatar1;
+        case 2: return img0Avatar2;
+        case 3: return img0Avatar3;
+        default: return null;
+      }
+      case 1: switch(playerNum){
+        case 0: return img1Avatar0;
+        case 1: return img1Avatar1;
+        case 2: return img1Avatar2;
+        case 3: return img1Avatar3;
+        default: return null;
+      }
+      case 2: switch(playerNum){
+        case 0: return img2Avatar0;
+        case 1: return img2Avatar1;
+        case 2: return img2Avatar2;
+        case 3: return img2Avatar3;
+        default: return null;
+      }
+      case 3: switch(playerNum){
+        case 0: return img3Avatar0;
+        case 1: return img3Avatar1;
+        case 2: return img3Avatar2;
+        case 3: return img3Avatar3;
+        default: return null;
+      }
+      case 4: switch(playerNum){
+        case 0: return img4Avatar0;
+        case 1: return img4Avatar1;
+        case 2: return img4Avatar2;
+        case 3: return img4Avatar3;
+        default: return null;
+      }
+      case 5: switch(playerNum){
+        case 0: return img5Avatar0;
+        case 1: return img5Avatar1;
+        case 2: return img5Avatar2;
+        case 3: return img5Avatar3;
+        default: return null;
+      }
+      case 6: switch(playerNum){
+        case 0: return img6Avatar0;
+        case 1: return img6Avatar1;
+        case 2: return img6Avatar2;
+        case 3: return img6Avatar3;
+        default: return null;
+      }
+      case 7: switch(playerNum){
+        case 0: return img7Avatar0;
+        case 1: return img7Avatar1;
+        case 2: return img7Avatar2;
+        case 3: return img7Avatar3;
+        default: return null;
+      }
+      case 8: switch(playerNum){
+        case 0: return img8Avatar0;
+        case 1: return img8Avatar1;
+        case 2: return img8Avatar2;
+        case 3: return img8Avatar3;
+        default: return null;
+      }
+      case 9: switch(playerNum){
+        case 0: return img9Avatar0;
+        case 1: return img9Avatar1;
+        case 2: return img9Avatar2;
+        case 3: return img9Avatar3;
+        default: return null;
+      }
+      case 10: switch(playerNum){
+        case 0: return img10Avatar0;
+        case 1: return img10Avatar1;
+        case 2: return img10Avatar2;
+        case 3: return img10Avatar3;
+        default: return null;
+      }
+      case 11: switch(playerNum){
+        case 0: return img11Avatar0;
+        case 1: return img11Avatar1;
+        case 2: return img11Avatar2;
+        case 3: return img11Avatar3;
+        default: return null;
+      }
+      case 12: switch(playerNum){
+        case 0: return img12Avatar0;
+        case 1: return img12Avatar1;
+        case 2: return img12Avatar2;
+        case 3: return img12Avatar3;
+        default: return null;
+      }
+      case 13: switch(playerNum){
+        case 0: return img13Avatar0;
+        case 1: return img13Avatar1;
+        case 2: return img13Avatar2;
+        case 3: return img13Avatar3;
+        default: return null;
+      }
+      case 14: switch(playerNum){
+        case 0: return img14Avatar0;
+        case 1: return img14Avatar1;
+        case 2: return img14Avatar2;
+        case 3: return img14Avatar3;
+        default: return null;
+      }
+      case 15: switch(playerNum){
+        case 0: return img15Avatar0;
+        case 1: return img15Avatar1;
+        case 2: return img15Avatar2;
+        case 3: return img15Avatar3;
+        default: return null;
+      }
+      case 16: switch(playerNum){
+        case 0: return img16Avatar0;
+        case 1: return img16Avatar1;
+        case 2: return img16Avatar2;
+        case 3: return img16Avatar3;
+        default: return null;
+      }
+      case 17: switch(playerNum){
+        case 0: return img17Avatar0;
+        case 1: return img17Avatar1;
+        case 2: return img17Avatar2;
+        case 3: return img17Avatar3;
+        default: return null;
+      }
+      case 18: switch(playerNum){
+        case 0: return img18Avatar0;
+        case 1: return img18Avatar1;
+        case 2: return img18Avatar2;
+        case 3: return img18Avatar3;
+        default: return null;
+      }
+      case 19: switch(playerNum){
+        case 0: return img19Avatar0;
+        case 1: return img19Avatar1;
+        case 2: return img19Avatar2;
+        case 3: return img19Avatar3;
+        default: return null;
+      }
+      case 20: switch(playerNum){
+        case 0: return img20Avatar0;
+        case 1: return img20Avatar1;
+        case 2: return img20Avatar2;
+        case 3: return img20Avatar3;
+        default: return null;
+      }
+      case 21: switch(playerNum){
+        case 0: return img21Avatar0;
+        case 1: return img21Avatar1;
+        case 2: return img21Avatar2;
+        case 3: return img21Avatar3;
+        default: return null;
+      }
+      case 22: switch(playerNum){
+        case 0: return img22Avatar0;
+        case 1: return img22Avatar1;
+        case 2: return img22Avatar2;
+        case 3: return img22Avatar3;
+        default: return null;
+      }
+      case 23: switch(playerNum){
+        case 0: return img23Avatar0;
+        case 1: return img23Avatar1;
+        case 2: return img23Avatar2;
+        case 3: return img23Avatar3;
+        default: return null;
+      }
+      case 24: switch(playerNum){
+        case 0: return img24Avatar0;
+        case 1: return img24Avatar1;
+        case 2: return img24Avatar2;
+        case 3: return img24Avatar3;
+        default: return null;
+      }
+      case 25: switch(playerNum){
+        case 0: return img25Avatar0;
+        case 1: return img25Avatar1;
+        case 2: return img25Avatar2;
+        case 3: return img25Avatar3;
+        default: return null;
+      }
+      case 26: switch(playerNum){
+        case 0: return img26Avatar0;
+        case 1: return img26Avatar1;
+        case 2: return img26Avatar2;
+        case 3: return img26Avatar3;
+        default: return null;
+      }
+      case 27: switch(playerNum){
+        case 0: return img27Avatar0;
+        case 1: return img27Avatar1;
+        case 2: return img27Avatar2;
+        case 3: return img27Avatar3;
+        default: return null;
+      }
+      case 28: switch(playerNum){
+        case 0: return img28Avatar0;
+        case 1: return img28Avatar1;
+        case 2: return img28Avatar2;
+        case 3: return img28Avatar3;
+        default: return null;
+      }
+      case 29: switch(playerNum){
+        case 0: return img29Avatar0;
+        case 1: return img29Avatar1;
+        case 2: return img29Avatar2;
+        case 3: return img29Avatar3;
+        default: return null;
+      }
+      case 30: switch(playerNum){
+        case 0: return img30Avatar0;
+        case 1: return img30Avatar1;
+        case 2: return img30Avatar2;
+        case 3: return img30Avatar3;
+        default: return null;
+      }
+      case 31: switch(playerNum){
+        case 0: return img31Avatar0;
+        case 1: return img31Avatar1;
+        case 2: return img31Avatar2;
+        case 3: return img31Avatar3;
+        default: return null;
+      }
+      default: return null;
+    }
+  }
 }

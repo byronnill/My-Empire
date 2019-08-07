@@ -7,6 +7,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.*;
 import javafx.stage.*;
 import javafx.event.*;
 
@@ -14,23 +15,52 @@ import java.io.*;
 
 public class BoardStartUpRandomController {
 
-  private Game masterObject;
-
   @FXML
   private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31;
 
   @FXML
-  private ImageView backdrop;
+  private ImageView backdrop, muteButton;
 
   @FXML
   private Button startGame, randomizeAgain;
 
+  private Game masterObject;
   private Image gray0_, gray1_, purple0_, purple1_, purple2_, pink0_, pink1_, pink2_, green0_, green1_, green2_, blue0_, blue1_, blue2_, orange0_, orange1_, yellow0_, yellow1_, rail0_, rail1_, rail2_, util0_, util1_, chance, income, luxury, start, park, jail, service, backdropImage;
+  private MediaPlayer player;
 
-  public void setGame (Game game) {
+  public void initialize () {
 
-    this.masterObject = game;
-    masterObject.setGameBoard(new Board(masterObject.getNumPlayers()));
+    backdropImage = new Image("/Images/Main/Screens/Board Setup Screen Random.png");
+    gray0_ = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
+    gray1_ = new Image("/Images/Property Space/Gray/Kasoy Street/0.png");
+    purple0_ = new Image("/Images/Property Space/Purple/Rodeo Drive/0.png");
+    purple1_ = new Image("/Images/Property Space/Purple/Orange Street/0.png");
+    purple2_ = new Image("/Images/Property Space/Purple/Ventura Street/0.png");
+    pink0_ = new Image("/Images/Property Space/Pink/Juan Luna/0.png");
+    pink1_ = new Image("/Images/Property Space/Pink/Ylaya/0.png");
+    pink2_ = new Image("/Images/Property Space/Pink/J Abad Santos/0.png");
+    green0_ = new Image("/Images/Property Space/Green/Madison/0.png");
+    green1_ = new Image("/Images/Property Space/Green/Annapolis/0.png");
+    green2_ = new Image("/Images/Property Space/Green/Connecticut/0.png");
+    blue0_ = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
+    blue1_ = new Image("/Images/Property Space/Blue/Dama De Noche/0.png");
+    blue2_ = new Image("/Images/Property Space/Blue/Acacia/0.png");
+    orange0_ = new Image("/Images/Property Space/Orange/Solar Street/0.png");
+    orange1_ = new Image("/Images/Property Space/Orange/Galaxy Street/0.png");
+    yellow0_ = new Image("/Images/Property Space/Yellow/9th Street/0.png");
+    yellow1_ = new Image("/Images/Property Space/Yellow/5th Avenue/0.png");
+    rail0_ = new Image("/Images/Railroad Space/North Line/1.png");
+    rail1_ = new Image("/Images/Railroad Space/South Line/1.png");
+    rail2_ = new Image("/Images/Railroad Space/Metro Line/1.png");
+    util0_ = new Image("/Images/Utility Space/Water/1.png");
+    util1_ = new Image("/Images/Utility Space/Electric/1.png");
+    chance = new Image("/Images/Tax - Chance Space/Chance.png");
+    income = new Image("/Images/Tax - Chance Space/Income Tax.png");
+    luxury = new Image("/Images/Tax - Chance Space/Luxury Tax.png");
+    start = new Image("/Images/Corner Space/Start.png");
+    jail = new Image("/Images/Corner Space/Jail.png");
+    park = new Image("/Images/Corner Space/Free Parking.png");
+    service = new Image("/Images/Corner Space/Community Service.png");
 
     backdrop.setImage(backdropImage);
 
@@ -38,6 +68,14 @@ public class BoardStartUpRandomController {
 
     startGame.setStyle("-fx-cursor: hand");
     randomizeAgain.setStyle("-fx-cursor: hand");
+    muteButton.setStyle("-fx-cursor: hand");
+
+  }
+
+  public void setGame (Game game) {
+
+    this.masterObject = game;
+    masterObject.setGameBoard(new Board(masterObject.getNumPlayers()));
 
     for (int i = 0; i < 32; i++) {
 
@@ -82,39 +120,29 @@ public class BoardStartUpRandomController {
 
   }
 
-  public void initialize () {
+  public void setPlayer (MediaPlayer player) {
+    this.player = player;
 
-    backdropImage = new Image("/Images/Main/Board Setup Screen Random.png");
-    gray0_ = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
-    gray1_ = new Image("/Images/Property Space/Gray/Kasoy Street/0.png");
-    purple0_ = new Image("/Images/Property Space/Purple/Rodeo Drive/0.png");
-    purple1_ = new Image("/Images/Property Space/Purple/Orange Street/0.png");
-    purple2_ = new Image("/Images/Property Space/Purple/Ventura Street/0.png");
-    pink0_ = new Image("/Images/Property Space/Pink/Juan Luna/0.png");
-    pink1_ = new Image("/Images/Property Space/Pink/Ylaya/0.png");
-    pink2_ = new Image("/Images/Property Space/Pink/J Abad Santos/0.png");
-    green0_ = new Image("/Images/Property Space/Green/Madison/0.png");
-    green1_ = new Image("/Images/Property Space/Green/Annapolis/0.png");
-    green2_ = new Image("/Images/Property Space/Green/Connecticut/0.png");
-    blue0_ = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
-    blue1_ = new Image("/Images/Property Space/Blue/Dama De Noche/0.png");
-    blue2_ = new Image("/Images/Property Space/Blue/Acacia/0.png");
-    orange0_ = new Image("/Images/Property Space/Orange/Solar Street/0.png");
-    orange1_ = new Image("/Images/Property Space/Orange/Galaxy Street/0.png");
-    yellow0_ = new Image("/Images/Property Space/Yellow/9th Street/0.png");
-    yellow1_ = new Image("/Images/Property Space/Yellow/5th Avenue/0.png");
-    rail0_ = new Image("/Images/Railroad Space/North Line/1.png");
-    rail1_ = new Image("/Images/Railroad Space/South Line/1.png");
-    rail2_ = new Image("/Images/Railroad Space/Metro Line/1.png");
-    util0_ = new Image("/Images/Utility Space/Water/1.png");
-    util1_ = new Image("/Images/Utility Space/Electric/1.png");
-    chance = new Image("/Images/Tax - Chance Space/Chance.png");
-    income = new Image("/Images/Tax - Chance Space/Income Tax.png");
-    luxury = new Image("/Images/Tax - Chance Space/Luxury Tax.png");
-    start = new Image("/Images/Corner Space/Start.png");
-    jail = new Image("/Images/Corner Space/Jail.png");
-    park = new Image("/Images/Corner Space/Free Parking.png");
-    service = new Image("/Images/Corner Space/Community Service.png");
+    if (player.getVolume() > 0)
+      muteButton.setImage(new Image("Images/Main/Misc/Sound on.png"));
+
+    else
+      muteButton.setImage(new Image("Images/Main/Misc/Sound off.png"));
+  }
+
+  public void handleMute () {
+
+    if (player.getVolume() > 0) {
+
+      player.setVolume(0);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound off.png"));
+
+    } else {
+
+      player.setVolume(9);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
+
+    }
 
   }
 
@@ -138,6 +166,7 @@ public class BoardStartUpRandomController {
       Parent root = loader.load();
       GameBoardController gameBoardController = loader.getController();
 
+      gameBoardController.setPlayer(player);
       gameBoardController.setGame(masterObject);
 
       Scene scene = new Scene(root);

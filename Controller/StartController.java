@@ -5,7 +5,9 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.media.*;
 import javafx.stage.*;
+import javafx.util.*;
 
 import java.io.*;
 
@@ -22,15 +24,18 @@ public class StartController {
   private RadioButton players4;
 
   @FXML
-  private Button startButton;
+  private Button startButton, instructions, credits;
 
   @FXML
-  private ImageView backdrop;
+  private ImageView backdrop, muteButton;
 
-  ToggleGroup choices;
+  private ToggleGroup choices;
+  private Media media;
+  private MediaPlayer player;
 
   public void initialize () {
-    Image backdropImage = new Image("/Images/Main/Start Up.png");
+
+    Image backdropImage = new Image("/Images/Main/Screens/Start Up.png");
     backdrop.setImage(backdropImage);
 
     choices = new ToggleGroup();
@@ -47,7 +52,41 @@ public class StartController {
     startButton.setDefaultButton(true);
     startButton.setStyle("-fx-cursor: hand");
 
+    instructions.setStyle("-fx-cursor: hand");
+    credits.setStyle("-fx-cursor: hand");
+
     choices.selectToggle(players3);
+
+    muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
+    muteButton.setStyle("-fx-cursor: hand");
+
+    media = new Media (getClass().getResource("../Theme.mp3").toExternalForm());
+    player = new MediaPlayer(media);
+
+    player.setAutoPlay(true);
+    player.play();
+
+    player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
+
+  }
+
+  public void setPlayer (MediaPlayer player) {
+    this.player = player;
+  }
+
+  public void handleMute () {
+
+    if (player.getVolume() > 0) {
+
+      player.setVolume(0);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound off.png"));
+
+    } else {
+
+      player.setVolume(9);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
+
+    }
 
   }
 
@@ -60,6 +99,7 @@ public class StartController {
       NameAndGameTypeController controller = loader.getController();
 
       controller.setNumPlayers(Integer.parseInt(((RadioButton) choices.getSelectedToggle()).getAccessibleText()));
+      controller.setPlayer(player);
 
       Scene scene = new Scene(root);
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -75,5 +115,52 @@ public class StartController {
 
   }
 
+  public void handleInstructions (ActionEvent event) {
+
+    try {
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Instructions.fxml"));
+      Parent root = loader.load();
+      InstructionsController controller = loader.getController();
+
+      controller.setPlayer(player);
+
+      Scene scene = new Scene(root);
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+      stage.setResizable(false);
+      stage.centerOnScreen();
+      stage.setScene(scene);
+      stage.show();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  public void handleCredits (ActionEvent event) {
+
+    try {
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Credits.fxml"));
+      Parent root = loader.load();
+      CreditsController controller = loader.getController();
+
+      controller.setPlayer(player);
+
+      Scene scene = new Scene(root);
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+      stage.setResizable(false);
+      stage.centerOnScreen();
+      stage.setScene(scene);
+      stage.show();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+  }
 
 }

@@ -6,7 +6,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.layout.*;
+import javafx.scene.media.*;
 import javafx.stage.*;
 
 import java.io.*;
@@ -17,9 +17,7 @@ public class NameAndGameTypeController {
   private int nPlayers;
   private Game masterObject;
   private ArrayList <TextField> nameFields = new ArrayList <> ();
-
-  @FXML
-  private AnchorPane container;
+  private MediaPlayer player;
 
   @FXML
   private TextField player1Name;
@@ -34,7 +32,27 @@ public class NameAndGameTypeController {
   private Button confirmButton;
 
   @FXML
-  private ImageView backdrop;
+  private ImageView backdrop, muteButton;
+
+  public void initialize () {
+
+    Image backdropImage = new Image("/Images/Main/Screens/Name Screen.png");
+    backdrop.setImage(backdropImage);
+
+    muteButton.setStyle("-fx-cursor: hand");
+
+//    confirmButton.setDefaultButton(true);
+    confirmButton.setStyle("-fx-cursor: hand");
+
+    player1Name.setDisable(true);
+    player1Name.setDisable(false);
+
+    nameFields.add(player1Name);
+    nameFields.add(player2Name);
+    nameFields.add(player3Name);
+    nameFields.add(player4Name);
+
+  }
 
   public void setNumPlayers (int nNum) {
 
@@ -53,22 +71,29 @@ public class NameAndGameTypeController {
 
   }
 
-  public void initialize () {
+  public void setPlayer (MediaPlayer player) {
+    this.player = player;
 
-    Image backdropImage = new Image("/Images/Main/Name Screen.png");
-    backdrop.setImage(backdropImage);
+    if (player.getVolume() > 0)
+      muteButton.setImage(new Image ("/Images/Main/Misc/Sound on.png"));
 
-    confirmButton.setDefaultButton(true);
-    confirmButton.setStyle("-fx-cursor: hand");
+    else
+      muteButton.setImage(new Image ("/Images/Main/Misc/Sound off.png"));
+  }
 
-    player1Name.setDisable(true);
-    player1Name.setDisable(false);
+  public void handleMute () {
 
-    nameFields.add(player1Name);
-    nameFields.add(player2Name);
-    nameFields.add(player3Name);
-    nameFields.add(player4Name);
+    if (player.getVolume() > 0) {
 
+      player.setVolume(0);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound off.png"));
+
+    } else {
+
+      player.setVolume(9);
+      muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
+
+    }
 
   }
 
@@ -82,6 +107,25 @@ public class NameAndGameTypeController {
 
     if (masterObject.getNumPlayers() == 4)
       masterObject.getPlayerList().get(3).setName(player4Name.getText());
+
+  }
+
+  public void checkFill () {
+
+    boolean bFilled = true;
+
+    for (int i = 0; i < nPlayers; i++) {
+
+      if (nameFields.get(i).getText().trim().equals(""))
+        bFilled = false;
+
+    }
+
+    if (bFilled)
+      confirmButton.setDefaultButton(true);
+
+    else
+      confirmButton.setDefaultButton(false);
 
   }
 
@@ -104,6 +148,7 @@ public class NameAndGameTypeController {
       Parent root = loader.load();
       OrderPlayersController orderPlayersController = loader.getController();
 
+      orderPlayersController.setPlayer(player);
       orderPlayersController.setGame(masterObject);
 
       Scene scene = new Scene(root);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InstructionsController">
+    <children>
+        <ImageView fx:id="backdrop" fitHeight="700.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="instructions" fitHeight="700.0" fitWidth="520.0" layoutX="280.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="beginning" layoutX="60.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleBegin" prefHeight="40.0" prefWidth="160.0" text="Beginning" />
+      <Button fx:id="players" layoutX="60.0" layoutY="343.0" mnemonicParsing="false" onAction="#handlePlayers" prefHeight="40.0" prefWidth="160.0" text="Players" />
+      <Button fx:id="spaces" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleSpaces" prefHeight="40.0" prefWidth="160.0" text="Spaces" />
+      <Button fx:id="chanceCards" layoutX="60.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleChance" prefHeight="40.0" prefWidth="160.0" text="Chance Cards" />
+      <Button fx:id="ending" layoutX="60.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleEnd" prefHeight="40.0" prefWidth="160.0" text="Ending" />
+      <Button fx:id="goBack" layoutX="60.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="40.0" prefWidth="160.0" text="Main Menu" />
+      <Button fx:id="corners" layoutX="60.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleCorners" prefHeight="40.0" prefWidth="160.0" text="Corners" />
+      <Button fx:id="unownable" layoutX="60.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleUnownable" prefHeight="40.0" prefWidth="160.0" text="Unownable Spaces" />
+      <Button fx:id="property" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleProps" prefHeight="40.0" prefWidth="160.0" text="Properties" />
+        <Button fx:id="railutil" layoutX="60.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleRailUtil" prefHeight="40.0" prefWidth="160.0" text="Railroads and Utilities" />
+        <Button fx:id="actions" layoutX="60.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleActions" prefHeight="40.0" prefWidth="160.0" text="Actions" />
+        <Button fx:id="cash" layoutX="60.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleCash" prefHeight="40.0" prefWidth="160.0" text="Cash" />
+        <Button fx:id="owned" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleOwned" prefHeight="40.0" prefWidth="160.0" text="Properties and Value" />
+      <Button fx:id="backToTop" layoutX="60.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleTop" prefHeight="40.0" prefWidth="160.0" text="Go Back" />
+      <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="726.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</AnchorPane>

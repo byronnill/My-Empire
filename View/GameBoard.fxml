@@ -210,10 +210,11 @@
                   <Label fx:id="playerName" layoutX="170.0" layoutY="651.0" prefHeight="17.0" prefWidth="141.0" text="Label" />
                   <Label fx:id="playerCash" layoutX="150.0" layoutY="693.0" prefHeight="17.0" prefWidth="123.0" text="Label" />
                   <Label fx:id="bankValue" layoutX="150.0" layoutY="758.0" prefHeight="17.0" prefWidth="100.0" text="Label" />
-                  <Label fx:id="instructionBox" alignment="CENTER" layoutX="91.0" layoutY="819.0" prefHeight="59.0" prefWidth="298.0" text="Label" textAlignment="CENTER" />
+                  <Label fx:id="instructionBox" alignment="CENTER_LEFT" layoutX="91.0" layoutY="819.0" prefHeight="59.0" prefWidth="298.0" text="Label" textAlignment="CENTER" />
                   <Label fx:id="spaceBox" alignment="BASELINE_LEFT" layoutX="166.0" layoutY="799.0" prefHeight="17.0" prefWidth="221.0" text="Label" textAlignment="CENTER" />
                   <Label fx:id="inJail" layoutX="350.0" layoutY="693.0" prefHeight="17.0" prefWidth="36.0" text="Label" />
                   <Label fx:id="rentValue" alignment="BASELINE_LEFT" layoutX="320.0" layoutY="758.0" prefHeight="17.0" prefWidth="70.0" text="Label" />
+                  <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="406.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
                </children></AnchorPane>
             <Pane fx:id="pane16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
