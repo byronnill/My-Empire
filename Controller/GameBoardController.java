@@ -547,23 +547,13 @@ public class GameBoardController {
   public void enlargeChance () {
 
     if (chanceImage.isVisible()) {
-      chanceImage.setFitHeight(337.5);
-      chanceImage.setFitWidth(225);
 
-      chanceImage.setLayoutX(93.5);
-      chanceImage.setLayoutY(316.25);
-    }
+      chanceImage.setFitWidth(250);
+      chanceImage.setFitHeight(375);
 
-  }
+      chanceImage.setLayoutX(68);
+      chanceImage.setLayoutY(264.5);
 
-  public void enlargeSpace () {
-
-    if (spaceImage.isVisible()) {
-      spaceImage.setFitHeight(337.5);
-      spaceImage.setFitWidth(225);
-
-      spaceImage.setLayoutX(380.5);
-      spaceImage.setLayoutY(316.25);
     }
 
   }
@@ -572,11 +562,25 @@ public class GameBoardController {
 
     if (chanceImage.isVisible()) {
 
-      chanceImage.setFitHeight(300);
       chanceImage.setFitWidth(200);
+      chanceImage.setFitHeight(300);
 
-      chanceImage.setLayoutX(106);
-      chanceImage.setLayoutY(335);
+      chanceImage.setLayoutX(93);
+      chanceImage.setLayoutY(302);
+
+    }
+
+  }
+
+  public void enlargeSpace () {
+
+    if (spaceImage.isVisible()) {
+
+      spaceImage.setFitWidth(250);
+      spaceImage.setFitHeight(375);
+
+      spaceImage.setLayoutX(355);
+      spaceImage.setLayoutY(264.5);
 
     }
 
@@ -586,11 +590,11 @@ public class GameBoardController {
 
     if (spaceImage.isVisible()) {
 
-      spaceImage.setFitHeight(300);
       spaceImage.setFitWidth(200);
+      spaceImage.setFitHeight(300);
 
-      spaceImage.setLayoutX(393);
-      spaceImage.setLayoutY(335);
+      spaceImage.setLayoutX(380);
+      spaceImage.setLayoutY(302);
 
     }
 
