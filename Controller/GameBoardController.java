@@ -962,7 +962,7 @@ public class GameBoardController {
         int nSteps = 32 - masterCurrentPlayer.getLocationIndex();
 
         moveAvatar(nSteps);
-        masterCurrentPlayer.movePlayer(masterObject.getGameBoard(), nSteps, false, masterObject.getGameBank());
+        masterCurrentPlayer.movePlayer(masterObject.getGameBoard(), nSteps, true, masterObject.getGameBank());
         masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
         setInstructionBox(Game.LAND_ON_START);

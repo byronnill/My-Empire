@@ -233,15 +233,6 @@ public class Player {
       if (nID == s.getID())
         return s;
 
-//      if (s instanceof Property && nID == s.getID())
-//        return s;
-//
-//      else if (s instanceof Railroad && nID == s.getID())
-//        return s;
-//
-//      else if (s instanceof Utility && nID == s.getID())
-//        return s;
-
     }
 
     return null;

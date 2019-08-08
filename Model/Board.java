@@ -2,25 +2,43 @@ package Model;
 
 import java.util.*;
 
+/**
+ * Class handling the main board of a <b><i>Game</i></b> object. This is where <b><i>Player</i></b> instances
+ * move and manipulate <b><i>OwnableSpace</i></b> instances.
+ *
+ * @see Game
+ * @see Player
+ * @see OwnableSpace
+ */
+
 public class Board {
 
   private ArrayList <Space> boardSpaces;
 
-  //randomly arrange spaces
-
   /**
-   * Constructor for a Board object with randomly assigned spaces.
+   * Constructor for a <b><i>Board</i></b> object with randomly assigned <b><i>Space</i></b> instances.
    *
    * <p>
-   * This constructor intializes objects of type Space, TaxSpace, ChanceSpace, Railroad, Utility, and Property.
-   * The last three are subclasses of OwnableSpace.
+   * This constructor initializes objects of type <b><i>Space</i></b>, <b><i>TaxSpace</i></b>, <b><i>ChanceSpace</i></b>,
+   * <b><i>Property</i></b>, <b><i>Railroad</i></b>, and <b><i>Utility</i></b>. The last three are subclasses of
+   * <b><i>OwnableSpace</i></b>.
    *
    * <p>
-   * Generic corner spaces are always set at indices 0, 8, 16, and 24. TaxSpace and ChanceSpace instances, meanwhile,
-   * are given random indices that are not yet occupied. Lastly, this constructor arranges instances of OwnableSpace
-   * in the order that is specified in the Reference class static variables in consecutive available spaces.
+   * Generic corner spaces are always set at indices 0, 8, 16, and 24. <b><i>TaxSpace</i></b> and
+   * <b><i>ShanceSpace</i></b> instances, meanwhile, are given random indices that are not yet occupied.
+   * This is followed by the random insertion of <b><i>Railroad</i></b> and <b><i>Utility</i></b> instances. Lastly,
+   * this constructor arranges instances of <b><i>Property</i></b> in the order that is specified in the
+   * <b><i>Reference</i></b> class in consecutive available spaces.
    *
-   * @param nPlayers
+   * @param nPlayers Integer that holds the number of players in the game. This is used to set the
+   *                 <i>REQUIRED_FOOT_TRAFFIC</i> attribute of a <b><i>Property</i></b> object upon instantiation.
+   * @see Space
+   * @see TaxSpace
+   * @see ChanceSpace
+   * @see OwnableSpace
+   * @see Property
+   * @see Railroad
+   * @see Utility
    * @see Reference
    */
 
@@ -97,14 +115,14 @@ public class Board {
 
   }
 
-  //set corner spaces only
-
   /**
-   * Constructor for a Board object with corner spaces only.
+   * Constructor for a <b><i>Board</i></b> object with generic (corner) <b><i>Space</i></b> instances only.
    *
    * <p>
-   * The function setNewSpace below takes the function of placing new instances of Space to a Board object's boardSpaces
-   * attribute with a specified identifier and index.
+   * This constructor still creates enough <b><i>Space</i></b> instances to fill the entire board. However,
+   * the method <b>setNewSpace()</b> below takes the function of setting new instances of subclasses of
+   * <b><i>Space</i></b> to a <b><i>Board</i></b> object's <b><i>boardSpaces</i></b> attribute with a
+   * specified identifier and index.
    *
    * @see #setNewSpace(int, int, int)
    */
@@ -118,17 +136,27 @@ public class Board {
 
   }
 
+  /**
+   * Random number generator used in the random constructor of a <b><i>Board</i></b> object.
+   *
+   * @param nLo Integer that dictates the lower bound of the random number generator.
+   * @param nHi Integer that dictates the upper bound of the random number generator.
+   * @return Integer that is randomly generated within the bounds of <i>nLo</i> and <i>nHi</i>.
+   * @see #Board(int)
+   */
+
   public int randomGen (int nLo, int nHi) {
 
     Random rnd = new Random();
-    int toReturn = rnd.nextInt(nHi);
-
-    while (toReturn < nLo)
-      toReturn = rnd.nextInt(nHi);
+    int toReturn = rnd.nextInt(nHi) % (nHi - nLo + 1) + nLo;
 
     return toReturn;
 
   }
+
+  /**
+   * Console display method that prints the <b>boardSpaces</b> on the program console in their arranged order.
+   */
 
   public void consolePrintBoard () {
 
@@ -177,11 +205,34 @@ public class Board {
 
   }
 
-  //getter
+  //getters and setters
+
+  /**
+   * Getter method that returns the <b>boardSpaces</b> attribute of this class.
+   *
+   * @return boardSpaces ArrayList of <b><i>Space</i></b> objects.
+   */
 
   public ArrayList<Space> getBoardSpaces () {
     return boardSpaces;
   }
+
+  /**
+   * Equivalent setter method for individual elements of the <b>boardSpaces</b> attribute of this class.
+   * This method changes, rather than adds, spaces on the <b><i>Board</i></b> object;
+   *
+   * @param nIndex Integer that dictates the index at which the new <b><i>Space</i></b> subclass object will be
+   *               placed.
+   * @param nID Integer that identifies which subclass of <b><i>Space</i></b> will be instantiated and set to the
+   *            appropriate <i>nIndex</i>. For <b><i>Property</i></b> instances, <i>nID</i> also serves as the basis
+   *            for an instance's <i>COLOR_INDEX</i> (<i>nID</i> / 10) and <i>PROPERTY_INDEX</i> (<i>nID</i> % 10),
+   *            following the indices in <b><i>Reference</i></b>.
+   * @param nPlayers Integer that holds the number of players in the game. This is used to set the
+   *                 <i>REQUIRED_FOOT_TRAFFIC</i> attribute of a <b><i>Property</i></b> object upon instantiation.
+   * @see Space
+   * @see Property
+   * @see Reference
+   */
 
   public void setNewSpace (int nIndex, int nID, int nPlayers) {
 

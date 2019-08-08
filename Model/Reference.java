@@ -1,7 +1,7 @@
 package Model;
 
 public abstract class Reference {
-  public static final String[] TYPES = { "gray", "purple", "pink", "green", "blue", "orange", "yellow", "railroad", "utility" };
+  public static final String[] TYPES = { "Gray", "Purple", "Pink", "Green", "Blue", "Orange", "Yellow", "Railroad", "Utility" };
 
   public static final String[][] PROPERTIES =
           {
