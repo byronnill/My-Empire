@@ -762,7 +762,7 @@ public class GameBoardController {
         if (masterCurrentPlayer.isFreedomPossible() == 0) {
 
           masterCurrentPlayer.addOrDeductCash(-50);
-          setInstructionBox("You do not have a GET OUT OF JAIL FREE card and enough money to post bail.");
+          setInstructionBox("You do not have a GET OUT OF JAIL FREE card\nand enough money to post bail.");
           gameIsEnd(0);
 
         } else if (masterCurrentPlayer.isFreedomPossible() == 1) {
@@ -771,7 +771,7 @@ public class GameBoardController {
 
         } else if (masterCurrentPlayer.isFreedomPossible() == 2) {
 
-          setInstructionBox("You have been automatically deducted $50 and are now free from jail.\nPress ROLL DICE to start your turn.");
+          setInstructionBox("You have been automatically deducted $50\nand are now free from jail.\nPress ROLL DICE to start your turn.");
 
         }
 
@@ -787,6 +787,12 @@ public class GameBoardController {
 
   public void setChanceImage (Image image) {
     chanceImage.setImage(image);
+  }
+
+  public void setupPropertyRentChangeScreen (Card cardDrawn) {
+
+    //TODO dropdown
+
   }
 
   public void setupChanceScreen () {
@@ -904,7 +910,7 @@ public class GameBoardController {
 
       setChanceImage(new Image("/Images/Chance Cards/Chance Group 5_" + type + ".png"));
 
-      //TODO dropdown
+      setupPropertyRentChangeScreen(cardDrawn);
 
     } else if (cardDrawn instanceof CardGroup6) {
 
@@ -966,8 +972,6 @@ public class GameBoardController {
         masterCurrentPlayer.developProperty((Property) currSpace, masterObject.getGameBank());
         setInstructionBox("This property is yours and has been automatically developed.");
 
-        //TODO change imageview
-
         returnImageView(masterCurrentPlayer.getLocationIndex()).setImage(new Image("Images/Property Space/" + Reference.TYPES[((Property)currSpace).getColorIndex()] + "/" + Reference.PROPERTIES[((Property)currSpace).getColorIndex()][((Property)currSpace).getPropertyIndex()] + "/" + ((Property) currSpace).getDevelopment() + ".png"));
 
         if (masterCurrentPlayer.getCash() <= 0) {
@@ -1009,6 +1013,12 @@ public class GameBoardController {
 
   }
 
+  public void setupTradeScreen () {
+
+    //TODO dropdown
+
+  }
+
   public void handleDice () {
 
     hoverEnabled = false;
@@ -1025,7 +1035,7 @@ public class GameBoardController {
     dice1.setVisible(true);
     dice2.setVisible(true);
 
-    moveAvatar(this.masterCurrentPlayer.getLocationIndex() + curr1 + curr2);
+    moveAvatar((this.masterCurrentPlayer.getLocationIndex() + curr1 + curr2) % 32);
 
     int actionToDo = masterObject.turn(curr1 + curr2);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
@@ -1127,12 +1137,11 @@ public class GameBoardController {
       dToPay = ((Property) currSpace).getPropertyRent(masterObject.getGameDeck());
       ((Property) currSpace).addToCollected(dToPay);
 
-    }
+    } else if (currSpace instanceof Railroad) {
 
-    else if (currSpace instanceof Railroad)
       dToPay = currSpace.getRent();
 
-    else {
+    } else {
 
       int curr1 = masterObject.rollDice();
       int curr2 = masterObject.rollDice();
@@ -1176,6 +1185,7 @@ public class GameBoardController {
 
     playerTransition();
     spaceImage.setVisible(false);
+    chanceImage.setVisible(false);
 
   }
 

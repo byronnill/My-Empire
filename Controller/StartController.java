@@ -69,6 +69,12 @@ public class StartController {
 
   public void setPlayer (MediaPlayer player) {
     this.player = player;
+
+    if (player.getVolume() > 0)
+      muteButton.setImage(new Image("Images/Main/Misc/Sound on.png"));
+
+    else
+      muteButton.setImage(new Image("Images/Main/Misc/Sound off.png"));
   }
 
   public void handleMute () {

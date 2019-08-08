@@ -60,24 +60,18 @@ public class Player {
 
   public boolean movePlayer (Board board, int numSteps, boolean willCollectOnStart, Bank bank) {
 
-    for (int i = 0; i < numSteps; i++) {
-
-      this.nLocationIndex = (this.nLocationIndex + 1) % 32;
-
-      if (this.nLocationIndex == 0 && willCollectOnStart) {//start
-
-        this.dCash += 200;
-        bank.addOrDeduct(-200);
-
-      }
-
-      if (bank.getValue() <= 0)
-        return false;
-
+    if (this.nLocationIndex + numSteps >= 32 && willCollectOnStart) {
+      this.dCash += 200;
+      bank.addOrDeduct(-200);
     }
+
+    this.nLocationIndex = (this.nLocationIndex + numSteps) % 32;
 
     if (board.getBoardSpaces().get(this.nLocationIndex) instanceof Property)
       ((Property) board.getBoardSpaces().get(this.nLocationIndex)).addFootTraffic();
+
+    if (bank.getValue() <= 0)
+      return false;
 
     return true; //bank is not bankrupt
 

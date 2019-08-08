@@ -167,4 +167,12 @@ public class Property extends OwnableSpace{
 
   }
 
+  public String toStringShort () {
+
+    return  super.toStringShort() +
+            "\nDevelopment: " + this.nDevelopment + " / 5" +
+            "\nFoot Traffic: " + this.nFootTraffic + " / " + this.REQUIRED_FOOT_TRAFFIC +
+            "\nCash Collected: " + this.dTotalCollected;
+  }
+
 }

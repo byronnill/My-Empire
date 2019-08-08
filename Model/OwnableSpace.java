@@ -90,4 +90,12 @@ public abstract class OwnableSpace extends Space {
 
   }
 
+  public String toStringShort () {
+
+    return  "Name: " + this.NAME +
+            "\nPrice: " + this.PRICE +
+            "\nRent: " + this.dRent;
+
+  }
+
 }
