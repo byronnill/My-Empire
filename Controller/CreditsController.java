@@ -30,6 +30,7 @@ public class CreditsController {
     goBack.setDefaultButton(true);
 
     goBack.setStyle("-fx-cursor: hand");
+    change.setStyle("-fx-cursor: hand");
     muteButton.setStyle("-fx-cursor: hand");
 
   }
@@ -62,11 +63,15 @@ public class CreditsController {
 
   public void handleChange () {
 
-    if (backdrop.getImage().equals(creds1))
+    if (backdrop.getImage().equals(creds1)) {
       backdrop.setImage(creds2);
+      change.setText("Project Credits");
+    }
 
-    else
+    else {
       backdrop.setImage(creds1);
+      change.setText("Media Sources");
+    }
 
   }
 
