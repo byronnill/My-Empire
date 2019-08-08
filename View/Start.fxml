@@ -12,8 +12,9 @@
       <RadioButton fx:id="players4" accessibleText="4" layoutX="578.0" layoutY="486.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" />
       <RadioButton fx:id="players2" accessibleText="2" layoutX="204.0" layoutY="486.0" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" />
       <Button fx:id="startButton" layoutX="310.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="39.0" prefWidth="180.0" text="Start" />
-      <Button fx:id="instructions" layoutX="234.0" layoutY="625.0" mnemonicParsing="false" onAction="#handleInstructions" prefHeight="25.0" prefWidth="120.0" text="How to Play" />
-      <Button fx:id="credits" layoutX="446.0" layoutY="625.0" mnemonicParsing="false" onAction="#handleCredits" prefHeight="25.0" prefWidth="120.0" text="Credits" />
+      <Button fx:id="instructions" layoutX="153.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleInstructions" prefHeight="25.0" prefWidth="120.0" text="How to Play" />
+      <Button fx:id="credits" layoutX="527.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleCredits" prefHeight="25.0" prefWidth="120.0" text="Credits" />
+      <Button fx:id="exit" layoutX="340.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="120.0" text="Exit" />
       <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="726.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameBoardController">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameBoardController">
    <children>
       <ImageView fx:id="backdrop" fitHeight="960.0" fitWidth="1440.0" pickOnBounds="true" preserveRatio="true"/>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1440.0">
@@ -72,126 +72,226 @@
             <Pane fx:id="pane0" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img0" fitHeight="144.0" fitWidth="144.0" onMouseEntered="#enlarge0" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img0Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="13.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img0Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img0Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="62.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img0Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="88.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img1" accessibleText="1" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge1" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img1Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img1Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img1Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img1Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
-                  <ImageView fx:id="img2" fitHeight="144.0" fitWidth="96.0" layoutX="1.0" onMouseEntered="#enlarge2" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img2" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge2" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img2Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img2Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img2Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img2Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img3" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge3" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img3Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img3Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img3Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img3Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img4" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge4" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img4Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img4Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img4Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img4Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img5" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge5" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img5Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img5Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img5Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img5Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="13" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img6" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge6" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img6Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img6Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img6Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img6Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="15" GridPane.columnSpan="2" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img7" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge7" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img7Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img7Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img7Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img7Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img8" fitHeight="144.0" fitWidth="144.0" onMouseEntered="#enlarge8" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img8Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="77.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img8Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="108.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img8Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="77.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img8Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="108.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img9" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge9" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img9Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img9Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img9Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img9Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="5" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img10" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge10" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img10Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img10Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img10Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img10Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane11" prefHeight="200.0" prefWidth="15.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="7" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img11" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge11" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img11Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img11Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img11Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img11Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="9" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img12" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge12" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img12Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img12Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img12Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img12Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img13" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge13" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img13Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img13Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img13Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img13Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane14" prefHeight="86.0" prefWidth="189.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img14" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge14" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img14Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img14Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img14Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img14Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane15" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="15" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img15" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge15" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img15Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img15Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img15Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img15Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane24" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img24" fitHeight="144.0" fitWidth="144.0" onMouseEntered="#enlarge24" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img24Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="77.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img24Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="108.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img24Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="77.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img24Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="108.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane23" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img23" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge23" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img23Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img23Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img23Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img23Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane25" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="15" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img25" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge25" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img25Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img25Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img25Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img25Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane26" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img26" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge26" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img26Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img26Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img26Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img26Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane27" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img27" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge27" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img27Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img27Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img27Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img27Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane28" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="9" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img28" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge28" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img28Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img28Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img28Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img28Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane29" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="7" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img29" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge29" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img29Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img29Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img29Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img29Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane30" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="5" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img30" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge30" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img30Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img30Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img30Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img30Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane31" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2">
                <children>
                   <ImageView fx:id="img31" fitHeight="96.0" fitWidth="144.0" onMouseEntered="#enlarge31" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="1.48" translateX="40.0" />
+                  <ImageView fx:id="img31Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img31Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img31Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img31Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="480.0" GridPane.columnIndex="20" GridPane.columnSpan="10" GridPane.rowSpan="20">
@@ -219,38 +319,71 @@
             <Pane fx:id="pane16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img16" fitHeight="144.0" fitWidth="144.0" onMouseEntered="#enlarge16" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img16Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img16Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="118.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img16Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img16Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="118.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane17" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="15" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img17" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge17" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img17Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img17Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img17Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img17Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane18" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="13" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img18" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge18" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img18Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img18Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img18Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img18Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane19" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img19" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge19" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img19Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img19Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img19Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img19Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane20" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img20" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge20" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img20Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img20Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img20Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img20Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane21" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img21" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge21" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img21Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img21Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img21Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img21Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="pane22" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>
                   <ImageView fx:id="img22" fitHeight="144.0" fitWidth="96.0" onMouseEntered="#enlarge22" onMouseExited="#revertImage" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img22Avatar0" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img22Avatar1" fitHeight="20.0" fitWidth="20.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img22Avatar2" fitHeight="20.0" fitWidth="20.0" layoutX="49.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img22Avatar3" fitHeight="20.0" fitWidth="20.0" layoutX="71.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="14" GridPane.rowIndex="3" GridPane.rowSpan="14">
+               <children>
+                  <ImageView fx:id="chanceImage" fitHeight="300.0" fitWidth="200.0" layoutX="106.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="spaceImage" fitHeight="300.0" fitWidth="200.0" layoutX="393.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+               </children></Pane>
          </children>
       </GridPane>
    </children>

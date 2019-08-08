@@ -3,10 +3,13 @@ package Controller;
 import Model.*;
 import javafx.event.*;
 import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.*;
 
+import java.io.*;
 import java.util.*;
 
 public class GameBoardController {
@@ -35,7 +38,7 @@ public class GameBoardController {
   private ImageView img24Avatar0, img24Avatar1, img24Avatar2, img24Avatar3, img25Avatar0, img25Avatar1, img25Avatar2, img25Avatar3, img26Avatar0, img26Avatar1, img26Avatar2, img26Avatar3, img27Avatar0, img27Avatar1, img27Avatar2, img27Avatar3, img28Avatar0, img28Avatar1, img28Avatar2, img28Avatar3, img29Avatar0, img29Avatar1, img29Avatar2, img29Avatar3, img30Avatar0, img30Avatar1, img30Avatar2, img30Avatar3, img31Avatar0, img31Avatar1, img31Avatar2, img31Avatar3;
 
   @FXML
-  private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton;
+  private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton, chanceImage, spaceImage;
 
   @FXML
   private Button dice, buy, doNothing, doNothingOnBuy, rent, trade, endGame;
@@ -113,23 +116,18 @@ public class GameBoardController {
     avatar2 = new Image("/Images/Tokens/Player 2.png");
     avatar3 = new Image("/Images/Tokens/Player 3.png");
 
-//    for (int i = 0; i < 32; i++){
-//      returnAvatar(i, 0).setImage(avatar0);
-//      returnAvatar(i, 0).setVisible(false);
-//      returnAvatar(i, 1).setImage(avatar1);
-//      returnAvatar(i, 1).setVisible(false);
-//      returnAvatar(i, 2).setImage(avatar2);
-//      returnAvatar(i, 2).setVisible(false);
-//      returnAvatar(i, 3).setImage(avatar3);
-//      returnAvatar(i, 3).setVisible(false);
-//    }
-//
-//    for (int i = 0; i < masterObject.getNumPlayers(); i++)
-//      returnAvatar(0, i).setVisible(true);
+    for (int i = 0; i < 32; i++){
+      returnAvatar(i, 0).setImage(avatar0);
+      returnAvatar(i, 0).setVisible(false);
+      returnAvatar(i, 1).setImage(avatar1);
+      returnAvatar(i, 1).setVisible(false);
+      returnAvatar(i, 2).setImage(avatar2);
+      returnAvatar(i, 2).setVisible(false);
+      returnAvatar(i, 3).setImage(avatar3);
+      returnAvatar(i, 3).setVisible(false);
+    }
 
     hoverEnabled = true;
-
-    //avatar disable TODO
 
     setRentValue("-");
 
@@ -215,9 +213,12 @@ public class GameBoardController {
 
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(0);
 
+    for (int i = 0; i < masterObject.getNumPlayers(); i++)
+      returnAvatar(0, i).setVisible(true);
+
   }
 
-  public void setPlayer(MediaPlayer player){
+  public void setPlayer (MediaPlayer player) {
     this.player = player;
 
     if (player.getVolume() > 0)
@@ -703,7 +704,12 @@ public class GameBoardController {
 
   }
 
-  public void gameIsEnd () {
+  public void gameIsEnd (int condition) {
+
+    if (condition == 1)
+      setInstructionBox("A player has completed 2 property sets.");
+    else if (condition == 2)
+      setInstructionBox("The bank has been bankrupted.");
 
     setInstructionBox(instructionBox.getText() + "\nThe game is over.\nPlease press END GAME to proceed to the player rankings.");
 
@@ -722,11 +728,15 @@ public class GameBoardController {
 
   public void playerTransition () {
 
-    if (!masterObject.doesGameResume()) {
+    int doesGameResume = masterObject.doesGameResume();
 
-      gameIsEnd();
+    if (doesGameResume == 1 || doesGameResume == 2) { //ends the turn as well
+
+      gameIsEnd(doesGameResume);
 
     } else {
+
+      masterObject.endTurn();
 
       dice.setVisible(true);
 
@@ -739,7 +749,6 @@ public class GameBoardController {
       setRentValue("-");
       setSpaceBox("");
 
-      masterObject.endTurn();
       masterCurrentPlayer = masterObject.getActivePlayer();
 
       hoverEnabled = true;
@@ -752,9 +761,9 @@ public class GameBoardController {
 
         if (masterCurrentPlayer.isFreedomPossible() == 0) {
 
-          masterCurrentPlayer.setBankruptcy();
+          masterCurrentPlayer.addOrDeductCash(-50);
           setInstructionBox("You do not have a GET OUT OF JAIL FREE card and enough money to post bail.");
-          gameIsEnd();
+          gameIsEnd(0);
 
         } else if (masterCurrentPlayer.isFreedomPossible() == 1) {
 
@@ -776,9 +785,145 @@ public class GameBoardController {
 
   }
 
+  public void setChanceImage (Image image) {
+    chanceImage.setImage(image);
+  }
+
   public void setupChanceScreen () {
 
+    Card cardDrawn = masterObject.getGameDeck().drawCard();
 
+    dice.setVisible(false);
+
+    if (cardDrawn instanceof CardGroup1) {
+
+      setChanceImage(new Image("/Images/Chance Cards/Chance Group 1.png"));
+
+      ((CardGroup1) cardDrawn).applyCardToPlayer(masterCurrentPlayer);
+      setInstructionBox("You now have "+ masterCurrentPlayer.getJailChanceCards().size() + "GET OUT OF JAIL FREE card(s).");
+
+      doNothing.setVisible(true);
+
+    } else if (cardDrawn instanceof CardGroup2) {
+
+      masterObject.getGameDeck().discardCard(cardDrawn);
+
+      int type = ((CardGroup2) cardDrawn).getType();
+      int nIndexToGo;
+
+      setChanceImage(new Image("/Images/Chance Cards/Chance Group 2_" + type + ".png"));
+
+      if (type == 1) {
+
+        nIndexToGo = ((CardGroup2) cardDrawn).getIndexToGo();
+        setInstructionBox("Go to " + ((OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(nIndexToGo)).getName());
+
+      } else if (type == 2) {
+
+        nIndexToGo = ((CardGroup2) cardDrawn).findNearestRail(masterObject.getGameBoard(), masterCurrentPlayer);
+
+      } else {
+
+        nIndexToGo = ((CardGroup2) cardDrawn).findNearestUtil(masterObject.getGameBoard(), masterCurrentPlayer);
+
+      }
+
+      int nSteps;
+
+      nSteps = masterCurrentPlayer.getLocationIndex() <= nIndexToGo ? nIndexToGo - masterCurrentPlayer.getLocationIndex() : 32 - masterCurrentPlayer.getLocationIndex() + nIndexToGo;
+
+      moveAvatar(nSteps);
+      masterCurrentPlayer.movePlayer(masterObject.getGameBoard(), nSteps, false, masterObject.getGameBank());
+      masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+
+      setupOwnableScreen();
+
+    } else if (cardDrawn instanceof CardGroup3) {
+
+      masterObject.getGameDeck().discardCard(cardDrawn);
+      int type = ((CardGroup3) cardDrawn).getType();
+
+      setChanceImage(new Image("/Images/Chance Cards/Chance Group 3_" + type + ".png"));
+
+      if (type == 3) {
+
+        int nSteps = 32 - masterCurrentPlayer.getLocationIndex();
+
+        moveAvatar(nSteps);
+        masterCurrentPlayer.movePlayer(masterObject.getGameBoard(), nSteps, false, masterObject.getGameBank());
+        masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+
+        setInstructionBox(Game.LAND_ON_START);
+
+      } else {
+
+        double dCollect = ((CardGroup3) cardDrawn).getCollect();
+
+        masterCurrentPlayer.addOrDeductCash(dCollect);
+        masterObject.getGameBank().addOrDeduct(dCollect * -1);
+
+        setInstructionBox("You have been given $" + dCollect);
+
+      }
+
+      doNothing.setVisible(true);
+
+    } else if (cardDrawn instanceof CardGroup4) {
+
+      masterObject.getGameDeck().discardCard(cardDrawn);
+      int type = ((CardGroup4) cardDrawn).getType();
+
+      setChanceImage(new Image("/Images/Chance Cards/Chance Group 4_" + type + ".png"));
+
+      if (type == 1) {
+
+        int nIndexToGo = ((CardGroup4) cardDrawn).getIndexToGo();
+        setInstructionBox("Go to " + ((OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(nIndexToGo)).getName());
+
+        int nSteps = masterCurrentPlayer.getLocationIndex() <= nIndexToGo ? nIndexToGo - masterCurrentPlayer.getLocationIndex() : 32 - masterCurrentPlayer.getLocationIndex() + nIndexToGo;
+
+        moveAvatar(nSteps);
+        masterCurrentPlayer.movePlayer(masterObject.getGameBoard(), nSteps, false, masterObject.getGameBank());
+        masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+
+        masterObject.getGameDeck().discardCard(cardDrawn);
+        setupOwnableScreen();
+
+      } else {
+
+        masterCurrentPlayer.setInJail(true);
+        setInstructionBox(Game.LAND_ON_JAIL);
+
+        doNothing.setVisible(true);
+
+      }
+
+    } else if (cardDrawn instanceof CardGroup5) {
+
+      int type = ((CardGroup5) cardDrawn).getType();
+
+      setChanceImage(new Image("/Images/Chance Cards/Chance Group 5_" + type + ".png"));
+
+      //TODO dropdown
+
+    } else if (cardDrawn instanceof CardGroup6) {
+
+      masterObject.getGameDeck().discardCard(cardDrawn);
+
+      int type = ((CardGroup6) cardDrawn).getType();
+
+      setChanceImage(new Image("/Images/Chance Cards/Chance Group 6_" + type + ".png"));
+
+      double toPay = ((CardGroup6) cardDrawn).getPay();
+
+      masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
+
+      if (masterCurrentPlayer.getCash() <= 0) {
+        setInstructionBox("You are now bankrupt.");
+        gameIsEnd(0);
+      }
+
+    }
 
   }
 
@@ -789,13 +934,16 @@ public class GameBoardController {
     setSpaceBox(currSpace.getName());
     setRentValue(Double.toString(currSpace.getRent()));
 
+    spaceImage.setImage(returnImageFull(currSpace.getID()));
+    spaceImage.setVisible(true);
+
+    dice.setVisible(false);
+
     if (currSpace.getOwner() == null) {
 
       setInstructionBox("This space is unowned.");
 
       if (currSpace.canBeBought(masterCurrentPlayer)) {
-
-        dice.setVisible(false);
 
         buy.setVisible(true);
         doNothingOnBuy.setVisible(true);
@@ -803,8 +951,6 @@ public class GameBoardController {
       } else {
 
         setInstructionBox(instructionBox.getText() + "\nHowever, you have insufficient funding to buy it.");
-
-        dice.setVisible(false);
 
         buy.setVisible(true);
         buy.setDisable(true);
@@ -818,7 +964,18 @@ public class GameBoardController {
       if (currSpace instanceof Property && ((Property) currSpace).canBeDeveloped(masterCurrentPlayer)) {
 
         masterCurrentPlayer.developProperty((Property) currSpace, masterObject.getGameBank());
-        setInstructionBox("This property is yours and has been automatically developed.\nThe new rent is now $" + currSpace.getRent());
+        setInstructionBox("This property is yours and has been automatically developed.");
+
+        //TODO change imageview
+
+        returnImageView(masterCurrentPlayer.getLocationIndex()).setImage(new Image("Images/Property Space/" + Reference.TYPES[((Property)currSpace).getColorIndex()] + "/" + Reference.PROPERTIES[((Property)currSpace).getColorIndex()][((Property)currSpace).getPropertyIndex()] + "/" + ((Property) currSpace).getDevelopment() + ".png"));
+
+        if (masterCurrentPlayer.getCash() <= 0) {
+
+          setInstructionBox(instructionBox.getText() + "\nYou are now bankrupt.");
+          gameIsEnd(0);
+
+        }
 
       } else {
 
@@ -826,14 +983,27 @@ public class GameBoardController {
 
       }
 
+      doNothing.setVisible(true);
+
     } else {
 
-      setInstructionBox("This property is owned by " + currSpace.getOwner().getName() + "\nand has a rent of $" + currSpace.getRent());
-
-      dice.setVisible(false);
+      setInstructionBox("This property is owned by " + currSpace.getOwner().getName());
 
       rent.setVisible(true);
       trade.setVisible(true);
+
+      if (masterCurrentPlayer.getCash() <= currSpace.getRent()) {
+        rent.setDisable(true);
+        setInstructionBox(instructionBox.getText() + "\nYou have insufficient funding to pay rent.");
+      }
+      if (masterCurrentPlayer.getOwned() == 0) {
+        trade.setDisable(true);
+        setInstructionBox(instructionBox.getText() + "\nYou don't have properties to trade.");
+      }
+
+      if (rent.isDisable() && trade.isDisable()) {
+        gameIsEnd(0);
+      }
 
     }
 
@@ -855,9 +1025,9 @@ public class GameBoardController {
     dice1.setVisible(true);
     dice2.setVisible(true);
 
-    int actionToDo = masterObject.turn(curr1 + curr2);
+    moveAvatar(this.masterCurrentPlayer.getLocationIndex() + curr1 + curr2);
 
-    //moveAvatar(this.masterCurrentPlayer.getLocationIndex());
+    int actionToDo = masterObject.turn(curr1 + curr2);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
     System.out.println(masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex()));
@@ -890,9 +1060,9 @@ public class GameBoardController {
 
                                       } else {
 
-                                        masterCurrentPlayer.setBankruptcy();
+                                        masterCurrentPlayer.payBank(-50, masterObject.getGameBank());
                                         setInstructionBox("You have insufficient funding to pay for community service.");
-                                        gameIsEnd();
+                                        gameIsEnd(0);
 
                                       }
                                       break;
@@ -915,15 +1085,17 @@ public class GameBoardController {
 
                                       } else {
 
-                                        masterCurrentPlayer.setBankruptcy();
+                                        masterCurrentPlayer.payBank(toPay * -1, masterObject.getGameBank());
                                         setInstructionBox("You have insufficient funding to pay for taxes.");
-                                        gameIsEnd();
+                                        gameIsEnd(0);
 
                                       }
                                       break;
 
       case Game.LAND_ON_OWNABLE     : setupOwnableScreen();
                                       break;
+
+      case Game.GAME_IS_END         : gameIsEnd(2);
 
     }
 
@@ -947,19 +1119,88 @@ public class GameBoardController {
 
   public void handleRent () {
 
-  }
+    OwnableSpace currSpace = (OwnableSpace) masterCurrentSpace;
+    double dToPay;
 
-  public void handleContinue () {
+    if (currSpace instanceof Property) {
 
-    playerTransition();
+      dToPay = ((Property) currSpace).getPropertyRent(masterObject.getGameDeck());
+      ((Property) currSpace).addToCollected(dToPay);
+
+    }
+
+    else if (currSpace instanceof Railroad)
+      dToPay = currSpace.getRent();
+
+    else {
+
+      int curr1 = masterObject.rollDice();
+      int curr2 = masterObject.rollDice();
+
+      dice1.setImage(new Image("/Images/Main/Dice/" + curr1 + ".png"));
+      dice2.setImage(new Image("/Images/Main/Dice/" + curr2 + ".png"));
+
+      dice1.setVisible(true);
+      dice2.setVisible(true);
+
+      dToPay = currSpace.getRent() * (curr1 + curr2);
+
+    }
+
+    masterCurrentPlayer.payPlayer(dToPay, currSpace.getOwner());
+
+    if (masterCurrentPlayer.getCash() <= 0) {
+
+      setInstructionBox("You are now bankrupt.");
+      gameIsEnd(0);
+
+    } else {
+
+      setInstructionBox("You paid " + currSpace.getOwner().getName() + " $" + dToPay + ".");
+
+      rent.setVisible(false);
+      trade.setVisible(false);
+      doNothing.setVisible(true);
+
+    }
 
   }
 
   public void handleTrade () {
 
+    //TODO dropdown here
+
   }
 
-  public void handleEndGame () {
+  public void handleContinue () {
+
+    playerTransition();
+    spaceImage.setVisible(false);
+
+  }
+
+  public void handleEndGame (ActionEvent event) {
+
+    try {
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EndGame.fxml"));
+      Parent root = loader.load();
+      EndGameController controller = loader.getController();
+
+      controller.setPlayer(player);
+      controller.setGameAndRankPlayers(masterObject);
+
+      Scene scene = new Scene(root);
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+      stage.setResizable(false);
+      stage.centerOnScreen();
+      stage.setScene(scene);
+      stage.show();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
   }
 

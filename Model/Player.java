@@ -13,7 +13,7 @@ public class Player {
   private ArrayList <OwnableSpace> ownedSpaces;
   private boolean bInJail;
   private ArrayList <CardGroup1> jailChanceCards;
-  private boolean bBankrupt;
+  private double dWorth;
 
   public Player (int nPlayerNum) {
 
@@ -64,20 +64,20 @@ public class Player {
 
       this.nLocationIndex = (this.nLocationIndex + 1) % 32;
 
-      if (board.getBoardSpaces().get(this.nLocationIndex) instanceof Property)
-        ((Property) board.getBoardSpaces().get(this.nLocationIndex)).addFootTraffic();
-
-      else if (this.nLocationIndex == 0 && willCollectOnStart) {//start
-
-        if (bank.getValue() <= 200)
-          return false;
+      if (this.nLocationIndex == 0 && willCollectOnStart) {//start
 
         this.dCash += 200;
         bank.addOrDeduct(-200);
 
       }
 
+      if (bank.getValue() <= 0)
+        return false;
+
     }
+
+    if (board.getBoardSpaces().get(this.nLocationIndex) instanceof Property)
+      ((Property) board.getBoardSpaces().get(this.nLocationIndex)).addFootTraffic();
 
     return true; //bank is not bankrupt
 
@@ -107,14 +107,11 @@ public class Player {
 
       for (OwnableSpace s : this.ownedSpaces) {
 
-        if (s instanceof Property && ((Property) s).getColorIndex() == nType)
-          s.setRent(Reference.RENT[((Property) s).getColorIndex()][((Property) s).getPropertyIndex()][((Property) s).getDevelopment()]);
-
-        else if (s instanceof Railroad && nType == 7)
+        if (s instanceof Railroad && nType == 7)
           s.setRent(50);
 
         else if (s instanceof Utility && nType == 8)
-          s.setRent(10);
+          s.setRent(4);
 
       }
 
@@ -122,10 +119,7 @@ public class Player {
 
       for (OwnableSpace s : this.ownedSpaces) {
 
-        if (s instanceof Property && ((Property) s).getColorIndex() == nType)
-          s.setRent(Reference.RENT[((Property) s).getColorIndex()][((Property) s).getPropertyIndex()][((Property) s).getDevelopment()] + 10);
-
-        else if (s instanceof Railroad && nType == 7)
+        if (s instanceof Railroad && nType == 7)
           s.setRent(50);
 
         else if (s instanceof Utility && nType == 8)
@@ -137,10 +131,7 @@ public class Player {
 
       for (OwnableSpace s : this.ownedSpaces) {
 
-        if (s instanceof Property && ((Property) s).getColorIndex() == nType)
-          s.setRent(Reference.RENT[((Property) s).getColorIndex()][((Property) s).getPropertyIndex()][((Property) s).getDevelopment()] + 20);
-
-        else if (s instanceof Railroad && nType == 7)
+        if (s instanceof Railroad && nType == 7)
           s.setRent(150);
 
       }
@@ -172,53 +163,56 @@ public class Player {
       toDevelop.addToWorth(toDevelop.getHousePrice());
     }
 
-    this.adjustPropertyRents(toDevelop.getColorIndex());
-
   }
 
-  public boolean payRent (OwnableSpace currSpace, Player otherOwner, Game game, Deck deck) {
-
-    double dToPay;
-
-    if (currSpace instanceof Property) {
-
-      dToPay = currSpace.getRent();
-
-      if (((Property) currSpace).isDoubleRent()) {
-
-        ((Property) currSpace).setDoubleRent(false);
-        currSpace.setRent(currSpace.getRent() / 2);
-
-        deck.discardCard(((Property) currSpace).getDoubleRentHolder());
-
-        ((Property) currSpace).setDoubleRentHolder(null);
-
-      }
-
-    }
-
-    else if (currSpace instanceof Railroad)
-      dToPay = currSpace.getRent();
-
-    else
-      dToPay = currSpace.getRent() * game.rollDice();
-
-
-    if (!this.isPaymentPossible(dToPay))
-      return false;
-
-    else {
-
-      payPlayer(dToPay, otherOwner);
-
-      if (currSpace instanceof Property)
-        ((Property) currSpace).addToCollected();
-
-      return true;
-
-    }
-
-  }
+//  public boolean payRent (OwnableSpace currSpace, Player otherOwner, Game game, Deck deck) {
+//
+//    double dToPay;
+//
+//    if (currSpace instanceof Property) {
+//
+//      dToPay = currSpace.getRent();
+//
+//      if (otherOwner.getOwnedPerType(currSpace.getID() / 10) == 2)
+//        dToPay += 10;
+//      else if (otherOwner.getOwnedPerType(currSpace.getID() / 10) == 3)
+//        dToPay += 20;
+//
+//      if (((Property) currSpace).isDoubleRent()) {
+//
+//        ((Property) currSpace).setDoubleRent(false);
+//        currSpace.setRent(currSpace.getRent() / 2);
+//
+//        deck.discardCard(((Property) currSpace).getDoubleRentHolder());
+//
+//        ((Property) currSpace).setDoubleRentHolder(null);
+//
+//      }
+//
+//    }
+//
+//    else if (currSpace instanceof Railroad)
+//      dToPay = currSpace.getRent();
+//
+//    else
+//      dToPay = currSpace.getRent() * game.rollDice();
+//
+//
+//    if (!this.isPaymentPossible(dToPay))
+//      return false;
+//
+//    else {
+//
+//      payPlayer(dToPay, otherOwner);
+//
+//      if (currSpace instanceof Property)
+//        ((Property) currSpace).addToCollected();
+//
+//      return true;
+//
+//    }
+//
+//  }
 
   public void tradeProperty (OwnableSpace playerSpace, OwnableSpace otherSpace, Player otherPlayer) {
 
@@ -359,8 +353,8 @@ public class Player {
     return this.jailChanceCards;
   }
 
-  public boolean getBankruptcy () {
-    return this.bBankrupt;
+  public double getWorth () {
+    return this.dWorth;
   }
 
   public void setPlayerNum (int nPlayerNum) {
@@ -387,7 +381,6 @@ public class Player {
     if (toAdd instanceof Property) {
 
       nOwnedPerType[((Property) toAdd).getColorIndex()]++;
-      adjustPropertyRents(((Property) toAdd).getColorIndex());
 
     } else if (toAdd instanceof Railroad) {
 
@@ -411,7 +404,6 @@ public class Player {
     if (toRemove instanceof Property) {
 
       nOwnedPerType[((Property) toRemove).getColorIndex()]--;
-      adjustPropertyRents(((Property) toRemove).getColorIndex());
 
     } else if (toRemove instanceof Railroad) {
 
@@ -439,8 +431,8 @@ public class Player {
     this.jailChanceCards.remove(0);
   }
 
-  public void setBankruptcy () {
-    this.bBankrupt = true;
+  public void setWorth (double dWorth) {
+    this.dWorth = dWorth;
   }
 
   @Override

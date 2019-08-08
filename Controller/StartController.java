@@ -14,9 +14,6 @@ import java.io.*;
 public class StartController {
 
   @FXML
-  private Label TitleBar;
-
-  @FXML
   private RadioButton players2;
   @FXML
   private RadioButton players3;
@@ -30,7 +27,6 @@ public class StartController {
   private ImageView backdrop, muteButton;
 
   private ToggleGroup choices;
-  private Media media;
   private MediaPlayer player;
 
   public void initialize () {
@@ -55,18 +51,19 @@ public class StartController {
     instructions.setStyle("-fx-cursor: hand");
     credits.setStyle("-fx-cursor: hand");
 
-    choices.selectToggle(players3);
+    choices.selectToggle(players2);
 
     muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
     muteButton.setStyle("-fx-cursor: hand");
 
-    media = new Media (getClass().getResource("../Theme.mp3").toExternalForm());
-    player = new MediaPlayer(media);
+    player = new MediaPlayer(new Media(getClass().getResource("../Theme.mp3").toExternalForm()));
 
     player.setAutoPlay(true);
+    player.setVolume(9);
     player.play();
 
     player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
+
 
   }
 
@@ -161,6 +158,10 @@ public class StartController {
       e.printStackTrace();
     }
 
+  }
+
+  public void handleExit () {
+    System.exit(0);
   }
 
 }

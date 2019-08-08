@@ -90,7 +90,7 @@ public class CardGroup5 extends Card {
 
   }
 
-  public int getSpecific () {
+  public int getType () {
     return this.SPEC_TYPE;
   }
 }

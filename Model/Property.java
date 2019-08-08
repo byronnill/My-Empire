@@ -41,7 +41,7 @@ public class Property extends OwnableSpace{
 
       return false;
 
-    } else if (this.nDevelopment == 4 && currPlayer.isPaymentPossible(this.HOTEL_PRICE)) {
+    } else if (this.nDevelopment == 4) {
 
       if (this.dTotalCollected >= this.HOTEL_PRICE)
         return true;
@@ -52,7 +52,7 @@ public class Property extends OwnableSpace{
       else
         return false;
 
-    } else if (this.nDevelopment < 4 && currPlayer.isPaymentPossible(this.HOUSE_PRICE)) {
+    } else if (this.nDevelopment < 4) {
 
       if (this.dTotalCollected >= this.HOUSE_PRICE)
         return true;
@@ -68,6 +68,29 @@ public class Property extends OwnableSpace{
       return false;
 
     }
+
+  }
+
+  public double getPropertyRent (Deck deck) {
+
+    double dToPay = this.getRent();
+
+    if (owner.getOwnedPerType(this.COLOR_INDEX) == 2)
+      dToPay += 10;
+    else if (owner.getOwnedPerType(this.COLOR_INDEX) == 3)
+      dToPay += 20;
+
+    if (this.isDoubleRent()) {
+
+      this.bDoubleRent = false;
+      this.dRent /= 2;
+
+      deck.discardCard(this.doubleRentHolder);
+      this.doubleRentHolder = null;
+
+    }
+
+    return dToPay;
 
   }
 
@@ -119,8 +142,8 @@ public class Property extends OwnableSpace{
     this.nFootTraffic++;
   }
 
-  public void addToCollected () {
-    this.dTotalCollected += this.dRent;
+  public void addToCollected (double toAdd) {
+    this.dTotalCollected += toAdd;
   }
 
   public void setDoubleRent (boolean bDoubleRent) {

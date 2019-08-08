@@ -34,6 +34,9 @@ public class NameAndGameTypeController {
   @FXML
   private ImageView backdrop, muteButton;
 
+  @FXML
+  private Label confirmation;
+
   public void initialize () {
 
     Image backdropImage = new Image("/Images/Main/Screens/Name Screen.png");
@@ -41,7 +44,6 @@ public class NameAndGameTypeController {
 
     muteButton.setStyle("-fx-cursor: hand");
 
-//    confirmButton.setDefaultButton(true);
     confirmButton.setStyle("-fx-cursor: hand");
 
     player1Name.setDisable(true);
@@ -121,11 +123,17 @@ public class NameAndGameTypeController {
 
     }
 
-    if (bFilled)
+    if (bFilled) {
+      confirmation.setVisible(false);
+      confirmButton.setText("Get Player Order");
       confirmButton.setDefaultButton(true);
+    }
 
-    else
+    else {
+      confirmation.setVisible(true);
+      confirmButton.setText("Accept and Get Player Order");
       confirmButton.setDefaultButton(false);
+    }
 
   }
 

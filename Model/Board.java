@@ -8,6 +8,22 @@ public class Board {
 
   //randomly arrange spaces
 
+  /**
+   * Constructor for a Board object with randomly assigned spaces.
+   *
+   * <p>
+   * This constructor intializes objects of type Space, TaxSpace, ChanceSpace, Railroad, Utility, and Property.
+   * The last three are subclasses of OwnableSpace.
+   *
+   * <p>
+   * Generic corner spaces are always set at indices 0, 8, 16, and 24. TaxSpace and ChanceSpace instances, meanwhile,
+   * are given random indices that are not yet occupied. Lastly, this constructor arranges instances of OwnableSpace
+   * in the order that is specified in the Reference class static variables in consecutive available spaces.
+   *
+   * @param nPlayers
+   * @see Reference
+   */
+
   public Board (int nPlayers) {
 
     ArrayList <Integer> occupiedSpaces = new ArrayList <> (32);
@@ -82,6 +98,16 @@ public class Board {
   }
 
   //set corner spaces only
+
+  /**
+   * Constructor for a Board object with corner spaces only.
+   *
+   * <p>
+   * The function setNewSpace below takes the function of placing new instances of Space to a Board object's boardSpaces
+   * attribute with a specified identifier and index.
+   *
+   * @see #setNewSpace(int, int, int)
+   */
 
   public Board () {
 

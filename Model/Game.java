@@ -136,7 +136,7 @@ public class Game {
 
   }
 
-  public boolean doesGameResume () {
+  public int doesGameResume () {
 
     for (Player p : this.playerList) {
 
@@ -150,104 +150,48 @@ public class Game {
       }
 
       if (nCounter >= 2)
-        return false;
+        return 1;
 
     }
 
-    this.endTurn();
+    if (GAME_BANK.getValue() <= 0)
+      return 2;
 
-    return true;
-  }
-
-  public boolean doChance (Player currPlayer) { //to adjust for controller
-
-    Card cardDrawn = this.gameDeck.drawCard();
-
-    if (cardDrawn instanceof CardGroup1) {
-
-      ((CardGroup1) cardDrawn).applyCardToPlayer(currPlayer);
-
-    } else if (cardDrawn instanceof CardGroup2) {
-
-      if (!((CardGroup2) cardDrawn).doChance(this.gameBoard, currPlayer, this.GAME_BANK))
-        return false;
-
-      this.gameDeck.discardCard(cardDrawn);
-
-    } else if (cardDrawn instanceof CardGroup3) {
-
-      if (!((CardGroup3) cardDrawn).collectCash(this.gameBoard, currPlayer, this.GAME_BANK))
-        return false;
-
-      this.gameDeck.discardCard(cardDrawn);
-
-    } else if (cardDrawn instanceof CardGroup4) {
-
-      if (!((CardGroup4) cardDrawn).doChance(this.gameBoard, currPlayer, this.GAME_BANK))
-        return false;
-
-      this.gameDeck.discardCard(cardDrawn);
-
-    } else if (cardDrawn instanceof CardGroup5) {
-
-      if (!((CardGroup5) cardDrawn).isCardApplicable(currPlayer)) {
-
-        this.gameDeck.discardCard(cardDrawn);
-
-      } else {
-
-        OwnableSpace space = currPlayer.getOwnedSpaces().get(0);  //change to accommodate GUI
-
-        ((CardGroup5) cardDrawn).applyCardToSpace(space);
-
-        if (((CardGroup5) cardDrawn).getSpecific() != 1)
-          this.gameDeck.discardCard(cardDrawn);
-
-      }
-
-    } else if (cardDrawn instanceof CardGroup6) {
-
-      if (!((CardGroup6) cardDrawn).payCash(currPlayer, this.GAME_BANK))
-        return false;
-
-      this.gameDeck.discardCard(cardDrawn);
-
-    }
-
-    return true;
-
+    return 0;
   }
 
   public ArrayList <Player> rankPlayers () {
 
     ArrayList <Player> ranked = this.playerList;
-    double[] nWorth = new double[NUM_PLAYERS];
+    double[] dWorth = new double[NUM_PLAYERS];
 
     for (int i = 0; i < this.NUM_PLAYERS; i++) {
 
-     if (this.playerList.get(i).getCash() <= 0 || this.playerList.get(i).getBankruptcy())
-        nWorth[i] = 0;
+     if (this.playerList.get(i).getCash() <= 0)
+        dWorth[i] = 0;
 
      else {
 
-        nWorth[i] = this.playerList.get(i).getCash();
+        dWorth[i] = this.playerList.get(i).getCash();
 
         for (OwnableSpace s : this.playerList.get(i).getOwnedSpaces())
-          nWorth[i] += s.getWorth();
+          dWorth[i] += s.getWorth();
 
      }
 
+     ranked.get(i).setWorth(dWorth[i]);
+
     }
 
-    for (int i = 0; i < nWorth.length - 1; i++) {
+    for (int i = 0; i < dWorth.length - 1; i++) {
 
-      for (int j = i + 1; j < nWorth.length; j++)
+      for (int j = i + 1; j < dWorth.length; j++)
 
-        if (nWorth[i] < nWorth[j]) {
-          double temp = nWorth[i];
+        if (dWorth[i] < dWorth[j]) {
+          double temp = dWorth[i];
 
-          nWorth[i] = nWorth[j];
-          nWorth[j] = temp;
+          dWorth[i] = dWorth[j];
+          dWorth[j] = temp;
 
           swapPlayers(ranked, ranked.indexOf(ranked.get(i)), ranked.indexOf(ranked.get(j)));
         }

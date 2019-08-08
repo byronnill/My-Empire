@@ -46,8 +46,8 @@ public class BoardStartUpDragController {
   public void initialize () {
 
     backdropImage = new Image("/Images/Main/Screens/Board Setup Screen.png");
-    instruction1 = new Image("/Images/Main/Drag Instructions Choose.png");
-    instruction2 = new Image("/Images/Main/Drag Instructions Place.png");
+    instruction1 = new Image("/Images/Main/Misc/Drag Instructions Choose.png");
+    instruction2 = new Image("/Images/Main/Misc/Drag Instructions Place.png");
     gray0 = new Image("/Images/Property Space/Gray/Almond Drive/Full.png");
     gray0_ = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
     gray1 = new Image("/Images/Property Space/Gray/Kasoy Street/Full.png");
