@@ -7,6 +7,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.*;
 import javafx.stage.*;
 
 import java.io.*;
@@ -41,7 +42,7 @@ public class GameBoardController {
   private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton, chanceImage, spaceImage;
 
   @FXML
-  private Button dice, buy, doNothing, doNothingOnBuy, rent, trade, endGame;
+  private Button dice, buy, doNothing, doNothingOnBuy, drawChance, rent, trade, endGame;
 
   @FXML
   private Label playerName, playerCash, inJail, bankValue, rentValue, instructionBox, spaceBox;
@@ -137,7 +138,6 @@ public class GameBoardController {
 
     dice1.setVisible(false);
     dice2.setVisible(false);
-    dice.setDefaultButton(true);
 
     buy.setStyle("-fx-cursor: hand");
     doNothing.setStyle("-fx-cursor: hand");
@@ -153,6 +153,7 @@ public class GameBoardController {
     doNothingOnBuy.setVisible(false);
     rent.setVisible(false);
     trade.setVisible(false);
+    drawChance.setVisible(false);
 
     setSpaceBox("");
   }
@@ -543,6 +544,58 @@ public class GameBoardController {
 
   }
 
+  public void enlargeChance () {
+
+    if (chanceImage.isVisible()) {
+      chanceImage.setFitHeight(337.5);
+      chanceImage.setFitWidth(225);
+
+      chanceImage.setLayoutX(93.5);
+      chanceImage.setLayoutY(316.25);
+    }
+
+  }
+
+  public void enlargeSpace () {
+
+    if (spaceImage.isVisible()) {
+      spaceImage.setFitHeight(337.5);
+      spaceImage.setFitWidth(225);
+
+      spaceImage.setLayoutX(380.5);
+      spaceImage.setLayoutY(316.25);
+    }
+
+  }
+
+  public void revertChance () {
+
+    if (chanceImage.isVisible()) {
+
+      chanceImage.setFitHeight(300);
+      chanceImage.setFitWidth(200);
+
+      chanceImage.setLayoutX(106);
+      chanceImage.setLayoutY(335);
+
+    }
+
+  }
+
+  public void revertSpace () {
+
+    if (spaceImage.isVisible()) {
+
+      spaceImage.setFitHeight(300);
+      spaceImage.setFitWidth(200);
+
+      spaceImage.setLayoutX(393);
+      spaceImage.setLayoutY(335);
+
+    }
+
+  }
+
   public Image returnImage(int nID){
     switch(nID){
       case 0: return gray0;
@@ -661,7 +714,53 @@ public class GameBoardController {
 
   }
 
+  public void setRentValue (OwnableSpace currSpace) {
+
+    if (currSpace instanceof Property) {
+
+      if (currSpace.getOwner() == null)
+        rentValue.setText(Double.toString(currSpace.getRent()));
+
+      else {
+        switch (currSpace.getOwner().getOwnedPerType(((Property) currSpace).getColorIndex())) {
+
+          case 1:
+            rentValue.setText(Double.toString(currSpace.getRent()));
+          case 2:
+            rentValue.setText(Double.toString(currSpace.getRent() + 10));
+          case 3:
+            rentValue.setText(Double.toString(currSpace.getRent() + 20));
+
+        }
+      }
+
+    } else if (currSpace instanceof Railroad) {
+
+      rentValue.setText(Double.toString(currSpace.getRent()));
+
+    } else if (currSpace instanceof Utility) {
+
+      if (currSpace.getOwner() == null)
+        rentValue.setText("Dice x 4");
+
+      else {
+        switch (currSpace.getOwner().getOwnedPerType(8)) {
+
+          case 1:
+            rentValue.setText("Dice x 4");
+          case 2:
+            rentValue.setText("Dice x 10");
+
+        }
+      }
+
+    }
+
+  }
+
   public void setInstructionBox (int nType) {
+
+    instructionBox.setTextAlignment(TextAlignment.LEFT);
 
     switch (nType) {
 
@@ -677,7 +776,7 @@ public class GameBoardController {
                                     break;
 
       case Game.LAND_ON_JAIL      : setSpaceBox("Jail");
-                                    instructionBox.setText("You are now in jail.\nPay $50 or use a GET OUT OF JAIL FREE card on your next turn.");
+                                    instructionBox.setText("You are now in jail.\nPay $50 or use a GET OUT OF JAIL FREE card\non your next turn.");
                                     break;
 
       case Game.LAND_ON_COMMUNITY : setSpaceBox("Community Service");
@@ -685,7 +784,7 @@ public class GameBoardController {
                                     break;
 
       case Game.LAND_ON_CHANCE    : setSpaceBox("Chance Card Space");
-                                    instructionBox.setText("Please see instructions on the card drawn from the deck.");
+                                    instructionBox.setText("Chance!\nPlease see instructions on the card drawn\nfrom the deck.");
                                     break;
 
     }
@@ -723,6 +822,7 @@ public class GameBoardController {
     doNothingOnBuy.setVisible(false);
     rent.setVisible(false);
     trade.setVisible(false);
+    drawChance.setVisible(false);
 
   }
 
@@ -745,6 +845,7 @@ public class GameBoardController {
       doNothingOnBuy.setVisible(false);
       rent.setVisible(false);
       trade.setVisible(false);
+      drawChance.setVisible(false);
 
       setRentValue("-");
       setSpaceBox("");
@@ -799,9 +900,8 @@ public class GameBoardController {
 
     Card cardDrawn = masterObject.getGameDeck().drawCard();
 
-    dice.setVisible(false);
-
     if (cardDrawn instanceof CardGroup1) {
+      System.out.println("Card Drawn from Group 1");
 
       setChanceImage(new Image("/Images/Chance Cards/Chance Group 1.png"));
 
@@ -811,6 +911,7 @@ public class GameBoardController {
       doNothing.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup2) {
+      System.out.println("Card Drawn from Group 2");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
 
@@ -845,6 +946,7 @@ public class GameBoardController {
       setupOwnableScreen();
 
     } else if (cardDrawn instanceof CardGroup3) {
+      System.out.println("Card Drawn from Group 3");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup3) cardDrawn).getType();
@@ -875,6 +977,7 @@ public class GameBoardController {
       doNothing.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup4) {
+      System.out.println("Card Drawn from Group 4");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup4) cardDrawn).getType();
@@ -905,14 +1008,16 @@ public class GameBoardController {
       }
 
     } else if (cardDrawn instanceof CardGroup5) {
+      System.out.println("Card Drawn from Group 5");
 
       int type = ((CardGroup5) cardDrawn).getType();
 
       setChanceImage(new Image("/Images/Chance Cards/Chance Group 5_" + type + ".png"));
 
-      setupPropertyRentChangeScreen(cardDrawn);
+      setupPropertyRentChangeScreen(cardDrawn); //TODO
 
     } else if (cardDrawn instanceof CardGroup6) {
+      System.out.println("Card Drawn from Group 6");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
 
@@ -938,12 +1043,10 @@ public class GameBoardController {
     OwnableSpace currSpace = (OwnableSpace) masterCurrentSpace;//masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
     setSpaceBox(currSpace.getName());
-    setRentValue(Double.toString(currSpace.getRent()));
+    setRentValue(currSpace);
 
     spaceImage.setImage(returnImageFull(currSpace.getID()));
     spaceImage.setVisible(true);
-
-    dice.setVisible(false);
 
     if (currSpace.getOwner() == null) {
 
@@ -972,6 +1075,7 @@ public class GameBoardController {
         masterCurrentPlayer.developProperty((Property) currSpace, masterObject.getGameBank());
         setInstructionBox("This property is yours and has been automatically developed.");
 
+        setRentValue(currSpace);
         returnImageView(masterCurrentPlayer.getLocationIndex()).setImage(new Image("Images/Property Space/" + Reference.TYPES[((Property)currSpace).getColorIndex()] + "/" + Reference.PROPERTIES[((Property)currSpace).getColorIndex()][((Property)currSpace).getPropertyIndex()] + "/" + ((Property) currSpace).getDevelopment() + ".png"));
 
         if (masterCurrentPlayer.getCash() <= 0) {
@@ -1022,6 +1126,7 @@ public class GameBoardController {
   public void handleDice () {
 
     hoverEnabled = false;
+    dice.setVisible(false);
 
     int curr1 = masterObject.rollDice();
     dice1Holder = new Image("/Images/Main/Dice/" + curr1 + ".png");
@@ -1040,14 +1145,15 @@ public class GameBoardController {
     int actionToDo = masterObject.turn(curr1 + curr2);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
-    System.out.println(masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex()));
+    System.out.println(masterCurrentSpace);
     System.out.println(actionToDo);
     System.out.println();
+
+    setDetails();
 
     switch (actionToDo) {
 
       case Game.LAND_ON_START       : setInstructionBox(Game.LAND_ON_START);
-                                      setDetails();
                                       doNothing.setVisible(true);
                                       break;
 
@@ -1057,20 +1163,20 @@ public class GameBoardController {
 
       case Game.LAND_ON_JAIL        : setInstructionBox(Game.LAND_ON_JAIL);
                                       masterCurrentPlayer.setInJail(true);
-                                      setDetails();
                                       doNothing.setVisible(true);
                                       break;
 
       case Game.LAND_ON_COMMUNITY   : if (masterCurrentPlayer.isPaymentPossible(50)) {
 
-                                        setInstructionBox(Game.LAND_ON_COMMUNITY);
                                         masterCurrentPlayer.payBank(50, masterObject.getGameBank());
+                                        setInstructionBox(Game.LAND_ON_COMMUNITY);
                                         setDetails();
                                         doNothing.setVisible(true);
 
                                       } else {
 
                                         masterCurrentPlayer.payBank(-50, masterObject.getGameBank());
+                                        setDetails();
                                         setInstructionBox("You have insufficient funding to pay for community service.");
                                         gameIsEnd(0);
 
@@ -1078,7 +1184,7 @@ public class GameBoardController {
                                       break;
 
       case Game.LAND_ON_CHANCE      : setInstructionBox(Game.LAND_ON_CHANCE);
-                                      setupChanceScreen();
+                                      drawChance.setVisible(true);
                                       break;
 
       case Game.LAND_ON_TAX         : String strType = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).isIncome() ? "Income" : "Luxury";
@@ -1088,14 +1194,15 @@ public class GameBoardController {
 
                                       if (toPay != -1) {
 
-                                        setInstructionBox("You have been automatically deducted $" + toPay);
                                         masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
                                         setDetails();
+                                        setInstructionBox("You have been automatically deducted $" + toPay);
                                         doNothing.setVisible(true);
 
                                       } else {
 
                                         masterCurrentPlayer.payBank(toPay * -1, masterObject.getGameBank());
+                                        setDetails();
                                         setInstructionBox("You have insufficient funding to pay for taxes.");
                                         gameIsEnd(0);
 
@@ -1157,6 +1264,7 @@ public class GameBoardController {
     }
 
     masterCurrentPlayer.payPlayer(dToPay, currSpace.getOwner());
+    setDetails();
 
     if (masterCurrentPlayer.getCash() <= 0) {
 
@@ -1178,6 +1286,17 @@ public class GameBoardController {
   public void handleTrade () {
 
     //TODO dropdown here
+    setupTradeScreen();
+
+  }
+
+  public void handleDraw () {
+
+    dice1.setVisible(false);
+    dice2.setVisible(false);
+
+    chanceImage.setVisible(true);
+    setupChanceScreen();
 
   }
 

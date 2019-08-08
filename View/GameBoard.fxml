@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +11,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameBoardController">
    <children>
-      <ImageView fx:id="backdrop" fitHeight="960.0" fitWidth="1440.0" pickOnBounds="true" preserveRatio="true"/>
+      <ImageView fx:id="backdrop" fitHeight="960.0" fitWidth="1440.0" pickOnBounds="true" preserveRatio="true" />
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1440.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
@@ -296,13 +295,14 @@
             </Pane>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="480.0" GridPane.columnIndex="20" GridPane.columnSpan="10" GridPane.rowSpan="20">
                <children>
-                  <Button fx:id="dice" layoutX="182.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleDice" prefWidth="120.0" text="Roll Dice" />
-                  <Button fx:id="buy" layoutX="118.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleBuy" prefWidth="120.0" text="Buy Property" />
-                  <Button fx:id="doNothingOnBuy" layoutX="246.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="120.0" text="Continue" />
-                  <Button fx:id="rent" layoutX="118.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleRent" prefWidth="120.0" text="Pay Rent" />
-                  <Button fx:id="trade" layoutX="246.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleTrade" prefWidth="120.0" text="Initiate Trade" />
-                  <Button fx:id="doNothing" layoutX="182.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="120.0" text="Continue" />
-                  <Button fx:id="endGame" layoutX="182.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleEndGame" prefWidth="120.0" text="End Game" />
+                  <Button fx:id="dice" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleDice" prefWidth="150.0" text="Roll Dice" />
+                  <Button fx:id="buy" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleBuy" prefWidth="150.0" text="Buy Property" />
+                  <Button fx:id="doNothingOnBuy" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />
+                  <Button fx:id="rent" layoutX="65.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleRent" prefWidth="150.0" text="Pay Rent" />
+                  <Button fx:id="trade" layoutX="265.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleTrade" prefWidth="150.0" text="Initiate Trade" />
+                  <Button fx:id="doNothing" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />
+                  <Button fx:id="drawChance" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleDraw" prefWidth="150.0" text="Draw Chance Card" />
+                  <Button fx:id="endGame" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleEndGame" prefWidth="150.0" text="End Game" />
                   <ImageView fx:id="dice1" fitHeight="120.0" fitWidth="120.0" layoutX="119.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="dice2" fitHeight="120.0" fitWidth="120.0" layoutX="239.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="currentSpace" fitHeight="300.0" fitWidth="200.0" layoutX="142.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
@@ -381,8 +381,8 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="14" GridPane.rowIndex="3" GridPane.rowSpan="14">
                <children>
-                  <ImageView fx:id="chanceImage" fitHeight="300.0" fitWidth="200.0" layoutX="106.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="spaceImage" fitHeight="300.0" fitWidth="200.0" layoutX="393.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="chanceImage" fitHeight="300.0" fitWidth="200.0" layoutX="106.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlargeChance" onMouseExited="#revertChance"/>
+                  <ImageView fx:id="spaceImage" fitHeight="300.0" fitWidth="200.0" layoutX="393.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#enlargeSpace" onMouseExited="#revertSpace"/>
                </children></Pane>
          </children>
       </GridPane>

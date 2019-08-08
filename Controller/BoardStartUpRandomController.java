@@ -19,41 +19,42 @@ public class BoardStartUpRandomController {
   private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31;
 
   @FXML
-  private ImageView backdrop, muteButton;
+  private ImageView backdrop, muteButton, currentSpace, currentSpaceSquare;
 
   @FXML
   private Button startGame, randomizeAgain;
 
   private Game masterObject;
-  private Image gray0_, gray1_, purple0_, purple1_, purple2_, pink0_, pink1_, pink2_, green0_, green1_, green2_, blue0_, blue1_, blue2_, orange0_, orange1_, yellow0_, yellow1_, rail0_, rail1_, rail2_, util0_, util1_, chance, income, luxury, start, park, jail, service, backdropImage;
+  private Image gray0, gray1, purple0, purple1, purple2, pink0, pink1, pink2, green0, green1, green2, blue0, blue1, blue2, orange0, orange1, yellow0, yellow1, rail0, rail1, rail2, util0, util1, chance, income, luxury, start, park, jail, service, backdropImage;
+  private Image gray0_, gray1_, purple0_, purple1_, purple2_, pink0_, pink1_, pink2_, green0_, green1_, green2_, blue0_, blue1_, blue2_, orange0_, orange1_, yellow0_, yellow1_, rail0_, rail1_, rail2_, util0_, util1_;
   private MediaPlayer player;
 
   public void initialize () {
 
     backdropImage = new Image("/Images/Main/Screens/Board Setup Screen Random.png");
-    gray0_ = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
-    gray1_ = new Image("/Images/Property Space/Gray/Kasoy Street/0.png");
-    purple0_ = new Image("/Images/Property Space/Purple/Rodeo Drive/0.png");
-    purple1_ = new Image("/Images/Property Space/Purple/Orange Street/0.png");
-    purple2_ = new Image("/Images/Property Space/Purple/Ventura Street/0.png");
-    pink0_ = new Image("/Images/Property Space/Pink/Juan Luna/0.png");
-    pink1_ = new Image("/Images/Property Space/Pink/Ylaya/0.png");
-    pink2_ = new Image("/Images/Property Space/Pink/J Abad Santos/0.png");
-    green0_ = new Image("/Images/Property Space/Green/Madison/0.png");
-    green1_ = new Image("/Images/Property Space/Green/Annapolis/0.png");
-    green2_ = new Image("/Images/Property Space/Green/Connecticut/0.png");
-    blue0_ = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
-    blue1_ = new Image("/Images/Property Space/Blue/Dama De Noche/0.png");
-    blue2_ = new Image("/Images/Property Space/Blue/Acacia/0.png");
-    orange0_ = new Image("/Images/Property Space/Orange/Solar Street/0.png");
-    orange1_ = new Image("/Images/Property Space/Orange/Galaxy Street/0.png");
-    yellow0_ = new Image("/Images/Property Space/Yellow/9th Street/0.png");
-    yellow1_ = new Image("/Images/Property Space/Yellow/5th Avenue/0.png");
-    rail0_ = new Image("/Images/Railroad Space/North Line/1.png");
-    rail1_ = new Image("/Images/Railroad Space/South Line/1.png");
-    rail2_ = new Image("/Images/Railroad Space/Metro Line/1.png");
-    util0_ = new Image("/Images/Utility Space/Water/1.png");
-    util1_ = new Image("/Images/Utility Space/Electric/1.png");
+    gray0 = new Image("/Images/Property Space/Gray/Almond Drive/0.png");
+    gray1 = new Image("/Images/Property Space/Gray/Kasoy Street/0.png");
+    purple0 = new Image("/Images/Property Space/Purple/Rodeo Drive/0.png");
+    purple1 = new Image("/Images/Property Space/Purple/Orange Street/0.png");
+    purple2 = new Image("/Images/Property Space/Purple/Ventura Street/0.png");
+    pink0 = new Image("/Images/Property Space/Pink/Juan Luna/0.png");
+    pink1 = new Image("/Images/Property Space/Pink/Ylaya/0.png");
+    pink2 = new Image("/Images/Property Space/Pink/J Abad Santos/0.png");
+    green0 = new Image("/Images/Property Space/Green/Madison/0.png");
+    green1 = new Image("/Images/Property Space/Green/Annapolis/0.png");
+    green2 = new Image("/Images/Property Space/Green/Connecticut/0.png");
+    blue0 = new Image("/Images/Property Space/Blue/Bougainvilla/0.png");
+    blue1 = new Image("/Images/Property Space/Blue/Dama De Noche/0.png");
+    blue2 = new Image("/Images/Property Space/Blue/Acacia/0.png");
+    orange0 = new Image("/Images/Property Space/Orange/Solar Street/0.png");
+    orange1 = new Image("/Images/Property Space/Orange/Galaxy Street/0.png");
+    yellow0 = new Image("/Images/Property Space/Yellow/9th Street/0.png");
+    yellow1 = new Image("/Images/Property Space/Yellow/5th Avenue/0.png");
+    rail0 = new Image("/Images/Railroad Space/North Line/1.png");
+    rail1 = new Image("/Images/Railroad Space/South Line/1.png");
+    rail2 = new Image("/Images/Railroad Space/Metro Line/1.png");
+    util0 = new Image("/Images/Utility Space/Water/1.png");
+    util1 = new Image("/Images/Utility Space/Electric/1.png");
     chance = new Image("/Images/Tax - Chance Space/Chance.png");
     income = new Image("/Images/Tax - Chance Space/Income Tax.png");
     luxury = new Image("/Images/Tax - Chance Space/Luxury Tax.png");
@@ -61,6 +62,30 @@ public class BoardStartUpRandomController {
     jail = new Image("/Images/Corner Space/Jail.png");
     park = new Image("/Images/Corner Space/Free Parking.png");
     service = new Image("/Images/Corner Space/Community Service.png");
+
+    gray0_ = new Image("/Images/Property Space/Gray/Almond Drive/Full.png");
+    gray1_ = new Image("/Images/Property Space/Gray/Kasoy Street/Full.png");
+    purple0_ = new Image("/Images/Property Space/Purple/Rodeo Drive/Full.png");
+    purple1_ = new Image("/Images/Property Space/Purple/Orange Street/Full.png");
+    purple2_ = new Image("/Images/Property Space/Purple/Ventura Street/Full.png");
+    pink0_ = new Image("/Images/Property Space/Pink/Juan Luna/Full.png");
+    pink1_ = new Image("/Images/Property Space/Pink/Ylaya/Full.png");
+    pink2_ = new Image("/Images/Property Space/Pink/J Abad Santos/Full.png");
+    green0_ = new Image("/Images/Property Space/Green/Madison/Full.png");
+    green1_ = new Image("/Images/Property Space/Green/Annapolis/Full.png");
+    green2_ = new Image("/Images/Property Space/Green/Connecticut/Full.png");
+    blue0_ = new Image("/Images/Property Space/Blue/Bougainvilla/Full.png");
+    blue1_ = new Image("/Images/Property Space/Blue/Dama De Noche/Full.png");
+    blue2_ = new Image("/Images/Property Space/Blue/Acacia/Full.png");
+    orange0_ = new Image("/Images/Property Space/Orange/Solar Street/Full.png");
+    orange1_ = new Image("/Images/Property Space/Orange/Galaxy Street/Full.png");
+    yellow0_ = new Image("/Images/Property Space/Yellow/9th Street/Full.png");
+    yellow1_ = new Image("/Images/Property Space/Yellow/5th Avenue/Full.png");
+    rail0_ = new Image("/Images/Railroad Space/North Line/Full.png");
+    rail1_ = new Image("/Images/Railroad Space/South Line/Full.png");
+    rail2_ = new Image("/Images/Railroad Space/Metro Line/Full.png");
+    util0_ = new Image("/Images/Utility Space/Water/Full.png");
+    util1_ = new Image("/Images/Utility Space/Electric/Full.png");
 
     backdrop.setImage(backdropImage);
 
@@ -95,17 +120,21 @@ public class BoardStartUpRandomController {
 
       } else if (currSpace instanceof ChanceSpace) {
         returnImageView(i).setImage(chance);
-
+        returnImageView(i).setAccessibleText("-1");
       } else if (currSpace instanceof TaxSpace) {
 
-        if (((TaxSpace) currSpace).isIncome())
+        if (((TaxSpace) currSpace).isIncome()) {
           returnImageView(i).setImage(income);
-        else
+          returnImageView(i).setAccessibleText("-2");
+        } else {
           returnImageView(i).setImage(luxury);
+          returnImageView(i).setAccessibleText("-3");
+        }
 
       } else if (currSpace instanceof OwnableSpace) {
 
         returnImageView(i).setImage(returnImage(((OwnableSpace) currSpace).getID()));
+        returnImageView(i).setAccessibleText(Integer.toString(((OwnableSpace) currSpace).getID()));
 
       }
 
@@ -143,6 +172,240 @@ public class BoardStartUpRandomController {
       muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
 
     }
+
+  }
+
+  public void enlarge0 () {
+
+    currentSpaceSquare.setImage(img0.getImage());
+    currentSpaceSquare.setVisible(true);
+
+  }
+
+  public void enlarge1 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img1.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge2 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img2.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge3 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img3.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge4 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img4.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge5 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img5.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge6 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img6.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge7 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img7.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge8 () {
+
+    currentSpaceSquare.setImage(img8.getImage());
+    currentSpaceSquare.setVisible(true);
+
+  }
+
+  public void enlarge9 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img9.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge10 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img10.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge11 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img11.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge12 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img12.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge13 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img13.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge14 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img14.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge15 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img15.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge16 () {
+
+    currentSpaceSquare.setImage(img16.getImage());
+    currentSpaceSquare.setVisible(true);
+
+  }
+
+  public void enlarge17 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img17.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge18 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img18.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge19 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img19.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge20 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img20.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge21 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img21.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge22 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img22.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge23 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img23.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge24 () {
+
+    currentSpaceSquare.setImage(img24.getImage());
+    currentSpaceSquare.setVisible(true);
+
+  }
+
+  public void enlarge25 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img25.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge26 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img26.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge27 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img27.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge28 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img28.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge29 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img29.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge30 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img30.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void enlarge31 () {
+
+    currentSpace.setImage(returnImageFull(Integer.parseInt(img31.getAccessibleText())));
+    currentSpace.setVisible(true);
+
+  }
+
+  public void revertImage () {
+
+
+      currentSpace.setVisible(false);
+      currentSpaceSquare.setVisible(false);
+      currentSpaceSquare.setImage(null);
+      currentSpace.setImage(null);
 
   }
 
@@ -187,6 +450,38 @@ public class BoardStartUpRandomController {
 
   public Image returnImage(int nID){
     switch(nID){
+      case 0: return gray0;
+      case 1: return gray1;
+      case 10: return purple0;
+      case 11: return purple1;
+      case 12: return purple2;
+      case 20: return pink0;
+      case 21: return pink1;
+      case 22: return pink2;
+      case 30: return green0;
+      case 31: return green1;
+      case 32: return green2;
+      case 40: return blue0;
+      case 41: return blue1;
+      case 42: return blue2;
+      case 50: return orange0;
+      case 51: return orange1;
+      case 60: return yellow0;
+      case 61: return yellow1;
+      case 100: return rail0;
+      case 200: return rail1;
+      case 300: return rail2;
+      case 1000: return util0;
+      case 2000: return util1;
+      default: return null;
+    }
+  }
+
+  public Image returnImageFull(int nID){
+    switch(nID){
+      case -1:    return chance;
+      case -2:    return income;
+      case -3:    return luxury;
       case 0: return gray0_;
       case 1: return gray1_;
       case 10: return purple0_;
