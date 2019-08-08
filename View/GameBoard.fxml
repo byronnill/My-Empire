@@ -300,8 +300,8 @@
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="480.0" GridPane.columnIndex="20" GridPane.columnSpan="10" GridPane.rowSpan="20">
                <children>
                   <Button fx:id="dice" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleDice" prefWidth="150.0" text="Roll Dice" />
-                  <Button fx:id="buy" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleBuy" prefWidth="150.0" text="Buy Property" />
-                  <Button fx:id="doNothingOnBuy" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />
+                  <Button fx:id="buy" layoutX="65.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleBuy" prefWidth="150.0" text="Buy Property" />
+                  <Button fx:id="doNothingOnBuy" layoutX="265.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />
                   <Button fx:id="rent" layoutX="65.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleRent" prefWidth="150.0" text="Pay Rent" />
                   <Button fx:id="trade" layoutX="265.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleTrade" prefWidth="150.0" text="Initiate Trade" />
                   <Button fx:id="doNothing" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />

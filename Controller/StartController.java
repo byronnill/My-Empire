@@ -68,6 +68,9 @@ public class StartController {
   }
 
   public void setPlayer (MediaPlayer player) {
+    if (this.player != null)
+      this.player = null;
+
     this.player = player;
 
     if (player.getVolume() > 0)

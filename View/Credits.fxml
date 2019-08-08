@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreditsController">
     <ImageView fx:id="backdrop" fitHeight="700.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
-    <Button fx:id="goBack" layoutX="320.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="40.0" prefWidth="160.0" text="Main Menu" />
+    <Button fx:id="goBack" layoutX="420.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="40.0" prefWidth="160.0" text="Main Menu" />
+    <Button fx:id="change" layoutX="220.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleChange" prefHeight="40.0" prefWidth="160.0" text="Switch Page" />
     <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="726.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
 </AnchorPane>

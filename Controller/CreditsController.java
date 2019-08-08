@@ -16,17 +16,20 @@ public class CreditsController {
   private ImageView backdrop, muteButton;
 
   @FXML
-  private Button goBack;
+  private Button goBack, change;
 
   private MediaPlayer player;
+  private Image creds1, creds2;
 
   public void initialize () {
 
-    Image bg = new Image ("/Images/Main/Screens/Credits.png");
+    creds1 = new Image ("/Images/Main/Screens/Credits.png");
+    creds2 = new Image ("/Images/Main/Screens/Credits 2.png");
 
-    backdrop.setImage(bg);
+    backdrop.setImage(creds1);
+    goBack.setDefaultButton(true);
+
     goBack.setStyle("-fx-cursor: hand");
-
     muteButton.setStyle("-fx-cursor: hand");
 
   }
@@ -54,6 +57,16 @@ public class CreditsController {
       muteButton.setImage(new Image("/Images/Main/Misc/Sound on.png"));
 
     }
+
+  }
+
+  public void handleChange () {
+
+    if (backdrop.getImage().equals(creds1))
+      backdrop.setImage(creds2);
+
+    else
+      backdrop.setImage(creds1);
 
   }
 

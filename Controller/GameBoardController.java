@@ -1302,6 +1302,8 @@ public class GameBoardController {
     chanceImage.setVisible(true);
     setupChanceScreen();
 
+    drawChance.setVisible(false);
+
   }
 
   public void handleContinue () {

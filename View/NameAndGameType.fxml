@@ -9,10 +9,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NameAndGameTypeController">
    <children>
       <ImageView fx:id="backdrop" fitHeight="700.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="player1Name" accessibleText="Gryffindor" alignment="CENTER" layoutX="213.0" layoutY="384.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 1. Default name: Gryffindor" />
-      <TextField fx:id="player2Name" accessibleText="Slytherin" alignment="CENTER" layoutX="213.0" layoutY="423.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 2. Default name: Slytherin" />
-      <TextField fx:id="player3Name" accessibleText="Ravenclaw" alignment="CENTER" layoutX="213.0" layoutY="462.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 3. Default name: Ravenclaw" />
-      <TextField fx:id="player4Name" accessibleText="Hufflepuff" alignment="CENTER" layoutX="213.0" layoutY="501.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 4. Default name: Hufflepuff" />
+      <TextField fx:id="player1Name" accessibleText="Archie" alignment="CENTER" layoutX="213.0" layoutY="384.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 1. Default name: Archie" />
+      <TextField fx:id="player2Name" accessibleText="Eggle" alignment="CENTER" layoutX="213.0" layoutY="423.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 2. Default name: Eggle" />
+      <TextField fx:id="player3Name" accessibleText="Marowe" alignment="CENTER" layoutX="213.0" layoutY="462.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 3. Default name: Marowe" />
+      <TextField fx:id="player4Name" accessibleText="Tiggy" alignment="CENTER" layoutX="213.0" layoutY="501.0" onKeyReleased="#checkFill" prefHeight="27.0" prefWidth="391.0" promptText="Player 4. Default name: Tiggy" />
       <Button fx:id="confirmButton" layoutX="275.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="31.0" prefWidth="250.0" text="Accept and Get Player Order" />
       <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="726.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="confirmation" layoutX="309.0" layoutY="575.0" text="Continue with default names?" />
