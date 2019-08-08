@@ -159,55 +159,6 @@ public class Player {
 
   }
 
-//  public boolean payRent (OwnableSpace currSpace, Player otherOwner, Game game, Deck deck) {
-//
-//    double dToPay;
-//
-//    if (currSpace instanceof Property) {
-//
-//      dToPay = currSpace.getRent();
-//
-//      if (otherOwner.getOwnedPerType(currSpace.getID() / 10) == 2)
-//        dToPay += 10;
-//      else if (otherOwner.getOwnedPerType(currSpace.getID() / 10) == 3)
-//        dToPay += 20;
-//
-//      if (((Property) currSpace).isDoubleRent()) {
-//
-//        ((Property) currSpace).setDoubleRent(false);
-//        currSpace.setRent(currSpace.getRent() / 2);
-//
-//        deck.discardCard(((Property) currSpace).getDoubleRentHolder());
-//
-//        ((Property) currSpace).setDoubleRentHolder(null);
-//
-//      }
-//
-//    }
-//
-//    else if (currSpace instanceof Railroad)
-//      dToPay = currSpace.getRent();
-//
-//    else
-//      dToPay = currSpace.getRent() * game.rollDice();
-//
-//
-//    if (!this.isPaymentPossible(dToPay))
-//      return false;
-//
-//    else {
-//
-//      payPlayer(dToPay, otherOwner);
-//
-//      if (currSpace instanceof Property)
-//        ((Property) currSpace).addToCollected();
-//
-//      return true;
-//
-//    }
-//
-//  }
-
   public void tradeProperty (OwnableSpace playerSpace, OwnableSpace otherSpace, Player otherPlayer) {
 
     //giving otherSpace to this player
@@ -225,48 +176,6 @@ public class Player {
     this.removeSpaceOwned(playerSpace);
 
   }
-
-  /*public void tradeProperty (Space currSpace, Player oldOwner) {
-
-    if (currSpace instanceof Property) {
-
-      ((Property) currSpace).setOwner(this);
-
-      this.addSpaceOwned(currSpace);
-      this.adjustPropertyRents(((Property) currSpace).getColorIndex());
-
-      oldOwner.removeSpace(currSpace);
-      oldOwner.nOwned--;
-      oldOwner.nOwnedPerType[((Property) currSpace).getColorIndex()]--;
-      oldOwner.adjustPropertyRents(((Property) currSpace).getColorIndex());
-
-    } else if (currSpace instanceof Railroad) {
-
-      ((Railroad) currSpace).setOwner(this);
-
-      this.addSpaceOwned(currSpace);
-      this.adjustPropertyRents(7);
-
-      oldOwner.removeSpace(currSpace);
-      oldOwner.nOwned--;
-      oldOwner.nOwnedPerType[7]--;
-      oldOwner.adjustPropertyRents(7);
-
-    } else if (currSpace instanceof Utility) {
-
-      ((Utility) currSpace).setOwner(this);
-
-      this.addSpaceOwned(currSpace);
-      this.adjustPropertyRents(8);
-
-      oldOwner.removeSpace(currSpace);
-      oldOwner.nOwned--;
-      oldOwner.nOwnedPerType[8]--;
-      oldOwner.adjustPropertyRents(8);
-
-    }
-
-  }*/
 
   public boolean isTypeComplete (int nType) {
 
