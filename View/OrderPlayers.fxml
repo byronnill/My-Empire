@@ -8,26 +8,26 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderPlayersController">
     <children>
         <ImageView fx:id="backdrop" fitHeight="700.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="dice1_1" fitHeight="50.0" fitWidth="50.0" layoutX="613.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="dice1_2" fitHeight="50.0" fitWidth="50.0" layoutX="674.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="dice2_1" fitHeight="50.0" fitWidth="50.0" layoutX="613.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="dice2_2" fitHeight="50.0" fitWidth="50.0" layoutX="674.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="dice3_1" fitHeight="50.0" fitWidth="50.0" layoutX="613.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="dice3_2" fitHeight="50.0" fitWidth="50.0" layoutX="674.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="dice4_1" fitHeight="50.0" fitWidth="50.0" layoutX="613.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="dice4_2" fitHeight="50.0" fitWidth="50.0" layoutX="674.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="dice1_1" fitHeight="50.0" fitWidth="50.0" layoutX="579.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="dice1_2" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice2_1" fitHeight="50.0" fitWidth="50.0" layoutX="579.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice2_2" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice3_1" fitHeight="50.0" fitWidth="50.0" layoutX="579.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice3_2" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice4_1" fitHeight="50.0" fitWidth="50.0" layoutX="579.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="dice4_2" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="726.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
         <Button fx:id="arrangeBoard" layoutX="452.0" layoutY="605.0" mnemonicParsing="false" onAction="#handleArrange" prefWidth="140.0" text="Arrange Board" />
         <Button fx:id="randomizeBoard" layoutX="240.0" layoutY="605.0" mnemonicParsing="false" onAction="#handleRandom" prefWidth="140.0" text="Randomize Board" />
         <Button fx:id="confirm" layoutX="330.0" layoutY="605.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="140.0" text="Continue" />
           <Label fx:id="playerSequence" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="387.0" prefHeight="171.0" prefWidth="331.0" text="Label" textAlignment="CENTER" />
-      <Label fx:id="player1Name" layoutX="100.0" layoutY="343.0" prefHeight="27.0" prefWidth="300.0" text="Label" />
-      <Label fx:id="player2Name" layoutX="100.0" layoutY="403.0" prefHeight="27.0" prefWidth="300.0" text="Label" />
-      <Label fx:id="player3Name" layoutX="100.0" layoutY="464.0" prefHeight="27.0" prefWidth="300.0" text="Label" />
-      <Label fx:id="player4Name" layoutX="100.0" layoutY="525.0" prefHeight="27.0" prefWidth="300.0" text="Label" />
-      <Button fx:id="rollP1" layoutX="462.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleRoll1" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
-      <Button fx:id="rollP2" layoutX="462.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleRoll2" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
-      <Button fx:id="rollP3" layoutX="462.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleRoll3" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
-      <Button fx:id="rollP4" layoutX="462.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleRoll4" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
+      <Label fx:id="player1Name" alignment="CENTER_RIGHT" layoutX="119.0" layoutY="343.0" prefHeight="27.0" prefWidth="290.0" text="Label" />
+      <Label fx:id="player2Name" alignment="CENTER_RIGHT" layoutX="119.0" layoutY="403.0" prefHeight="27.0" prefWidth="290.0" text="Label" />
+      <Label fx:id="player3Name" alignment="CENTER_RIGHT" layoutX="119.0" layoutY="464.0" prefHeight="27.0" prefWidth="290.0" text="Label" />
+      <Label fx:id="player4Name" alignment="CENTER_RIGHT" layoutX="119.0" layoutY="525.0" prefHeight="27.0" prefWidth="290.0" text="Label" />
+      <Button fx:id="rollP1" layoutX="428.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleRoll1" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
+      <Button fx:id="rollP2" layoutX="428.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleRoll2" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
+      <Button fx:id="rollP3" layoutX="428.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleRoll3" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
+      <Button fx:id="rollP4" layoutX="428.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleRoll4" prefHeight="27.0" prefWidth="140.0" text="Roll Dice" />
     </children>
 </AnchorPane>

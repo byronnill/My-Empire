@@ -35,7 +35,7 @@ public class NameAndGameTypeController {
   private ImageView backdrop, muteButton;
 
   @FXML
-  private Label confirmation;
+  private Label confirmation, noDups;
 
   public void initialize () {
 
@@ -43,7 +43,6 @@ public class NameAndGameTypeController {
     backdrop.setImage(backdropImage);
 
     muteButton.setStyle("-fx-cursor: hand");
-
     confirmButton.setStyle("-fx-cursor: hand");
 
     player1Name.setDisable(true);
@@ -53,6 +52,8 @@ public class NameAndGameTypeController {
     nameFields.add(player2Name);
     nameFields.add(player3Name);
     nameFields.add(player4Name);
+
+    noDups.setVisible(false);
 
   }
 
@@ -112,9 +113,58 @@ public class NameAndGameTypeController {
 
   }
 
+  public void checkMax1 () {
+
+    if (player1Name.getText().length() >= 25) {
+
+      int pos = player1Name.getCaretPosition();
+      player1Name.setText(player1Name.getText(0, 24));
+      player1Name.positionCaret(pos);
+
+    }
+
+  }
+
+  public void checkMax2 () {
+
+    if (player2Name.getText().length() >= 25) {
+
+      int pos = player2Name.getCaretPosition();
+      player2Name.setText(player2Name.getText(0, 24));
+      player2Name.positionCaret(pos);
+
+    }
+
+  }
+
+  public void checkMax3 () {
+
+    if (player3Name.getText().length() >= 25) {
+
+      int pos = player3Name.getCaretPosition();
+      player3Name.setText(player3Name.getText(0, 24));
+      player3Name.positionCaret(pos);
+
+    }
+
+  }
+
+  public void checkMax4 () {
+
+    if (player4Name.getText().length() >= 25) {
+
+      int pos = player4Name.getCaretPosition();
+      player4Name.setText(player4Name.getText(0, 24));
+      player4Name.positionCaret(pos);
+
+    }
+
+  }
+
   public void checkFill () {
 
     boolean bFilled = true;
+    boolean bOkay = true;
 
     for (int i = 0; i < nPlayers; i++) {
 
@@ -124,15 +174,38 @@ public class NameAndGameTypeController {
     }
 
     if (bFilled) {
+
       confirmation.setVisible(false);
       confirmButton.setText("Get Player Order");
       confirmButton.setDefaultButton(true);
-    }
 
-    else {
+    } else {
+
       confirmation.setVisible(true);
       confirmButton.setText("Accept and Get Player Order");
       confirmButton.setDefaultButton(false);
+
+    }
+
+    for (int i = 0; i < nPlayers - 1; i++) {
+
+      for (int j = i + 1; j < nPlayers; j++)
+
+        if (nameFields.get(i).getText().equals(nameFields.get(j).getText()))
+          bOkay = false;
+
+    }
+
+    if (!bOkay) {
+
+      confirmButton.setDisable(true);
+      noDups.setVisible(true);
+
+    } else {
+
+      confirmButton.setDisable(false);
+      noDups.setVisible(false);
+
     }
 
   }
