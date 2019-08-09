@@ -61,6 +61,8 @@ public class CardGroup5 extends Card {
       ((Property) space).setDoubleRent(true);
       ((Property) space).setDoubleRentHolder(this);
 
+      return 1;
+
     } else if (SPEC_TYPE == 2) {
 
       double dToPay;
@@ -78,10 +80,9 @@ public class CardGroup5 extends Card {
     } else {
 
       space.setRent(space.getRent() * this.dChangeRate);
+      return 1;
 
     }
-
-    return 1;
 
   }
 

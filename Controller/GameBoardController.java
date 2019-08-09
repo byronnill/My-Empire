@@ -41,7 +41,7 @@ public class GameBoardController {
   private ImageView img24Avatar0, img24Avatar1, img24Avatar2, img24Avatar3, img25Avatar0, img25Avatar1, img25Avatar2, img25Avatar3, img26Avatar0, img26Avatar1, img26Avatar2, img26Avatar3, img27Avatar0, img27Avatar1, img27Avatar2, img27Avatar3, img28Avatar0, img28Avatar1, img28Avatar2, img28Avatar3, img29Avatar0, img29Avatar1, img29Avatar2, img29Avatar3, img30Avatar0, img30Avatar1, img30Avatar2, img30Avatar3, img31Avatar0, img31Avatar1, img31Avatar2, img31Avatar3;
 
   @FXML
-  private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton, chanceImage, spaceImage;
+  private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton, chanceImage, spaceImage, avatarImg;
 
   @FXML
   private Button dice, buy, doNothing, doNothingOnBuy, drawChance, rent, trade, endGame, confirmTrade, agreeTrade, disagreeTrade, applyChance5, applyChanceOther;
@@ -176,6 +176,9 @@ public class GameBoardController {
     applyChanceOther.setVisible(false);
 
     setSpaceBox("");
+
+    avatarImg.setImage(avatar0);
+    avatarImg.setVisible(true);
   }
 
   public void setGame (Game game) {
@@ -868,6 +871,7 @@ public class GameBoardController {
     } else {
 
       masterObject.endTurn();
+      masterCurrentPlayer = masterObject.getActivePlayer();
 
       dice.setVisible(true);
 
@@ -886,10 +890,17 @@ public class GameBoardController {
       applyChance5.setVisible(false);
       applyChanceOther.setVisible(false);
 
+      switch (masterCurrentPlayer.getPlayerNum()) {
+
+        case 0 : avatarImg.setImage(avatar0); break;
+        case 1 : avatarImg.setImage(avatar1); break;
+        case 2 : avatarImg.setImage(avatar2); break;
+        case 3 : avatarImg.setImage(avatar3); break;
+
+      }
+
       setRentValue("-");
       setSpaceBox("");
-
-      masterCurrentPlayer = masterObject.getActivePlayer();
 
       hoverEnabled = true;
       setDetails();
@@ -899,17 +910,17 @@ public class GameBoardController {
 
       if (masterCurrentPlayer.isInJail()) {
 
-        if (masterCurrentPlayer.isFreedomPossible() == 0) {
+        if (masterCurrentPlayer.isFreedomPossible(masterObject.getGameBank()) == 0) {
 
           masterCurrentPlayer.addOrDeductCash(-50);
           setInstructionBox("You do not have a GET OUT OF JAIL FREE card\nand enough money to post bail.");
           gameIsEnd(0);
 
-        } else if (masterCurrentPlayer.isFreedomPossible() == 1) {
+        } else if (masterCurrentPlayer.isFreedomPossible(masterObject.getGameBank()) == 1) {
 
           setInstructionBox("Your GET OUT OF JAIL FREE card has been used.\nPress ROLL DICE to start your turn.");
 
-        } else if (masterCurrentPlayer.isFreedomPossible() == 2) {
+        } else if (masterCurrentPlayer.isFreedomPossible(masterObject.getGameBank()) == 2) {
 
           setInstructionBox("You have been automatically deducted $50\nand are now free from jail.\nPress ROLL DICE to start your turn.");
 
@@ -979,35 +990,34 @@ public class GameBoardController {
 
   public void confirmChance () {
 
-    double dStatus = 1;
+    double dToPay = 1;
 
     for (int i = 0; i < masterCurrentPlayer.getOwnedSpaces().size(); i++)
       if (masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort().equals(comboSelection.getValue()))
-        dStatus = ((CardGroup5)cardDrawn).applyCardToSpace(masterCurrentPlayer.getOwnedSpaces().get(i));
+        dToPay = ((CardGroup5)cardDrawn).applyCardToSpace(masterCurrentPlayer.getOwnedSpaces().get(i));
 
     if (((CardGroup5) cardDrawn).getType() != 1)
       masterObject.getGameDeck().discardCard(cardDrawn);
 
-    if (dStatus > 1) {
+    if (((CardGroup5) cardDrawn).getType() == 2) {
 
-      if (masterCurrentPlayer.isPaymentPossible(dStatus)) {
-        masterCurrentPlayer.payBank(dStatus, masterObject.getGameBank());
-
-        doNothing.setVisible(true);
-        applyChance5.setVisible(false);
-        currentSpace.setLayoutX(200);
-        currentSpace.setVisible(false);
-        comboSelection.setVisible(false);
-      }
+      if (masterCurrentPlayer.isPaymentPossible(dToPay))
+        masterCurrentPlayer.payBank(dToPay, masterObject.getGameBank());
 
       else {
 
-        setInstructionBox("You paid for renovation and are now bankrupt.");
+        setInstructionBox("You paid for renovation and are now bankrupt");
         gameIsEnd(0);
 
       }
 
     }
+
+    doNothing.setVisible(true);
+    applyChance5.setVisible(false);
+    currentSpace.setLayoutY(200);
+    currentSpace.setVisible(false);
+    comboSelection.setVisible(false);
 
   }
 
@@ -1084,7 +1094,7 @@ public class GameBoardController {
 
       int nIndexToGo = ((CardGroup4) cardDrawn).getIndexToGo();
 
-      if (type == 1) {
+      if (type == 2) {
 
         setInstructionBox("Go to " + ((OwnableSpace) masterObject.getGameBoard().getBoardSpaces().get(nIndexToGo)).getName());
         applyChanceOther.setText("Move to Space");
@@ -1185,6 +1195,9 @@ public class GameBoardController {
       rent.setVisible(true);
       trade.setVisible(true);
 
+      rent.setDisable(false);
+      trade.setDisable(false);
+
       if (masterCurrentPlayer.getCash() <= currSpace.getRent()) {
         rent.setDisable(true);
         setInstructionBox(instructionBox.getText() + "\nYou have insufficient funding to pay rent.");
@@ -1208,7 +1221,7 @@ public class GameBoardController {
     comboSelection.getItems().clear();
     dropList = FXCollections.observableArrayList();
     for (int i = 0; i < masterCurrentPlayer.getOwned(); i++){
-        dropList.add(masterCurrentPlayer.getOwnedSpaces().get(i).getName());
+        dropList.add(masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort());
     }
     comboSelection.setItems(dropList);
     comboSelection.setVisible(true);
@@ -1218,51 +1231,66 @@ public class GameBoardController {
   }
 
   public void comboChanged(){
+
+    OwnableSpace spaceInBox = null;
+
+    for (int i = 0; i < masterCurrentPlayer.getOwned(); i++) {
+
+      if (masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort().equals(comboSelection.getValue())) {
+        spaceInBox = masterCurrentPlayer.getOwnedSpaces().get(i);
+        break;
+      }
+
+    }
+
+    if (spaceInBox != null) {
+
       confirmTrade.setDisable(false);
       applyChance5.setDisable(false);
-      if (masterCurrentPlayer.getOwnedSpaces().get(dropList.indexOf(comboSelection.getValue())) instanceof Property){
-          currentSpace.setImage(new Image("Images/Property Space/" + Reference.TYPES[((Property) masterCurrentPlayer.getOwnedSpaces().get(dropList.indexOf(comboSelection.getValue()))).getColorIndex()] + "/" + comboSelection.getValue() + "/Full.png"));
+      if (spaceInBox instanceof Property) {
+        currentSpace.setImage(new Image("Images/Property Space/" + Reference.TYPES[((Property) spaceInBox).getColorIndex()] + "/" + spaceInBox.getName() + "/Full.png"));
+      } else if (spaceInBox instanceof Railroad) {
+        currentSpace.setImage(new Image("Images/Railroad Space/" + spaceInBox.getName() + "/Full.png"));
+      } else {
+        currentSpace.setImage(new Image("Images/Utility Space/" + spaceInBox.getName() + "/Full.png"));
       }
-      else if (masterCurrentPlayer.getOwnedSpaces().get(dropList.indexOf(comboSelection.getValue())) instanceof Railroad){
-          currentSpace.setImage(new Image("Images/Railroad Space/"  + comboSelection.getValue() + "/Full.png"));
-      }
-      else{
-          currentSpace.setImage(new Image("Images/Utility Space/"  + comboSelection.getValue() + "/Full.png"));
-      }
-    currentSpace.setLayoutX(250);
+      currentSpace.setLayoutY(250);
       currentSpace.setVisible(true);
+
+    }
 
   }
 
   public void handleConfirm(){
-      confirmTrade.setVisible(false);
-      agreeTrade.setVisible(true);
-      disagreeTrade.setVisible(true);
-      setInstructionBox(masterCurrentPlayer.getName() + " has offered a trade.");
+    confirmTrade.setVisible(false);
+    agreeTrade.setVisible(true);
+    disagreeTrade.setVisible(true);
+    setInstructionBox(masterCurrentPlayer.getName() + " has offered a trade.");
   }
 
-  public void handleAgree(){
-      agreeTrade.setVisible(false);
-      disagreeTrade.setVisible(false);
-      currentSpace.setLayoutX(200);
-      currentSpace.setVisible(false);
-      comboSelection.setVisible(false);
-      masterCurrentPlayer.tradeProperty(masterCurrentPlayer.getOwnedSpaces().get(dropList.indexOf(comboSelection.getValue())), (OwnableSpace) masterCurrentSpace, ((OwnableSpace) masterCurrentSpace).getOwner());
-      rent.setVisible(false);
-      trade.setVisible(false);
-      doNothing.setVisible(true);
-      setInstructionBox("Trade successful!");
+  public void handleAgree () {
+    agreeTrade.setVisible(false);
+    disagreeTrade.setVisible(false);
+    currentSpace.setLayoutY(200);
+    currentSpace.setVisible(false);
+    comboSelection.setVisible(false);
+    masterCurrentPlayer.tradeProperty(masterCurrentPlayer.getOwnedSpaces().get(dropList.indexOf(comboSelection.getValue())), (OwnableSpace) masterCurrentSpace, ((OwnableSpace) masterCurrentSpace).getOwner());
+    rent.setVisible(false);
+    trade.setVisible(false);
+    doNothing.setVisible(true);
+    setInstructionBox("Trade successful!");
   }
 
   public void handleDisagree(){
-      agreeTrade.setVisible(false);
-      disagreeTrade.setVisible(false);
-    currentSpace.setLayoutX(200);
-      currentSpace.setVisible(false);
-      comboSelection.setVisible(false);
-      trade.setDisable(true);
-      setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " has disagreed to the trade. You must not pay rent.");
+    agreeTrade.setVisible(false);
+    disagreeTrade.setVisible(false);
+    currentSpace.setLayoutY(200);
+    currentSpace.setVisible(false);
+    comboSelection.setVisible(false);
+    trade.setDisable(true);
+    setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " has disagreed to the trade. You must not pay rent.");
   }
+
   public void handleDice () {
 
     hoverEnabled = false;
@@ -1399,7 +1427,11 @@ public class GameBoardController {
       dice1.setVisible(true);
       dice2.setVisible(true);
 
-      dToPay = currSpace.getRent() * (curr1 + curr2);
+      if (cardDrawn != null && cardDrawn instanceof CardGroup2 && ((CardGroup2) cardDrawn).getType() == 2)
+        dToPay = 10 * (curr1 + curr2);
+
+      else
+        dToPay = currSpace.getRent() * (curr1 + curr2);
 
     }
 
@@ -1511,7 +1543,7 @@ public class GameBoardController {
       int nIndexToGo = ((CardGroup4) cardDrawn).getIndexToGo();
       int nSteps = masterCurrentPlayer.getLocationIndex() <= nIndexToGo ? nIndexToGo - masterCurrentPlayer.getLocationIndex() : 32 - masterCurrentPlayer.getLocationIndex() + nIndexToGo;
 
-      if (type == 1) {
+      if (type == 2) {
 
         moveAvatar(nIndexToGo);
         masterCurrentPlayer.movePlayer(masterObject.getGameBoard(), nSteps, true, masterObject.getGameBank());
@@ -1551,9 +1583,11 @@ public class GameBoardController {
 
   public void handleContinue () {
 
-    playerTransition();
     spaceImage.setVisible(false);
     chanceImage.setVisible(false);
+    cardDrawn = null;
+
+    playerTransition();
 
   }
 

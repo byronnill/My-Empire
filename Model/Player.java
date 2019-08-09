@@ -36,9 +36,9 @@ public class Player {
 
   }
 
-  public int isFreedomPossible () {
+  public int isFreedomPossible (Bank bank) {
 
-    if (!this.jailChanceCards.isEmpty()) {
+    if (this.jailChanceCards.size() > 0) {
 
       this.removeJailChance();
       this.bInJail = false;
@@ -46,7 +46,7 @@ public class Player {
 
     } else if (this.dCash > 50) {
 
-      this.dCash -= 50;
+      payBank(50, bank);
       this.bInJail = false;
       return 2;
 

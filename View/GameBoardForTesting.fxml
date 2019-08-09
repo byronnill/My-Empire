@@ -305,11 +305,12 @@
                   <Button fx:id="drawChance" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleDraw" prefWidth="150.0" text="Draw Chance Card" />
                   <Button fx:id="endGame" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleEndGame" prefWidth="150.0" text="End Game" />
                   <Button fx:id="applyChanceOther" layoutX="140.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleApplyChance" prefWidth="200.0" text="Accept Chance" />
-                  <ImageView fx:id="dice1" fitHeight="120.0" fitWidth="120.0" layoutX="119.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="dice2" fitHeight="120.0" fitWidth="120.0" layoutX="239.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="dice1" fitHeight="120.0" fitWidth="120.0" layoutX="119.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="dice2" fitHeight="120.0" fitWidth="120.0" layoutX="239.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="currentSpace" fitHeight="300.0" fitWidth="200.0" layoutX="142.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="currentSpaceSquare" fitHeight="300.0" fitWidth="300.0" layoutX="92.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="playerName" layoutX="170.0" layoutY="651.0" prefHeight="17.0" prefWidth="141.0" text="Label" />
+                  <ImageView fx:id="avatarImg" fitHeight="20.0" fitWidth="20.0" layoutX="370.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="playerCash" layoutX="150.0" layoutY="693.0" prefHeight="17.0" prefWidth="123.0" text="Label" />
                   <Label fx:id="bankValue" layoutX="150.0" layoutY="758.0" prefHeight="17.0" prefWidth="100.0" text="Label" />
                   <Label fx:id="instructionBox" layoutX="91.0" layoutY="819.0" prefHeight="59.0" prefWidth="298.0" text="Label" textAlignment="CENTER" />
@@ -317,23 +318,23 @@
                   <Label fx:id="inJail" layoutX="350.0" layoutY="693.0" prefHeight="17.0" prefWidth="36.0" text="Label" />
                   <Label fx:id="rentValue" alignment="BASELINE_LEFT" layoutX="320.0" layoutY="758.0" prefHeight="17.0" prefWidth="70.0" text="Label" />
                   <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="406.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
-                  <ComboBox fx:id="comboSelection" layoutX="147.0" layoutY="200.0" onAction="#comboChanged" prefHeight="26.0" prefWidth="182.0" promptText="-NONE SELECTED-" />
+                  <ComboBox fx:id="comboSelection" layoutX="88.0" layoutY="200.0" onAction="#comboChanged" prefHeight="26.0" prefWidth="300.0" promptText="-NONE SELECTED-" />
                   <Button fx:id="confirmTrade" layoutX="139.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="26.0" prefWidth="200.0" text="OK" />
                   <Button fx:id="disagreeTrade" layoutX="129.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleDisagree" text="Do Not Agree" />
-                  <Button fx:id="agreeTrade" layoutX="265.0" layoutY="586.0" mnemonicParsing="false" onAction="#handleAgree" prefHeight="26.0" prefWidth="90.0" text="Agree" />
+                  <Button fx:id="agreeTrade" layoutX="265.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleAgree" prefHeight="26.0" prefWidth="90.0" text="Agree" />
                   <Button fx:id="applyChance5" layoutX="139.0" layoutY="587.0" mnemonicParsing="false" onAction="#confirmChance" prefHeight="26.0" prefWidth="200.0" text="Apply" />
-                  <Button onAction="#move1" layoutX="3.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="1" />
-                  <Button onAction="#move2" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="2" />
-                  <Button onAction="#move3" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="3" />
-                  <Button onAction="#move4" layoutX="123.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="4" />
-                  <Button onAction="#move5" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="5" />
-                  <Button onAction="#move6" layoutX="203.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="6" />
-                  <Button onAction="#move7" layoutX="243.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="7" />
-                  <Button onAction="#move8" layoutX="283.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="8" />
-                  <Button onAction="#move9" layoutX="323.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="9" />
-                  <Button onAction="#move10" layoutX="363.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="10" />
-                  <Button onAction="#move11" layoutX="403.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="11" />
-                  <Button onAction="#move12" layoutX="443.0" layoutY="14.0" mnemonicParsing="false" prefWidth="33.0" text="12" />
+                  <Button layoutX="3.0" layoutY="14.0" mnemonicParsing="false" onAction="#move1" prefWidth="33.0" text="1" />
+                  <Button layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#move2" prefWidth="33.0" text="2" />
+                  <Button layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#move3" prefWidth="33.0" text="3" />
+                  <Button layoutX="123.0" layoutY="14.0" mnemonicParsing="false" onAction="#move4" prefWidth="33.0" text="4" />
+                  <Button layoutX="163.0" layoutY="14.0" mnemonicParsing="false" onAction="#move5" prefWidth="33.0" text="5" />
+                  <Button layoutX="203.0" layoutY="14.0" mnemonicParsing="false" onAction="#move6" prefWidth="33.0" text="6" />
+                  <Button layoutX="243.0" layoutY="14.0" mnemonicParsing="false" onAction="#move7" prefWidth="33.0" text="7" />
+                  <Button layoutX="283.0" layoutY="14.0" mnemonicParsing="false" onAction="#move8" prefWidth="33.0" text="8" />
+                  <Button layoutX="323.0" layoutY="14.0" mnemonicParsing="false" onAction="#move9" prefWidth="33.0" text="9" />
+                  <Button layoutX="363.0" layoutY="14.0" mnemonicParsing="false" onAction="#move10" prefWidth="33.0" text="10" />
+                  <Button layoutX="403.0" layoutY="14.0" mnemonicParsing="false" onAction="#move11" prefWidth="33.0" text="11" />
+                  <Button layoutX="443.0" layoutY="14.0" mnemonicParsing="false" onAction="#move12" prefWidth="33.0" text="12" />
                </children></AnchorPane>
             <Pane fx:id="pane16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="17" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="3">
                <children>

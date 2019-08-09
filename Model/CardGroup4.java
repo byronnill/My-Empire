@@ -10,7 +10,7 @@ public class CardGroup4 extends Card {
 
     this.SPEC_TYPE = randomGen(1, 2);
 
-    if (this.SPEC_TYPE == 1)
+    if (this.SPEC_TYPE == 2)
       this.nIndexToGo = findRandomProperty(board);
 
     else

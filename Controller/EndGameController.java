@@ -15,7 +15,7 @@ import java.util.*;
 public class EndGameController {
 
   @FXML
-  private Button mainMenu;
+  private Button mainMenu, exit;
 
   @FXML
   private ImageView backdrop, muteButton;
@@ -30,6 +30,10 @@ public class EndGameController {
     backdrop.setImage(new Image("/Images/Main/Screens/End Game.png"));
 
     mainMenu.setDefaultButton(true);
+
+    mainMenu.setStyle("-fx-cursor: hand");
+    exit.setStyle("-fx-cursor: hand");
+    muteButton.setStyle("-fx-cursor: hand");
   }
 
   public void setGameAndRankPlayers (Game game) {
