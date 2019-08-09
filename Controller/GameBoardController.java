@@ -874,7 +874,7 @@ public class GameBoardController {
       masterCurrentPlayer = masterObject.getActivePlayer();
 
       dice.setVisible(true);
-
+      currentSpace.setVisible(false);
       endGame.setVisible(false);
       buy.setVisible(false);
       doNothing.setVisible(false);
@@ -1219,7 +1219,7 @@ public class GameBoardController {
     comboSelection.getItems().clear();
     dropList = FXCollections.observableArrayList();
     for (int i = 0; i < masterCurrentPlayer.getOwned(); i++){
-        dropList.add(masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort());
+      dropList.add(masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort());
     }
     comboSelection.setItems(dropList);
     comboSelection.setVisible(true);
@@ -1286,7 +1286,7 @@ public class GameBoardController {
     currentSpace.setVisible(false);
     comboSelection.setVisible(false);
     trade.setDisable(true);
-    setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " has disagreed to the trade. You must not pay rent.");
+    setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " disagreed. You must pay rent.");
   }
 
   public void handleDice () {
@@ -1444,7 +1444,9 @@ public class GameBoardController {
       rent.setVisible(false);
       trade.setVisible(false);
       doNothing.setVisible(true);
-
+      comboSelection.setVisible(false);
+      currentSpace.setVisible(false);
+      confirmTrade.setVisible(false);
     }
 
   }
@@ -1474,7 +1476,7 @@ public class GameBoardController {
     if (cardDrawn instanceof CardGroup1) {
 
       ((CardGroup1) cardDrawn).applyCardToPlayer(masterCurrentPlayer);
-      setInstructionBox("You now have "+ masterCurrentPlayer.getJailChanceCards().size() + "GET OUT OF JAIL FREE card(s).");
+      setInstructionBox("You now have "+ masterCurrentPlayer.getJailChanceCards().size() + " GET OUT OF JAIL FREE card(s).");
 
       doNothing.setVisible(true);
 

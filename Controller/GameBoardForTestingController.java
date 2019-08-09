@@ -874,7 +874,7 @@ public class GameBoardForTestingController {
       masterCurrentPlayer = masterObject.getActivePlayer();
 
       dice.setVisible(true);
-
+      currentSpace.setVisible(false);
       endGame.setVisible(false);
       buy.setVisible(false);
       doNothing.setVisible(false);
@@ -1286,7 +1286,7 @@ public class GameBoardForTestingController {
     currentSpace.setVisible(false);
     comboSelection.setVisible(false);
     trade.setDisable(true);
-    setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " has disagreed to the trade. You must not pay rent.");
+    setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " disagreed. You must pay rent.");
   }
 
   public void handleDice () {
@@ -1310,7 +1310,6 @@ public class GameBoardForTestingController {
 
     int actionToDo = masterObject.turn(curr1 + curr2);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
-
 
     setDetails();
 
@@ -1445,7 +1444,9 @@ public class GameBoardForTestingController {
       rent.setVisible(false);
       trade.setVisible(false);
       doNothing.setVisible(true);
-
+      comboSelection.setVisible(false);
+      currentSpace.setVisible(false);
+      confirmTrade.setVisible(false);
     }
 
   }
@@ -1475,7 +1476,7 @@ public class GameBoardForTestingController {
     if (cardDrawn instanceof CardGroup1) {
 
       ((CardGroup1) cardDrawn).applyCardToPlayer(masterCurrentPlayer);
-      setInstructionBox("You now have "+ masterCurrentPlayer.getJailChanceCards().size() + "GET OUT OF JAIL FREE card(s).");
+      setInstructionBox("You now have "+ masterCurrentPlayer.getJailChanceCards().size() + " GET OUT OF JAIL FREE card(s).");
 
       doNothing.setVisible(true);
 
