@@ -19,6 +19,16 @@ public class CardGroup6 extends Card {
 
   }
 
+  public boolean payCash (Player currPlayer, Bank bank) {
+
+    if (!currPlayer.isPaymentPossible(this.dToPay))
+      return false;
+
+    currPlayer.payBank(this.dToPay, bank);
+    return true;
+
+  }
+
   public int getType () {
     return this.SPEC_TYPE;
   }

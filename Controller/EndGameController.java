@@ -15,7 +15,7 @@ import java.util.*;
 public class EndGameController {
 
   @FXML
-  private Button mainMenu, exit;
+  private Button mainMenu;
 
   @FXML
   private ImageView backdrop, muteButton;
@@ -30,25 +30,21 @@ public class EndGameController {
     backdrop.setImage(new Image("/Images/Main/Screens/End Game.png"));
 
     mainMenu.setDefaultButton(true);
-
-    mainMenu.setStyle("-fx-cursor: hand");
-    exit.setStyle("-fx-cursor: hand");
-    muteButton.setStyle("-fx-cursor: hand");
   }
 
   public void setGameAndRankPlayers (Game game) {
     this.masterObject = game;
 
     ArrayList <Player> ranked = masterObject.rankPlayers();
-
-    centerLabel.setText("Ranking of Players:\n\n");
+    centerLabel.setText("Player Ranking\n\n");
 
     for (Player p : ranked) {
 
       if (p.getWorth() > 0)
-        centerLabel.setText(centerLabel.getText() + p.getName() + " with a net worth of $" + p.getWorth() + ".\n");
+        centerLabel.setText(centerLabel.getText() + p.getName() + " with a total net worth of $" + p.getWorth() + "\n");
+
       else
-        centerLabel.setText(centerLabel.getText() + p.getName() + " who has declared bankruptcy\n");
+        centerLabel.setText(centerLabel.getText() + p.getName() + " with a total net worth of $" + (p.getWorth() - p.getCash()) + " and liabilities of $" + p.getCash() + "\n");
 
     }
 
@@ -80,6 +76,10 @@ public class EndGameController {
 
   }
 
+  public void handleExit () {
+    System.exit(0);
+  }
+
   public void handleBack (ActionEvent event) {
 
     try {
@@ -102,10 +102,6 @@ public class EndGameController {
       e.printStackTrace();
     }
 
-  }
-
-  public void handleExit () {
-    System.exit(0);
   }
 
 }

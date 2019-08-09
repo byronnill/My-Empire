@@ -53,12 +53,9 @@ public class CardGroup5 extends Card {
 
   }
 
-  public int applyCardToSpace (OwnableSpace space) {
+  public double applyCardToSpace (OwnableSpace space) {
 
     if (SPEC_TYPE == 1) {
-
-      if (((Property) space).isDoubleRent())
-        return 0;
 
       space.setRent(space.getRent() * this.dChangeRate);
       ((Property) space).setDoubleRent(true);
@@ -74,11 +71,9 @@ public class CardGroup5 extends Card {
       else
         dToPay = 25 * ((Property) space).getDevelopment();
 
-      if (space.getOwner().isPaymentPossible(dToPay))
-        space.setRent(space.getRent() * this.dChangeRate);
 
-      else
-        return -1;
+      space.setRent(space.getRent() * this.dChangeRate);
+      return dToPay;
 
     } else {
 

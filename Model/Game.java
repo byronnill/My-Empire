@@ -163,35 +163,31 @@ public class Game {
   public ArrayList <Player> rankPlayers () {
 
     ArrayList <Player> ranked = this.playerList;
-    double[] dWorth = new double[NUM_PLAYERS];
+    double[] nWorth = new double[NUM_PLAYERS];
 
     for (int i = 0; i < this.NUM_PLAYERS; i++) {
 
-     if (this.playerList.get(i).getCash() <= 0)
-        dWorth[i] = 0;
+    nWorth[i] = this.playerList.get(i).getCash();
 
-     else {
+    for (OwnableSpace s : this.playerList.get(i).getOwnedSpaces())
+      nWorth[i] += s.getWorth();
 
-        dWorth[i] = this.playerList.get(i).getCash();
+    if (this.playerList.get(i).getCash() <= 0)
+      nWorth[i] *= -1;
 
-        for (OwnableSpace s : this.playerList.get(i).getOwnedSpaces())
-          dWorth[i] += s.getWorth();
-
-     }
-
-     ranked.get(i).setWorth(dWorth[i]);
+    this.playerList.get(i).setWorth(nWorth[i]);
 
     }
 
-    for (int i = 0; i < dWorth.length - 1; i++) {
+    for (int i = 0; i < nWorth.length - 1; i++) {
 
-      for (int j = i + 1; j < dWorth.length; j++)
+      for (int j = i + 1; j < nWorth.length; j++)
 
-        if (dWorth[i] < dWorth[j]) {
-          double temp = dWorth[i];
+        if (nWorth[i] < nWorth[j]) {
+          double temp = nWorth[i];
 
-          dWorth[i] = dWorth[j];
-          dWorth[j] = temp;
+          nWorth[i] = nWorth[j];
+          nWorth[j] = temp;
 
           swapPlayers(ranked, ranked.indexOf(ranked.get(i)), ranked.indexOf(ranked.get(j)));
         }

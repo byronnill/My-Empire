@@ -1,20 +1,19 @@
 package Controller;
 
 import Model.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 
 import java.io.*;
 
-public class GameBoardController {
+public class GameBoardForTestingController {
 
   private static final int ROLL_DICE = -2;
 
@@ -159,6 +158,8 @@ public class GameBoardController {
     disagreeTrade.setStyle("-fx-cursor: hand");
     applyChance5.setStyle("-fx-cursor: hand");
     applyChanceOther.setStyle("-fx-cursor: hand");
+
+    dice.setDisable(true);
 
     endGame.setVisible(false);
     buy.setVisible(false);
@@ -940,14 +941,8 @@ public class GameBoardController {
 
         for (int i = 0; i < masterCurrentPlayer.getOwned(); i++) {
 
-          if (masterCurrentPlayer.getOwnedSpaces().get(i) instanceof Property) {
-
-            if (((Property) masterCurrentPlayer.getOwnedSpaces().get(i)).isDoubleRent() && ((CardGroup5) cardDrawn).getType() == 1)
-              continue;
-
+          if (masterCurrentPlayer.getOwnedSpaces().get(i) instanceof Property)
             dropList.add(masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort());
-
-          }
 
         }
 
@@ -979,35 +974,15 @@ public class GameBoardController {
 
   public void confirmChance () {
 
-    double dStatus = 1;
-
     for (int i = 0; i < masterCurrentPlayer.getOwnedSpaces().size(); i++)
       if (masterCurrentPlayer.getOwnedSpaces().get(i).toStringShort().equals(comboSelection.getValue()))
-        dStatus = ((CardGroup5)cardDrawn).applyCardToSpace(masterCurrentPlayer.getOwnedSpaces().get(i));
+        ((CardGroup5)cardDrawn).applyCardToSpace(masterCurrentPlayer.getOwnedSpaces().get(i));
 
-    if (((CardGroup5) cardDrawn).getType() != 1)
-      masterObject.getGameDeck().discardCard(cardDrawn);
-
-    if (dStatus > 1) {
-
-      if (masterCurrentPlayer.isPaymentPossible(dStatus)) {
-        masterCurrentPlayer.payBank(dStatus, masterObject.getGameBank());
-
-        doNothing.setVisible(true);
-        applyChance5.setVisible(false);
-        currentSpace.setLayoutX(200);
-        currentSpace.setVisible(false);
-        comboSelection.setVisible(false);
-      }
-
-      else {
-
-        setInstructionBox("You paid for renovation and are now bankrupt.");
-        gameIsEnd(0);
-
-      }
-
-    }
+    doNothing.setVisible(true);
+    applyChance5.setVisible(false);
+    currentSpace.setLayoutX(200);
+    currentSpace.setVisible(false);
+    comboSelection.setVisible(false);
 
   }
 
@@ -1113,7 +1088,7 @@ public class GameBoardController {
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup6) cardDrawn).getType();
 
-      setInstructionBox("Pay $" + ((CardGroup6) cardDrawn).getPay() + ".");
+      setInstructionBox("Collect $" + ((CardGroup6) cardDrawn).getPay() + ".");
       setChanceImage(new Image("/Images/Chance Cards/Chance Group 6_" + type + ".png"));
 
       applyChanceOther.setText("Pay Cash");
@@ -1816,4 +1791,136 @@ public class GameBoardController {
       default: return null;
     }
   }
+
+  public void move1 () {
+    setupAfterMove(1);
+  }
+
+  public void move2 () {
+    setupAfterMove(2);
+  }
+
+  public void move3 () {
+    setupAfterMove(3);
+  }
+
+  public void move4 () {
+    setupAfterMove(4);
+  }
+
+  public void move5 () {
+    setupAfterMove(5);
+  }
+
+  public void move6 () {
+    setupAfterMove(6);
+  }
+
+  public void move7 () {
+    setupAfterMove(7);
+  }
+
+  public void move8 () {
+    setupAfterMove(8);
+  }
+
+  public void move9 () {
+    setupAfterMove(9);
+  }
+
+  public void move10 () {
+    setupAfterMove(10);
+  }
+
+  public void move11 () {
+    setupAfterMove(11);
+  }
+
+  public void move12 () {
+    setupAfterMove(12);
+  }
+
+  public void setupAfterMove (int numSteps) {
+
+    hoverEnabled = false;
+    dice.setVisible(false);
+
+    moveAvatar((this.masterCurrentPlayer.getLocationIndex() + numSteps) % 32);
+
+    int actionToDo = masterObject.turn(numSteps);
+    masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
+
+    System.out.println(masterCurrentSpace);
+    System.out.println(actionToDo);
+    System.out.println();
+
+    setDetails();
+
+    switch (actionToDo) {
+
+      case Game.LAND_ON_START       : setInstructionBox(Game.LAND_ON_START);
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_FREE        : setInstructionBox(Game.LAND_ON_FREE);
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_JAIL        : setInstructionBox(Game.LAND_ON_JAIL);
+                                      masterCurrentPlayer.setInJail(true);
+                                      doNothing.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_COMMUNITY   : if (masterCurrentPlayer.isPaymentPossible(50)) {
+
+                                      masterCurrentPlayer.payBank(50, masterObject.getGameBank());
+                                      setInstructionBox(Game.LAND_ON_COMMUNITY);
+                                      setDetails();
+                                      doNothing.setVisible(true);
+
+                                    } else {
+
+                                      masterCurrentPlayer.payBank(-50, masterObject.getGameBank());
+                                      setDetails();
+                                      setInstructionBox("You have insufficient funding to pay for community service.");
+                                      gameIsEnd(0);
+
+                                    }
+                                      break;
+
+      case Game.LAND_ON_CHANCE      : setInstructionBox(Game.LAND_ON_CHANCE);
+                                      drawChance.setVisible(true);
+                                      break;
+
+      case Game.LAND_ON_TAX         : String strType = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).isIncome() ? "Income" : "Luxury";
+                                      setSpaceBox(strType + " Tax");
+
+                                      double toPay = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).payTax(masterCurrentPlayer);
+
+                                      if (toPay != -1) {
+
+                                        masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
+                                        setDetails();
+                                        setInstructionBox("You have been automatically deducted $" + toPay);
+                                        doNothing.setVisible(true);
+
+                                      } else {
+
+                                        masterCurrentPlayer.payBank(toPay * -1, masterObject.getGameBank());
+                                        setDetails();
+                                        setInstructionBox("You have insufficient funding to pay for taxes.");
+                                        gameIsEnd(0);
+
+                                      }
+                                      break;
+
+      case Game.LAND_ON_OWNABLE     : setupOwnableScreen();
+                                      break;
+
+      case Game.GAME_IS_END         : gameIsEnd(2);
+
+    }
+
+  }
+
 }

@@ -1,9 +1,7 @@
 package Model;
 
 /**
- * Class handling the bank values and transactions for a master <b>Game</b> object.
- *
- * @see Game
+ * This class handles the bank values and transactions for a master Game object.
  */
 
 public class Bank {
@@ -11,10 +9,10 @@ public class Bank {
   double dValue;
 
   /**
-   * Constructor for a <b><i>Bank</i></b> object. The instances always starts with 2500 as its <b>dValue</b> multiplied
-   * by the number of players in the <b><i>Game</i></b>.
+   * Constructor for the class. The bank always starts with 2500 as its value multiplied by the number of players in
+   * the Game.
    *
-   * @param nPlayers Integer that holds the number of players in the <b><i>Game</i></b>.
+   * @param nPlayers An integer that holds the number of players in the game.
    */
 
   public Bank (int nPlayers) {
@@ -22,10 +20,9 @@ public class Bank {
   }
 
   /**
-   * Getter method that returns the <b>dValue</b> attribute of this class.
+   * Getter function for the value attribute of this class.
    *
-   * @return dValue Double-precision floating point number that holds the current amount of money in the
-   * <b><i>Bank</i></b> object.
+   * @return dValue A double-precision floating point number that holds the current amount of money in the Bank object.
    */
 
   public double getValue () {
@@ -33,12 +30,11 @@ public class Bank {
   }
 
   /**
-   * Equivalent setter method for the <b>dValue</b> attribute of this class. Instead of changing the entire value,
-   * a certain amount is either added or deducted to the <b><i>Bank</i> dValue</b>.
+   * Equivalent setter method for the value attribute of this class. Instead of changing the entire value, a certain
+   * amount is either added or deducted to the bank value.
    *
-   * @param toAdd Double-precision floating point number that is to be added to the <b>dValue</b> attribute of
-   *              a <b><i>Bank</i></b> object. The caller of this setter function sets this parameter negative for
-   *              value deduction.
+   * @param toAdd A double-precision floating point number that is to be added to the value attribute of a Bank object.
+   *              The caller of this setter function sets this parameter negative for value deduction.
    */
 
   public void addOrDeduct (double toAdd) {
@@ -46,9 +42,9 @@ public class Bank {
   }
 
   /**
-   * Overridden method that returns the <b>dValue</b> attribute of a <b><i>Bank</i></b> object as a String object.
    *
-   * @return String representation of the <b>dValue</b> attribute of a <b><i>Bank</i></b> instance.
+   *
+   * @return
    */
 
   @Override

@@ -16,7 +16,7 @@ public abstract class Reference {
 
   public static final String[] RAILROADS = { "North Line", "South Line", "Metro Line" };
 
-  public static final String[] UTILITIES = { "Water", "Electricity" };
+  public static final String[] UTILITIES = { "Water", "Electric" };
 
   public static final double[][] PRICE =
           {
