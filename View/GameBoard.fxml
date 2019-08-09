@@ -302,6 +302,8 @@
                   <Button fx:id="doNothingOnBuy" layoutX="265.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />
                   <Button fx:id="rent" layoutX="65.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleRent" prefWidth="150.0" text="Pay Rent" />
                   <Button fx:id="trade" layoutX="265.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleTrade" prefWidth="150.0" text="Initiate Trade" />
+                  <Button fx:id="payJail" layoutX="65.0" layoutY="900.0" mnemonicParsing="false" onAction="#handlePayJail" prefWidth="150.0" text="Pay $50 fine" />
+                  <Button fx:id="useJailChance" layoutX="265.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleJailChance" prefWidth="150.0" text="Use Chance Card" />
                   <Button fx:id="doNothing" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleContinue" prefWidth="150.0" text="Continue" />
                   <Button fx:id="drawChance" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleDraw" prefWidth="150.0" text="Draw Chance Card" />
                   <Button fx:id="endGame" layoutX="165.0" layoutY="900.0" mnemonicParsing="false" onAction="#handleEndGame" prefWidth="150.0" text="End Game" />

@@ -44,7 +44,7 @@ public class GameBoardForTestingController {
   private ImageView backdrop, dice1, dice2, currentSpace, currentSpaceSquare, muteButton, chanceImage, spaceImage, avatarImg;
 
   @FXML
-  private Button dice, buy, doNothing, doNothingOnBuy, drawChance, rent, trade, endGame, confirmTrade, agreeTrade, disagreeTrade, applyChance5, applyChanceOther;
+  private Button dice, buy, doNothing, doNothingOnBuy, drawChance, rent, trade, endGame, confirmTrade, agreeTrade, disagreeTrade, applyChance5, applyChanceOther, payJail, useJailChance;
 
   @FXML
   private Label playerName, playerCash, inJail, bankValue, rentValue, instructionBox, spaceBox;
@@ -160,6 +160,9 @@ public class GameBoardForTestingController {
     applyChance5.setStyle("-fx-cursor: hand");
     applyChanceOther.setStyle("-fx-cursor: hand");
 
+    payJail.setStyle("-fx-cursor: hand");
+    useJailChance.setStyle("-fx-cursor: hand");
+
     endGame.setVisible(false);
     buy.setVisible(false);
     doNothing.setVisible(false);
@@ -175,6 +178,9 @@ public class GameBoardForTestingController {
     applyChance5.setVisible(false);
     applyChanceOther.setVisible(false);
 
+    payJail.setVisible(false);
+    useJailChance.setVisible(false);
+
     setSpaceBox("");
 
     avatarImg.setImage(avatar0);
@@ -186,6 +192,8 @@ public class GameBoardForTestingController {
     this.masterObject = game;
     masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
     masterCurrentPlayer = masterObject.getActivePlayer();
+
+    masterCurrentPlayer.addJailChance(new CardGroup1());
 
     for (int i = 0; i < 32; i++) {
 
@@ -858,6 +866,9 @@ public class GameBoardForTestingController {
     applyChance5.setVisible(false);
     applyChanceOther.setVisible(false);
 
+    payJail.setVisible(false);
+    useJailChance.setVisible(false);
+
   }
 
   public void playerTransition () {
@@ -873,7 +884,7 @@ public class GameBoardForTestingController {
       masterObject.endTurn();
       masterCurrentPlayer = masterObject.getActivePlayer();
 
-      dice.setVisible(true);
+      dice.setVisible(false);
       currentSpace.setVisible(false);
       endGame.setVisible(false);
       buy.setVisible(false);
@@ -912,31 +923,67 @@ public class GameBoardForTestingController {
 
         masterCurrentPlayer.setInJail(false);
 
-        if (masterCurrentPlayer.isFreedomPossible() == 0) {
+        setInstructionBox("");
+
+        if (masterCurrentPlayer.getJailChanceCards().size() == 0 && masterCurrentPlayer.getCash() <= 50) {
 
           masterCurrentPlayer.payBank(50, masterObject.getGameBank());
           setInstructionBox("You do not have a GET OUT OF JAIL FREE card\nand enough money to post bail.");
           gameIsEnd(0);
 
-        } else if (masterCurrentPlayer.isFreedomPossible() == 1) {
+        } else {
 
-          masterCurrentPlayer.removeJailChance();
-          setInstructionBox("Your GET OUT OF JAIL FREE card has been used.\nPress ROLL DICE to start your turn.");
+          payJail.setVisible(true);
+          useJailChance.setVisible(true);
 
-        } else if (masterCurrentPlayer.isFreedomPossible() == 2) {
+          if (masterCurrentPlayer.getJailChanceCards().size() >= 1)
+            setInstructionBox("You can get out of jail free.");
 
-          masterCurrentPlayer.payBank(50, masterObject.getGameBank());
-          setInstructionBox("You have been automatically deducted $50\nand are now free from jail.\nPress ROLL DICE to start your turn.");
+          else
+            useJailChance.setDisable(true);
+
+          if (masterCurrentPlayer.getCash() > 50)
+            setInstructionBox(instructionBox.getText() + "\nYou can afford to pay $50 fines.");
+
+          else
+            payJail.setDisable(true);
 
         }
 
       } else {
 
         setInstructionBox(ROLL_DICE);
+        dice.setVisible(true);
 
       }
 
     }
+
+  }
+
+  public void handlePayJail () {
+
+    masterCurrentPlayer.payBank(50, masterObject.getGameBank());
+    masterCurrentPlayer.setInJail(false);
+
+    payJail.setVisible(false);
+    useJailChance.setVisible(false);
+
+    setInstructionBox(ROLL_DICE);
+    dice.setVisible(true);
+
+  }
+
+  public void handleJailChance () {
+
+    masterCurrentPlayer.removeJailChance();
+    masterCurrentPlayer.setInJail(false);
+
+    payJail.setVisible(false);
+    useJailChance.setVisible(false);
+
+    setInstructionBox(ROLL_DICE);
+    dice.setVisible(true);
 
   }
 

@@ -36,19 +36,6 @@ public class Player {
 
   }
 
-  public int isFreedomPossible () {
-
-    if (this.jailChanceCards.size() > 0)
-      return 1;
-
-    else if (this.dCash > 50)
-      return 2;
-
-    else
-      return 0;
-
-  }
-
   public boolean movePlayer (Board board, int numSteps, boolean willCollectOnStart, Bank bank) {
 
     if (this.nLocationIndex + numSteps >= 32 && willCollectOnStart) {
