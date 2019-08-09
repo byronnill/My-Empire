@@ -59,8 +59,8 @@ public class CardGroup2 extends Card {
 
     int nHolder = player.getLocationIndex();
 
-    while (!(board.getBoardSpaces().get(nHolder % 32) instanceof Railroad))
-      nHolder = (nHolder + 1);
+    while (!(board.getBoardSpaces().get(nHolder) instanceof Railroad))
+      nHolder = (nHolder + 1) % 32;
 
     return nHolder;
 

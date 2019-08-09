@@ -36,25 +36,16 @@ public class Player {
 
   }
 
-  public int isFreedomPossible (Bank bank) {
+  public int isFreedomPossible () {
 
-    if (this.jailChanceCards.size() > 0) {
-
-      this.removeJailChance();
-      this.bInJail = false;
+    if (this.jailChanceCards.size() > 0)
       return 1;
 
-    } else if (this.dCash > 50) {
-
-      payBank(50, bank);
-      this.bInJail = false;
+    else if (this.dCash > 50)
       return 2;
 
-    } else {
-
+    else
       return 0;
-
-    }
 
   }
 

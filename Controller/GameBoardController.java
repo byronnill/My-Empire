@@ -910,18 +910,22 @@ public class GameBoardController {
 
       if (masterCurrentPlayer.isInJail()) {
 
-        if (masterCurrentPlayer.isFreedomPossible(masterObject.getGameBank()) == 0) {
+        masterCurrentPlayer.setInJail(false);
 
-          masterCurrentPlayer.addOrDeductCash(-50);
+        if (masterCurrentPlayer.isFreedomPossible() == 0) {
+
+          masterCurrentPlayer.payBank(50, masterObject.getGameBank());
           setInstructionBox("You do not have a GET OUT OF JAIL FREE card\nand enough money to post bail.");
           gameIsEnd(0);
 
-        } else if (masterCurrentPlayer.isFreedomPossible(masterObject.getGameBank()) == 1) {
+        } else if (masterCurrentPlayer.isFreedomPossible() == 1) {
 
+          masterCurrentPlayer.removeJailChance();
           setInstructionBox("Your GET OUT OF JAIL FREE card has been used.\nPress ROLL DICE to start your turn.");
 
-        } else if (masterCurrentPlayer.isFreedomPossible(masterObject.getGameBank()) == 2) {
+        } else if (masterCurrentPlayer.isFreedomPossible() == 2) {
 
+          masterCurrentPlayer.payBank(50, masterObject.getGameBank());
           setInstructionBox("You have been automatically deducted $50\nand are now free from jail.\nPress ROLL DICE to start your turn.");
 
         }
