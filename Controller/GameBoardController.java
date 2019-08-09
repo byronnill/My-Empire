@@ -1030,7 +1030,6 @@ public class GameBoardController {
     this.cardDrawn = masterObject.getGameDeck().drawCard();
 
     if (cardDrawn instanceof CardGroup1) {
-      System.out.println("Card Drawn from Group 1");
 
       setInstructionBox("Get out of Jail free.");
       setChanceImage(new Image("/Images/Chance Cards/Chance Group 1.png"));
@@ -1038,7 +1037,6 @@ public class GameBoardController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup2) {
-      System.out.println("Card Drawn from Group 2");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup2) cardDrawn).getType();
@@ -1067,7 +1065,6 @@ public class GameBoardController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup3) {
-      System.out.println("Card Drawn from Group 3");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup3) cardDrawn).getType();
@@ -1089,7 +1086,6 @@ public class GameBoardController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup4) {
-      System.out.println("Card Drawn from Group 4");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup4) cardDrawn).getType();
@@ -1113,7 +1109,6 @@ public class GameBoardController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup5) {
-      System.out.println("Card Drawn from Group 5");
 
       int type = ((CardGroup5) cardDrawn).getType();
 
@@ -1122,7 +1117,6 @@ public class GameBoardController {
       setupPropertyRentChangeScreen(cardDrawn);
 
     } else if (cardDrawn instanceof CardGroup6) {
-      System.out.println("Card Drawn from Group 6");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup6) cardDrawn).getType();
@@ -1316,10 +1310,6 @@ public class GameBoardController {
 
     int actionToDo = masterObject.turn(curr1 + curr2);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
-
-    System.out.println(masterCurrentSpace);
-    System.out.println(actionToDo);
-    System.out.println();
 
     setDetails();
 

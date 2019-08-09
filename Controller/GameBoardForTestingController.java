@@ -1,13 +1,14 @@
 package Controller;
 
 import Model.*;
-import javafx.collections.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.media.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.*;
 import javafx.stage.*;
 
@@ -143,8 +144,6 @@ public class GameBoardForTestingController {
 
     dice1.setVisible(false);
     dice2.setVisible(false);
-
-    dice.setDisable(true);
 
     endGame.setStyle("-fx-cursor: hand");
     buy.setStyle("-fx-cursor: hand");
@@ -1031,7 +1030,6 @@ public class GameBoardForTestingController {
     this.cardDrawn = masterObject.getGameDeck().drawCard();
 
     if (cardDrawn instanceof CardGroup1) {
-      System.out.println("Card Drawn from Group 1");
 
       setInstructionBox("Get out of Jail free.");
       setChanceImage(new Image("/Images/Chance Cards/Chance Group 1.png"));
@@ -1039,7 +1037,6 @@ public class GameBoardForTestingController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup2) {
-      System.out.println("Card Drawn from Group 2");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup2) cardDrawn).getType();
@@ -1068,7 +1065,6 @@ public class GameBoardForTestingController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup3) {
-      System.out.println("Card Drawn from Group 3");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup3) cardDrawn).getType();
@@ -1090,7 +1086,6 @@ public class GameBoardForTestingController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup4) {
-      System.out.println("Card Drawn from Group 4");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup4) cardDrawn).getType();
@@ -1114,7 +1109,6 @@ public class GameBoardForTestingController {
       applyChanceOther.setVisible(true);
 
     } else if (cardDrawn instanceof CardGroup5) {
-      System.out.println("Card Drawn from Group 5");
 
       int type = ((CardGroup5) cardDrawn).getType();
 
@@ -1123,7 +1117,6 @@ public class GameBoardForTestingController {
       setupPropertyRentChangeScreen(cardDrawn);
 
     } else if (cardDrawn instanceof CardGroup6) {
-      System.out.println("Card Drawn from Group 6");
 
       masterObject.getGameDeck().discardCard(cardDrawn);
       int type = ((CardGroup6) cardDrawn).getType();
@@ -1273,7 +1266,7 @@ public class GameBoardForTestingController {
     setInstructionBox(masterCurrentPlayer.getName() + " has offered a trade.");
   }
 
-  public void handleAgree(){
+  public void handleAgree () {
     agreeTrade.setVisible(false);
     disagreeTrade.setVisible(false);
     currentSpace.setLayoutY(200);
@@ -1295,6 +1288,7 @@ public class GameBoardForTestingController {
     trade.setDisable(true);
     setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " has disagreed to the trade. You must not pay rent.");
   }
+
   public void handleDice () {
 
     hoverEnabled = false;
@@ -1317,9 +1311,6 @@ public class GameBoardForTestingController {
     int actionToDo = masterObject.turn(curr1 + curr2);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
 
-    System.out.println(masterCurrentSpace);
-    System.out.println(actionToDo);
-    System.out.println();
 
     setDetails();
 
@@ -1587,9 +1578,11 @@ public class GameBoardForTestingController {
 
   public void handleContinue () {
 
-    playerTransition();
     spaceImage.setVisible(false);
     chanceImage.setVisible(false);
+    cardDrawn = null;
+
+    playerTransition();
 
   }
 
@@ -1910,10 +1903,6 @@ public class GameBoardForTestingController {
 
     int actionToDo = masterObject.turn(numSteps);
     masterCurrentSpace = masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex());
-
-    System.out.println(masterCurrentSpace);
-    System.out.println(actionToDo);
-    System.out.println();
 
     setDetails();
 
