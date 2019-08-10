@@ -13,6 +13,7 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 import java.io.*;
+import java.text.*;
 
 public class GameBoardController {
 
@@ -729,9 +730,11 @@ public class GameBoardController {
 
   public void setDetails () {
 
+    DecimalFormat numberFormat = new DecimalFormat("#.00");
+
     playerName.setText(masterCurrentPlayer.getName());
-    playerCash.setText(Double.toString(masterCurrentPlayer.getCash()));
-    bankValue.setText(Double.toString(Math.ceil(masterObject.getGameBank().getValue())));
+    playerCash.setText(numberFormat.format(masterCurrentPlayer.getCash()));
+    bankValue.setText(numberFormat.format(masterObject.getGameBank().getValue()));
 
     if (masterCurrentPlayer.isInJail())
       inJail.setText("Yes");

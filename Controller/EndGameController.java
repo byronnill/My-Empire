@@ -10,6 +10,7 @@ import javafx.scene.media.*;
 import javafx.stage.*;
 
 import java.io.*;
+import java.text.*;
 import java.util.*;
 
 public class EndGameController {
@@ -39,16 +40,18 @@ public class EndGameController {
   public void setGameAndRankPlayers (Game game) {
     this.masterObject = game;
 
+    DecimalFormat numberFormat = new DecimalFormat("#.00");
+
     ArrayList <Player> ranked = masterObject.rankPlayers();
     centerLabel.setText("Player Ranking\n\n");
 
     for (Player p : ranked) {
 
       if (p.getWorth() > 0)
-        centerLabel.setText(centerLabel.getText() + p.getName() + " with a total net worth of $" + p.getWorth() + "\n");
+        centerLabel.setText(centerLabel.getText() + p.getName() + " with a total net worth of $" + numberFormat.format(p.getWorth()) + "\n");
 
       else
-        centerLabel.setText(centerLabel.getText() + p.getName() + " with a total net worth of $" + (p.getWorth() - p.getCash()) + " and liabilities of $" + p.getCash() + "\n");
+        centerLabel.setText(centerLabel.getText() + p.getName() + " with a total net worth of $" + numberFormat.format(p.getWorth() - p.getCash()) + " and liabilities of $" + numberFormat.format(p.getCash()) + "\n");
 
     }
 
