@@ -191,7 +191,7 @@ public class NameAndGameTypeController {
 
       for (int j = i + 1; j < nPlayers; j++)
 
-        if (nameFields.get(i).getText().equals(nameFields.get(j).getText()))
+        if (nameFields.get(i).getText().equals(nameFields.get(j).getText()) && !nameFields.get(i).getText().trim().equals(""))
           bOkay = false;
 
     }

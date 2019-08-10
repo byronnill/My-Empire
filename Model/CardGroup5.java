@@ -74,13 +74,60 @@ public class CardGroup5 extends Card {
 
   public boolean isCardApplicable (Player player) {
 
-    if (player.getOwnedPerType(0) == 0 && player.getOwnedPerType(1) == 0 && player.getOwnedPerType(2) == 0 &&
-            player.getOwnedPerType(3) == 0 && player.getOwnedPerType(4) == 0 && player.getOwnedPerType(5) == 0 &&
-            player.getOwnedPerType(6) == 0 && (this.SPEC_TYPE == 1 || this.SPEC_TYPE == 2 || this.SPEC_TYPE == 3)) {
+    int propertyCount = 0;
+    int railUtilCount = 0;
+    int propertyDoubleRentCount = 0;
 
-      return false;
+    for (OwnableSpace s : player.getOwnedSpaces()) {
 
-    } else return player.getOwnedPerType(8) != 0 || player.getOwnedPerType(7) != 0 || this.SPEC_TYPE != 4;
+      if (s instanceof Property) {
+        propertyCount++;
+
+        if (((Property) s).isDoubleRent())
+          propertyDoubleRentCount++;
+
+      } else if (s instanceof Railroad || s instanceof Utility) {
+
+        railUtilCount++;
+
+      }
+
+    }
+
+    if (this.SPEC_TYPE == 1)
+      return propertyCount > 0 && propertyCount != propertyDoubleRentCount;
+
+    else if (this.SPEC_TYPE == 2 || this.SPEC_TYPE == 3)
+      return propertyCount > 0;
+
+    else
+      return railUtilCount > 0;
+
+//    if (player.getOwnedPerType(0) == 0 && player.getOwnedPerType(1) == 0 && player.getOwnedPerType(2) == 0 &&
+//            player.getOwnedPerType(3) == 0 && player.getOwnedPerType(4) == 0 && player.getOwnedPerType(5) == 0 &&
+//            player.getOwnedPerType(6) == 0 && (this.SPEC_TYPE == 1 || this.SPEC_TYPE == 2 || this.SPEC_TYPE == 3)) {
+//
+//      return false;
+//
+//    } else if (this.SPEC_TYPE == 1) {
+//
+//      int propertyCount = 0;
+//      int propertyDoubleRentCount = 0;
+//
+//      for (OwnableSpace s : player.getOwnedSpaces()) {
+//        if (s instanceof Property) {
+//
+//          propertyCount++;
+//
+//          if (((Property) s).isDoubleRent())
+//            propertyDoubleRentCount++;
+//
+//        }
+//      }
+//
+//
+//
+//    } else return player.getOwnedPerType(8) != 0 || player.getOwnedPerType(7) != 0 || this.SPEC_TYPE != 4;
 
   }
 

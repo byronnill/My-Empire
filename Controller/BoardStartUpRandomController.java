@@ -448,36 +448,6 @@ public class BoardStartUpRandomController {
 
   }
 
-  public void handleStartTest (ActionEvent event) {
-
-    masterObject.getGameBoard().consolePrintBoard();
-    masterObject.setGameDeck(new Deck(masterObject.getGameBoard()));
-
-    try {
-
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/GameBoardForTesting.fxml"));
-      Parent root = loader.load();
-      GameBoardForTestingController gameBoardController = loader.getController();
-
-      gameBoardController.setPlayer(player);
-      gameBoardController.setGame(masterObject);
-
-      Scene scene = new Scene(root);
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-      stage.setResizable(false);
-      stage.setScene(scene);
-      stage.centerOnScreen();
-      stage.show();
-
-    } catch (IOException e) {
-
-      e.printStackTrace();
-
-    }
-
-  }
-
   public Image returnImage(int nID){
     switch(nID){
       case 0: return gray0;

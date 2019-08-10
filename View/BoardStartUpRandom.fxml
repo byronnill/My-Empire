@@ -195,7 +195,6 @@
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="480.0" GridPane.columnIndex="20" GridPane.columnSpan="10" GridPane.rowSpan="20">
                <children>
                   <Button fx:id="startGame" layoutX="165.0" layoutY="829.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="34.0" prefWidth="150.0" text="Begin!" />
-                  <Button layoutX="165.0" layoutY="893.0" mnemonicParsing="false" onAction="#handleStartTest" prefHeight="34.0" prefWidth="150.0" text="Begin Test" />
                   <Button fx:id="randomizeAgain" layoutX="165.0" layoutY="765.0" mnemonicParsing="false" onAction="#handleRandomize" prefHeight="34.0" prefWidth="150.0" text="Randomize Again" />
                   <ImageView fx:id="muteButton" fitHeight="60.0" fitWidth="60.0" layoutX="406.0" layoutY="14.0" onMouseClicked="#handleMute" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="currentSpace" fitHeight="300.0" fitWidth="200.0" layoutX="140.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true" />
