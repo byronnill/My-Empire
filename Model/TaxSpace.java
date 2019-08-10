@@ -29,10 +29,11 @@ public class TaxSpace extends Space {
   }
 
   /**
-   * Method that determines the amount of t
+   * Method that determines the amount of tax to be paid by a <b><i>Player</i></b> instance.
    *
-   * @param currPlayer
-   * @return
+   * @param currPlayer <b><i>Player</i></b> object that will pay the amount to be returned. The <b>dCash</b> attribute
+   *                   of this parameter is also the basis for the returnable value if <b>bIncome</b> is true.
+   * @return Double-precision floating point value that is negative if payment is not possible a
    */
 
   public double payTax (Player currPlayer) {
@@ -47,9 +48,15 @@ public class TaxSpace extends Space {
       return dToPay;
 
     else
-      return -1;
+      return dToPay * -1;
 
   }
+
+  /**
+   * Getter method for the <b>INCOME_TAX</b> attribute of this class.
+   *
+   * @return Boolean variable that is used for the differentiation of the only two instances of this class.
+   */
 
   public boolean isIncome() {
     return INCOME_TAX;

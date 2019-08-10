@@ -1398,7 +1398,7 @@ public class GameBoardController {
 
                                       double toPay = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).payTax(masterCurrentPlayer);
 
-                                      if (toPay != -1) {
+                                      if (toPay > 0) {
 
                                         masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
                                         setDetails();
@@ -1407,7 +1407,7 @@ public class GameBoardController {
 
                                       } else {
 
-                                        masterCurrentPlayer.payBank(toPay * -1, masterObject.getGameBank());
+                                        masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
                                         setDetails();
                                         setInstructionBox("You have insufficient funding to pay for taxes.");
                                         gameIsEnd(0);

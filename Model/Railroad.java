@@ -12,6 +12,7 @@ public class Railroad extends OwnableSpace {
    *
    * @param nLocationIndex Integer holding the location of an instance on a <b><i>Board</i></b>.
    * @param nID Integer holding the identification number of an instance.
+   * @see Reference#RAILROADS
    */
 
   public Railroad(int nLocationIndex, int nID) {

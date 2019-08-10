@@ -145,8 +145,6 @@ public class GameBoardForTestingController {
     dice1.setVisible(false);
     dice2.setVisible(false);
 
-    dice.setDisable(true);
-
     endGame.setStyle("-fx-cursor: hand");
     buy.setStyle("-fx-cursor: hand");
     doNothing.setStyle("-fx-cursor: hand");
@@ -733,7 +731,7 @@ public class GameBoardForTestingController {
 
     playerName.setText(masterCurrentPlayer.getName());
     playerCash.setText(Double.toString(masterCurrentPlayer.getCash()));
-    bankValue.setText(Double.toString(masterObject.getGameBank().getValue()));
+    bankValue.setText(Double.toString(Math.ceil(masterObject.getGameBank().getValue())));
 
     if (masterCurrentPlayer.isInJail())
       inJail.setText("Yes");
@@ -1207,7 +1205,7 @@ public class GameBoardForTestingController {
 
     } else if (currSpace.getOwner().equals(masterCurrentPlayer)) {
 
-      if (currSpace instanceof Property && ((Property) currSpace).canBeDeveloped(masterCurrentPlayer)) {
+      if (currSpace instanceof Property && ((Property) currSpace).canBeDeveloped()) {
 
         masterCurrentPlayer.developProperty((Property) currSpace, masterObject.getGameBank());
         setInstructionBox("This property is yours and has been automatically developed.");
@@ -1400,7 +1398,7 @@ public class GameBoardForTestingController {
 
         double toPay = ((TaxSpace) masterObject.getGameBoard().getBoardSpaces().get(masterCurrentPlayer.getLocationIndex())).payTax(masterCurrentPlayer);
 
-        if (toPay != -1) {
+        if (toPay > 0) {
 
           masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
           setDetails();
@@ -1409,7 +1407,7 @@ public class GameBoardForTestingController {
 
         } else {
 
-          masterCurrentPlayer.payBank(toPay * -1, masterObject.getGameBank());
+          masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
           setDetails();
           setInstructionBox("You have insufficient funding to pay for taxes.");
           gameIsEnd(0);
