@@ -332,6 +332,7 @@ public class Player {
   /**
    * Getter method for one integer in the <b>nOwnedPerType</b> attribute of this class.
    *
+   * @param nType Integer holding the index of <b>nOwnedPerType</b> from which the returnable value will be taken.
    * @return nOwnedPerType[nType] Integer holding the number of <b><i>OwnableSpace</i></b> objects of a certain type
    *         that an instance owns.
    */

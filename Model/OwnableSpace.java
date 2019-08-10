@@ -162,6 +162,12 @@ public abstract class OwnableSpace extends Space {
     return dRent;
   }
 
+  /**
+   * Getter method for the <b>dMultiplier</b> attribute of this class.
+   *
+   * @return Double-precision floating point number holding the rent multiplier of an <b><i>OwnableSpace</i></b>
+   */
+
   public double getMultplier () {
     return dMultiplier;
   }
@@ -195,6 +201,13 @@ public abstract class OwnableSpace extends Space {
   public void setRent (double dRent) {
     this.dRent = dRent;
   }
+
+  /**
+   * Setter method for the <b>dMultiplier</b> attribute of this class.
+   *
+   * @param dMultiplier Double-precision floating point number holding the new rent multiplier of an
+   *                    <b><i>OwnableSpace</i></b>
+   */
 
   public void setMultiplier (double dMultiplier) {
     this.dMultiplier = dMultiplier;

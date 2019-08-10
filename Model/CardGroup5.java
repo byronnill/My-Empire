@@ -54,16 +54,16 @@ public class CardGroup5 extends Card {
    *
    * <ul>
    *   <li>
-   *     <b>SPEC_TYPE</b> = 1: <i>plyer</i> owns at least one instance of <b><i>Property</i></b>.
+   *     <b>SPEC_TYPE</b> = 1: <i>player</i> owns at least one instance of <b><i>Property</i></b>.
    *   </li>
    *   <li>
-   *     <b>SPEC_TYPE</b> = 2: <i>plyer</i> owns at least one instance of <b><i>Property</i></b>.
+   *     <b>SPEC_TYPE</b> = 2: <i>player</i> owns at least one instance of <b><i>Property</i></b>.
    *    </li>
    *    <li>
-   *     <b>SPEC_TYPE</b> = 3: <i>plyer</i> owns at least one instance of <b><i>Property</i></b>.
+   *     <b>SPEC_TYPE</b> = 3: <i>player</i> owns at least one instance of <b><i>Property</i></b>.
    *    </li>
    *    <li>
-   *     <b>SPEC_TYPE</b> = 4: <i>plyer</i> owns at least one instance of <b><i>Railroad</i></b> or <b><i>Utility</i></b>.
+   *     <b>SPEC_TYPE</b> = 4: <i>player</i> owns at least one instance of <b><i>Railroad</i></b> or <b><i>Utility</i></b>.
    *    </li>
    * </ul>
    *

@@ -5,7 +5,16 @@ package Model;
  */
 
 public abstract class Reference {
+
+  /**
+   * Reference for <b><i>OwnableSpace</i></b> types.
+   */
+
   public static final String[] TYPES = { "Gray", "Purple", "Pink", "Green", "Blue", "Orange", "Yellow", "Railroad", "Utility" };
+
+  /**
+   * Reference for <b><i>Property</i></b> names.
+   */
 
   public static final String[][] PROPERTIES =
           {
@@ -18,9 +27,21 @@ public abstract class Reference {
                   { "9th Street", "5th Avenue" },
           };
 
+  /**
+   * Reference for <b><i>Railroad</i></b> names.
+   */
+
   public static final String[] RAILROADS = { "North Line", "South Line", "Metro Line" };
 
+  /**
+   * Reference for <b><i>Utility</i></b> names.
+   */
+
   public static final String[] UTILITIES = { "Water", "Electric" };
+
+  /**
+   * Reference for <b><i>Property</i></b> prices.
+   */
 
   public static final double[][] PRICE =
           {
@@ -33,6 +54,10 @@ public abstract class Reference {
                   { 300, 320 },
           };
 
+  /**
+   * Reference for <b><i>Property</i></b> house development prices.
+   */
+
   public static final double[][] HOUSEPRICE =
           {
                   { 50, 50 },
@@ -44,6 +69,10 @@ public abstract class Reference {
                   { 200, 200 }
           };
 
+  /**
+   * Reference for <b><i>Property</i></b> rent values.
+   */
+
   public static final double[][][] RENT =
           {
                   { { 2, 10, 30, 90, 160, 450 }, { 4, 20, 60, 180, 320, 250 } },
@@ -54,6 +83,10 @@ public abstract class Reference {
                   { { 22, 110, 330, 800, 975, 1150 }, { 22, 110, 330, 800, 975, 1150 } },
                   { { 26, 130, 390, 900, 1100, 1275 }, { 28, 150, 450, 1000, 1200, 1400 } }
           };
+
+  /**
+   * Reference for <b><i>Property</i></b> foot traffic multipliers.
+   */
 
   public static final double[][] MULTIPLIER =
           {

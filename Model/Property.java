@@ -211,7 +211,7 @@ public class Property extends OwnableSpace{
    * Equivalent setter method for the <b>dTotalCollected</b> attribute of this class. Instead of changing the entire
    * value, a certain amount is added to that attribute.
    *
-   * @param toAdd
+   * @param toAdd Double-precision floating point number holding the amount to be added.
    */
 
   public void addToCollected (double toAdd) {
@@ -266,6 +266,7 @@ public class Property extends OwnableSpace{
    * @return String representation of the basic attributes of this class.
    */
 
+  @Override
   public String toStringShort () {
 
     return  super.toStringShort() +

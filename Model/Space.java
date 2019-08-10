@@ -25,7 +25,7 @@ public class Space {
 
   /**
    * Getter method for the <b>nLocationIndex</b> attribute of this class.
-   * @return
+   * @return Integer holding the specific location index of an instance as explained in {@link #nLocationIndex}.
    */
 
   public int getLocationIndex () {
