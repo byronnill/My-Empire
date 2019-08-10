@@ -145,10 +145,10 @@ public class Player {
       for (OwnableSpace s : this.ownedSpaces) {
 
         if (s instanceof Railroad && nType == 7)
-          s.setRent(50);
+          s.setRent(25 * s.getMultplier());
 
         else if (s instanceof Utility && nType == 8)
-          s.setRent(4);
+          s.setRent(4 * s.getMultplier());
 
       }
 
@@ -157,10 +157,10 @@ public class Player {
       for (OwnableSpace s : this.ownedSpaces) {
 
         if (s instanceof Railroad && nType == 7)
-          s.setRent(50);
+          s.setRent(50 * s.getMultplier());
 
         else if (s instanceof Utility && nType == 8)
-          s.setRent(10);
+          s.setRent(10 * s.getMultplier());
 
       }
 
@@ -169,7 +169,7 @@ public class Player {
       for (OwnableSpace s : this.ownedSpaces) {
 
         if (s instanceof Railroad && nType == 7)
-          s.setRent(150);
+          s.setRent(150 * s.getMultplier());
 
       }
 
@@ -390,16 +390,6 @@ public class Player {
 
   public void setPlayerNum (int nPlayerNum) {
     this.nPlayerNum = nPlayerNum;
-  }
-
-  /**
-   * Setter method for the <b>nLocationIndex</b> attribute of this class. Mainly used in <b><i>Player</i></b> movement.
-   *
-   * @param nLocationIndex Integer holding the new <b>nLocationIndex</b> attribute.
-   */
-
-  public void setLocationIndex (int nLocationIndex) {
-    this.nLocationIndex = nLocationIndex;
   }
 
   /**

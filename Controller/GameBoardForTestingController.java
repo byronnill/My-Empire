@@ -1407,7 +1407,7 @@ public class GameBoardForTestingController {
 
         } else {
 
-          masterCurrentPlayer.payBank(toPay, masterObject.getGameBank());
+          masterCurrentPlayer.payBank(toPay * -1, masterObject.getGameBank());
           setDetails();
           setInstructionBox("You have insufficient funding to pay for taxes.");
           gameIsEnd(0);
