@@ -1,18 +1,18 @@
 package Model;
 
 /**
- * This class handles the bank values and transactions for a master Game object.
+ * Class handling the bank values and transactions for a master <b><i>Game</i></b> object.
  */
 
 public class Bank {
 
-  double dValue;
+  private double dValue;
 
   /**
-   * Constructor for the class. The bank always starts with 2500 as its value multiplied by the number of players in
-   * the Game.
+   * Constructor for a <b><i>Bank</i></b> object. The bank always starts with 2500 as its <b>dValue</b> attribute multiplied by the
+   * number of players in the <b><i>Game</i></b>.
    *
-   * @param nPlayers An integer that holds the number of players in the game.
+   * @param nPlayers Integer that holds the number of players in the <b><i>Game</i></b>.
    */
 
   public Bank (int nPlayers) {
@@ -20,9 +20,10 @@ public class Bank {
   }
 
   /**
-   * Getter function for the value attribute of this class.
+   * Getter method for the <b>dValue</b> attribute of this class.
    *
-   * @return dValue A double-precision floating point number that holds the current amount of money in the Bank object.
+   * @return <b>dValue</b> Double-precision floating point number that holds the current amount of money in the
+   *                       <b><i>Bank</i></b> object.
    */
 
   public double getValue () {
@@ -30,11 +31,12 @@ public class Bank {
   }
 
   /**
-   * Equivalent setter method for the value attribute of this class. Instead of changing the entire value, a certain
-   * amount is either added or deducted to the bank value.
+   * Equivalent setter method for the <b>dValue</b> attribute of this class. Instead of changing the entire value,
+   * a certain amount is either added or deducted to the bank value.
    *
-   * @param toAdd A double-precision floating point number that is to be added to the value attribute of a Bank object.
-   *              The caller of this setter function sets this parameter negative for value deduction.
+   * @param toAdd Double-precision floating point number that is to be added to the <b>dValue</b> attribute of a
+   *              <b><i>Bank</i></b> object. The caller of this function sets this parameter negative for value
+   *              deduction.
    */
 
   public void addOrDeduct (double toAdd) {
@@ -42,9 +44,11 @@ public class Bank {
   }
 
   /**
+   * Overriden <b>toString()</b> method from the Object class. Used only in console testing for
+   * updates on the <b>dValue</b> attribute of a <b><i>Bank</i></b> object.
    *
-   *
-   * @return
+   * @return String representation of the <b>dValue</b> attribute of this class.
+   * @see Object#toString()
    */
 
   @Override

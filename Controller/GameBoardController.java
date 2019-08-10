@@ -190,7 +190,6 @@ public class GameBoardController {
   public void setGame (Game game) {
 
     this.masterObject = game;
-    masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
     masterCurrentPlayer = masterObject.getActivePlayer();
 
     for (int i = 0; i < 32; i++) {
@@ -732,7 +731,7 @@ public class GameBoardController {
 
     playerName.setText(masterCurrentPlayer.getName());
     playerCash.setText(Double.toString(masterCurrentPlayer.getCash()));
-    bankValue.setText(Double.toString(masterObject.getGameBank().getValue()));
+    bankValue.setText(Double.toString(Math.ceil(masterObject.getGameBank().getValue())));
 
     if (masterCurrentPlayer.isInJail())
       inJail.setText("Yes");
@@ -844,8 +843,6 @@ public class GameBoardController {
       setInstructionBox("The bank has been bankrupted.");
 
     setInstructionBox(instructionBox.getText() + "\nThe game is over.\nPress END GAME to proceed to player rankings.");
-
-    masterObject.setGameFinished(true);
 
     endGame.setVisible(true);
 
@@ -1208,7 +1205,7 @@ public class GameBoardController {
 
     } else if (currSpace.getOwner().equals(masterCurrentPlayer)) {
 
-      if (currSpace instanceof Property && ((Property) currSpace).canBeDeveloped(masterCurrentPlayer)) {
+      if (currSpace instanceof Property && ((Property) currSpace).canBeDeveloped()) {
 
         masterCurrentPlayer.developProperty((Property) currSpace, masterObject.getGameBank());
         setInstructionBox("This property is yours and has been automatically developed.");
@@ -1306,6 +1303,7 @@ public class GameBoardController {
 
   public void handleConfirm(){
     confirmTrade.setVisible(false);
+    rent.setDisable(true);
     agreeTrade.setVisible(true);
     disagreeTrade.setVisible(true);
     setInstructionBox(masterCurrentPlayer.getName() + " has offered a trade.");
@@ -1331,6 +1329,7 @@ public class GameBoardController {
     currentSpace.setVisible(false);
     comboSelection.setVisible(false);
     trade.setDisable(true);
+    rent.setDisable(false);
     setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " disagreed. You must pay rent.");
   }
 
@@ -1498,6 +1497,7 @@ public class GameBoardController {
 
   public void handleTrade () {
 
+    trade.setDisable(true);
     setupTradeScreen();
 
   }

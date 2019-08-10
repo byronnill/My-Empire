@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ * Abstract class called during instantiation of object modification. Used in both Model and Controller classes.
+ */
+
 public abstract class Reference {
   public static final String[] TYPES = { "Gray", "Purple", "Pink", "Green", "Blue", "Orange", "Yellow", "Railroad", "Utility" };
 
@@ -7,7 +11,7 @@ public abstract class Reference {
           {
                   { "Almond Drive", "Kasoy Street" },
                   { "Rodeo Drive", "Orange Street", "Ventura Street" },
-                  { "Juan Luna", "Ylaya", "J. Abad Santos" },
+                  { "Juan Luna", "Ylaya", "J Abad Santos" },
                   { "Madison", "Annapolis", "Connecticut" },
                   { "Bougainvilla", "Dama de Noche", "Acacia" },
                   { "Solar Street", "Galaxy Street" },

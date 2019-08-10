@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ * Class handling the determination of
+ */
+
 public class CardGroup2 extends Card {
 
   private final int SPEC_TYPE;
@@ -15,32 +19,6 @@ public class CardGroup2 extends Card {
 
     else
       nIndexToGo = -1;
-
-  }
-
-  public boolean doChance (Board board, Player player, Bank bank) {
-
-    switch (this.SPEC_TYPE) {
-
-      case 2:  this.nIndexToGo = findNearestRail(board, player); break;
-      case 3:  this.nIndexToGo = findNearestUtil(board, player);
-
-    }
-
-    int numSteps;
-
-    if (player.getLocationIndex() > this.nIndexToGo)
-      numSteps = this.nIndexToGo + 32 - player.getLocationIndex();
-
-    else
-      numSteps = this.nIndexToGo - player.getLocationIndex();
-
-    if (!player.movePlayer(board, numSteps, true, bank))
-      return false;
-
-    //do something
-
-    return true;
 
   }
 

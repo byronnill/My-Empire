@@ -2,10 +2,27 @@ package Model;
 
 import java.util.*;
 
+/**
+ * Class handling the <b>gameDeck</b> attribute of a master <b><i>Game</i></b> object. The instantiation of this class
+ * must always be preceded, even indirectly, by the instantiation of a <b><i>Board</i></b> object.
+ */
+
 public class Deck {
 
   private ArrayList <Card> activeDeck;
   private ArrayList <Card> discardDeck;
+
+  /**
+   * Constructor for a <b><i>Deck</i></b> object that, in itself, contructs multiple instances of the multiple
+   * subclasses of the <b><i>Card</i></b> class. Upon the last instantiation, the constructor will call the
+   * <b>shuffle()</b> method from the <b><i>java.util</i></b> class Collections.
+   *
+   * @param board <b><i>Board</i></b> object that will be the basis for the instantiation of <b><i>CardGroup2</i></b>
+   *              and <b><i>CardGroup4</i></b> instances with <b>SPEC_TYPE</b> attributes of 1 and 2, respectively.
+   * @see Collections#shuffle(List)
+   * @see CardGroup2#findRandomProperty(Board)
+   * @see CardGroup4#findRandomProperty(Board)
+   */
 
   public Deck (Board board) {
 
@@ -34,6 +51,17 @@ public class Deck {
 
   }
 
+  /**
+   * Equivalent getter method that returns the <b><i>Card</i></b> instance that is at index 0 of <b>activeDeck</b>.
+   *
+   * <p>
+   * Upon the removal of the top object in the ArrayList, if the <b>activeDeck</b> attribute is left empty, the
+   * <b>replaceDeckAndShuffle()</b> method is called.
+   *
+   * @return <b><i>Card</i></b> object that is taken from index 0 of the <b>activeDeck</b> attribute.
+   * @see #replaceDeckAndShuffle()
+   */
+
   public Card drawCard () {
 
     Card drawn = activeDeck.remove(0);
@@ -45,9 +73,20 @@ public class Deck {
 
   }
 
+  /**
+   * Equivalent setter method that adds a new <b><i>Card</i></b> object to the <b>discardDeck</b>.
+   *
+   * @param toDiscard <b><i>Card</i></b> instance that will be added to the <b>discardDeck</b> attribute.
+   */
+
   public void discardCard (Card toDiscard) {
     discardDeck.add(toDiscard);
   }
+
+  /**
+   * Method that sets the <b>activeDeck</b> attribute equal to the <b>discardDeck</b> attribute. After that setting,
+   * the former is shuffled through Collections.shuffle() while the latter's contents are cleared.
+   */
 
   private void replaceDeckAndShuffle () {
 
@@ -58,6 +97,13 @@ public class Deck {
 
   }
 
+  /**
+   * Console printing method that displays the contents of <b>activeDeck</b> on the environment console through
+   * <b>consolePrintDeck()</b>. Used only in program testing and confirmation.
+   *
+   * @see #consolePrintDeck(ArrayList)
+   */
+
   public void consolePrintActiveDeck () {
 
     System.out.println("Active Deck: ");
@@ -65,12 +111,28 @@ public class Deck {
 
   }
 
+  /**
+   * Console printing method that displays the contents of <b>discardDeck</b> on the environment console through
+   * <b>consolePrintDeck()</b>. Used only in program testing and confirmation.
+   *
+   * @see #consolePrintDeck(ArrayList)
+   */
+
   public void consolePrintDiscardDeck () {
 
     System.out.println("Discard Pile: ");
     consolePrintDeck(discardDeck);
 
   }
+
+  /**
+   * Console printing method called by <b>consolePrintActiveDeck</b> and <b>consolePrintDiscardDeck</b>. Lists and
+   * prints all cards in the appropriate deck in the order that they were inserted. The method also displays on the
+   * environment console the number of <b><i>Card</i></b> instances that are in each group (subclass). Used only
+   * in program testing and confirmation.
+   *
+   * @param deckToPrint
+   */
 
   private void consolePrintDeck (ArrayList<Card> deckToPrint) {
     int[] i = new int[6];

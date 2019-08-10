@@ -55,6 +55,8 @@ public class CardGroup5 extends Card {
 
   public double applyCardToSpace (OwnableSpace space) {
 
+    space.setMultiplier(dChangeRate * space.getMultplier());
+
     if (SPEC_TYPE == 1) {
 
       space.setRent(space.getRent() * this.dChangeRate);

@@ -145,6 +145,8 @@ public class GameBoardForTestingController {
     dice1.setVisible(false);
     dice2.setVisible(false);
 
+    dice.setDisable(true);
+
     endGame.setStyle("-fx-cursor: hand");
     buy.setStyle("-fx-cursor: hand");
     doNothing.setStyle("-fx-cursor: hand");
@@ -190,10 +192,7 @@ public class GameBoardForTestingController {
   public void setGame (Game game) {
 
     this.masterObject = game;
-    masterObject.setActivePlayer(masterObject.getPlayerList().get(0));
     masterCurrentPlayer = masterObject.getActivePlayer();
-
-    masterCurrentPlayer.addJailChance(new CardGroup1());
 
     for (int i = 0; i < 32; i++) {
 
@@ -847,8 +846,6 @@ public class GameBoardForTestingController {
 
     setInstructionBox(instructionBox.getText() + "\nThe game is over.\nPress END GAME to proceed to player rankings.");
 
-    masterObject.setGameFinished(true);
-
     endGame.setVisible(true);
 
     dice.setVisible(false);
@@ -1308,6 +1305,7 @@ public class GameBoardForTestingController {
 
   public void handleConfirm(){
     confirmTrade.setVisible(false);
+    rent.setDisable(true);
     agreeTrade.setVisible(true);
     disagreeTrade.setVisible(true);
     setInstructionBox(masterCurrentPlayer.getName() + " has offered a trade.");
@@ -1333,6 +1331,7 @@ public class GameBoardForTestingController {
     currentSpace.setVisible(false);
     comboSelection.setVisible(false);
     trade.setDisable(true);
+    rent.setDisable(false);
     setInstructionBox(((OwnableSpace) masterCurrentSpace).getOwner().getName() + " disagreed. You must pay rent.");
   }
 
@@ -1500,6 +1499,7 @@ public class GameBoardForTestingController {
 
   public void handleTrade () {
 
+    trade.setDisable(true);
     setupTradeScreen();
 
   }
